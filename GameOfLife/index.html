@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Game of Life Architect</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 id="title">Game of Life</h1>
+            <div class="controls">
+                <select id="langSelect">
+                    <option value="en">English</option>
+                    <option value="de">Deutsch</option>
+                    <option value="tr">Türkçe</option>
+                </select>
+                <button id="settingsBtn">⚙️ Rules</button>
+                <button id="playBtn">▶ Play</button>
+                <button id="resetBtn">🔄 Reset</button>
+            </div>
+        </header>
+
+        <div id="status">Level 1: Place 3 cells</div>
+        <div id="goal"></div>
+        <div id="game-grid" class="grid-container"></div>
+
+        <!-- Settings Modal (Rule Customization) -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <h3 id="rulesTitle">Evolution Rules</h3>
+                <label><span id="bornLabel">Born (e.g. 3):</span> 
+                    <select id="bornRules">
+                        <option value="2">2</option>
+                        <option value="2,3">2,3</option>
+                        <option value="3">3</option>
+                        <option value="3,4">3,4</option>
+                        <option value="2,3,4">2,3,4</option>
+                    </select>
+                </label>
+                <label><span id="surviveLabel">Survive (e.g. 2,3):</span> 
+                    <select id="surviveRules">
+                        <option value="2">2</option>
+                        <option value="2,3">2,3</option>
+                        <option value="3">3</option>
+                        <option value="3,4">3,4</option>
+                        <option value="4,5,6">4,5,6</option>
+                        <option value="5">5</option>
+                    </select>
+                </label>
+                <button onclick="updateRules()">Apply Rules</button>
+                <button onclick="document.getElementById('settingsModal').classList.remove('active')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="engine.js"></script>
+    <script src="levels/challenge1.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>
