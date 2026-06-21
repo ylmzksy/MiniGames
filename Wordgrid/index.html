@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kelime Matrisi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 id="game-title">Kelime Matrisi</h1>
+            <select id="langSelect" onchange="i18n.setLanguage(this.value)">
+                <option value="tr">Türkçe</option>
+                <option value="en">English</option>
+            </select>
+        </header>
+
+        <div class="input-zone">
+            <input type="text" id="wordInput" disabled autocomplete="off">
+            <div id="statusMessage">Hücre seçin</div>
+        </div>
+
+        <div id="grid-container" class="matrix-grid"></div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="engine.js"></script>
+    <script src="levels/daily_01.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>

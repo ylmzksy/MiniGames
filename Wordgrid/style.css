@@ -1,0 +1,90 @@
+:root {
+    --bg-main: #ffffff;
+    --border-color: #111111;
+    --text-color: #000000;
+    --selected-bg: #f0f7ff;
+    --selected-border: #3b82f6;
+}
+
+body {
+    font-family: -apple-system, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#app {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-zone {
+    margin: 20px 0;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+#statusMessage {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* 4 columns layout structure matching screenshot specifications */
+.matrix-grid {
+    display: grid;
+    grid-template-columns: 120px repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.header-cell {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.meta-cell {
+    font-size: 0.85rem;
+}
+
+.data-cell {
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.15s ease;
+}
+
+.data-cell.selected {
+    background: var(--selected-bg);
+    border-color: var(--selected-border);
+    transform: scale(0.98);
+}
