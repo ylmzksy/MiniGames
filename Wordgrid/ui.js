@@ -11,11 +11,21 @@ const gridContainer = document.getElementById('grid-container');
 const wordInput = document.getElementById('wordInput');
 const statusMessage = document.getElementById('statusMessage');
 
-function initGame() {
+async function initGame() {
     currentLevel = LevelRegistry[0]; // Load first level layout
     
-    // Fallback Mock Dictionary until you provide your Turkish JSON file
-    WordEngine.setDictionary(["talep", "kamp", "karpuz", "mektup", "kus", "fanus", "burs"]); 
+    try {
+        const response = await fetch('tdk_kelimeler.txt');
+        const text = await response.text();
+        const words = text.split('\n')
+            .map(w => w.trim())
+            .filter(w => w.length > 0);
+        WordEngine.setDictionary(words);
+    } catch (err) {
+        console.error('Dictionary file could not be loaded:', err);
+        // Fallback: use a minimal dictionary so the game isn't broken
+        WordEngine.setDictionary([]);
+    }
     
     window.dispatchEvent(new CustomEvent('langChanged'));
     renderMatrix();
@@ -60,16 +70,29 @@ function createCell(className, innerHTML) {
 }
 
 function selectCell(index) {
+    const state = cellData[index];
+
+    // If clicking the already selected cell and it has multiple words, cycle through them.
+    if (selectedCell === index && state.history.length > 1) {
+        state.selectedIndex = (state.selectedIndex + 1) % state.history.length;
+        renderMatrix();
+        return; // Skip re-enabling input
+    }
+
     selectedCell = index;
     wordInput.disabled = false;
     wordInput.value = '';
     wordInput.focus();
     statusMessage.innerText = `${i18n.t('placeholder')}`;
+    // Reset the selected word index for the new cell to show the latest one
+    if (state.history.length > 0) state.selectedIndex = state.history.length - 1;
     renderMatrix();
 }
 
-// Automatic text detection listener
-wordInput.oninput = function() {
+// Handle Enter key to submit a word
+wordInput.onkeydown = function(event) {
+    if (event.key !== 'Enter') return;
+
     const word = this.value.trim().toLowerCase();
     if (word.length < 2) return; 
 

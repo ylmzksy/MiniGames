@@ -50,6 +50,7 @@ input[type="text"] {
 .matrix-grid {
     display: grid;
     grid-template-columns: 120px repeat(3, 1fr);
+    grid-template-rows: auto repeat(3, 1fr); /* Define rows for proper alignment */
     gap: 8px;
     margin-top: 20px;
 }
@@ -79,12 +80,15 @@ input[type="text"] {
     aspect-ratio: 1 / 1;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 4vw, 1.2rem); /* Responsive font size */
     transition: all 0.15s ease;
+    position: relative; /* Ensure z-index is respected */
+    z-index: 1;
 }
 
 .data-cell.selected {
     background: var(--selected-bg);
     border-color: var(--selected-border);
-    transform: scale(0.98);
+    transform: scale(1.05); /* Scale up for better visibility */
+    z-index: 2; /* Bring selected cell to the front */
 }
