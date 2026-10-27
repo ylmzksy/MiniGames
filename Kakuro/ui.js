@@ -44,34 +44,38 @@ function render() {
     board.style.maxWidth = `${puzzle.width * 72}px`;
 
     const conflicts = KakuroEngine.conflicts(puzzle, values);
-    const related = new Set(selected
-        ? KakuroEngine.runsAt(puzzle, ...selected).flatMap(i => puzzle.runs[i].cells.map(([r, c]) => `${r},${c}`))
+    // Clues of the selected cell's runs are highlighted, as "r,c,dir" keys
+    const activeClues = new Set(selected
+        ? KakuroEngine.runsAt(puzzle, ...selected).map(i => {
+            const run = puzzle.runs[i];
+            return `${run.clue[0]},${run.clue[1]},${run.dir}`;
+        })
         : []);
 
     board.innerHTML = puzzle.cells.flatMap((row, r) => row.map((cell, c) =>
-        cell.block ? renderBlock(cell) : renderWhite(r, c, conflicts, related)
+        cell.block ? renderBlock(cell, r, c, activeClues) : renderWhite(r, c, conflicts)
     )).join('');
     renderHints();
 }
 
-function renderBlock(cell) {
+function renderBlock(cell, r, c, activeClues) {
     const hasClue = cell.across || cell.down;
+    const active = dir => (activeClues.has(`${r},${c},${dir}`) ? 'active' : '');
     return `
         <div class="cell block ${hasClue ? 'clue' : ''}">
-            ${cell.across ? `<span class="clue-across">${cell.across}</span>` : ''}
-            ${cell.down ? `<span class="clue-down">${cell.down}</span>` : ''}
+            ${cell.across ? `<span class="clue-across ${active('across')}">${cell.across}</span>` : ''}
+            ${cell.down ? `<span class="clue-down ${active('down')}">${cell.down}</span>` : ''}
         </div>
     `;
 }
 
-function renderWhite(r, c, conflicts, related) {
+function renderWhite(r, c, conflicts) {
     const key = `${r},${c}`;
     const value = values[r][c];
     const isSelected = selected && selected[0] === r && selected[1] === c;
     const classes = [
         'cell', 'white',
         isSelected ? 'selected' : '',
-        related.has(key) ? 'related' : '',
         conflicts.has(key) ? 'conflict' : '',
         isSolved ? 'solved' : ''
     ].join(' ');

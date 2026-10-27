@@ -30,11 +30,13 @@ const KakuroEngine = {
                 // A run starts right after a black cell, which then shows the clue
                 if (c > 0 && cells[r][c - 1].block) {
                     const run = collect('across', r, c);
+                    run.clue = [r, c - 1];
                     cells[r][c - 1].across = run.sum;
                     runs.push(run);
                 }
                 if (r > 0 && cells[r - 1][c].block) {
                     const run = collect('down', r, c);
+                    run.clue = [r - 1, c];
                     cells[r - 1][c].down = run.sum;
                     runs.push(run);
                 }

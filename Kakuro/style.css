@@ -1,3 +1,16 @@
+/* Playable cells must always be lighter than black cells, in both themes */
+:root {
+    --block-bg: var(--surface-2);
+    --cell-bg: var(--surface);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --block-bg: var(--bg);
+        --cell-bg: var(--surface-2);
+    }
+}
+
 .level-info {
     color: var(--text-muted);
 }
@@ -22,13 +35,13 @@
 }
 
 .cell.block {
-    background: var(--surface-2);
+    background: var(--block-bg);
 }
 
 /* Clue cells are split by a diagonal: across sum top-right, down sum bottom-left */
 .cell.clue {
     background: linear-gradient(to top right,
-        var(--surface-2) calc(50% - 1px), var(--border) 50%, var(--surface-2) calc(50% + 1px));
+        var(--block-bg) calc(50% - 1px), var(--border) 50%, var(--block-bg) calc(50% + 1px));
 }
 
 .clue-across,
@@ -42,14 +55,16 @@
 .clue-across { top: 6%; right: 10%; }
 .clue-down { bottom: 6%; left: 10%; }
 
-.cell.white {
-    background: var(--surface);
-    cursor: pointer;
-    transition: background 0.15s;
+/* Clues of the selected cell's row and column */
+.clue-across.active,
+.clue-down.active {
+    color: var(--accent);
 }
 
-.cell.white.related {
-    background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
+.cell.white {
+    background: var(--cell-bg);
+    cursor: pointer;
+    transition: background 0.15s;
 }
 
 .cell.white.selected {
@@ -58,7 +73,7 @@
 }
 
 .cell.white.solved {
-    background: color-mix(in srgb, var(--success) 18%, var(--surface));
+    background: color-mix(in srgb, var(--success) 18%, var(--cell-bg));
 }
 
 .value {
