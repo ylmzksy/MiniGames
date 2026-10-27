@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Hackenbush</title>
 </head>
-<body data-home="../index.html">
+<body data-home="../index.html" data-game="hackenbush">
     <div id="app">
         <div id="status" class="status"></div>
         <div id="level-info" class="level-info"></div>
@@ -22,6 +22,7 @@
                 <option value="master" data-i18n="master">Master</option>
                 <option value="novice" data-i18n="novice">Novice</option>
             </select>
+            <button onclick="LevelSelect.open(loadLevel)" data-i18n="levels_button">Levels</button>
             <button id="restartBtn" class="primary" data-i18n="restart">Restart Level</button>
         </div>
     </div>
@@ -30,6 +31,7 @@
     <script src="i18n.js"></script>
     <script src="../common/shell.js"></script>
     <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
     <script src="engine.js"></script>
 
     <script src="levels/level1.js"></script>

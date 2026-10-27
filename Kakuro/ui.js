@@ -20,6 +20,7 @@ function loadLevel(idx) {
     if (!level) return;
 
     currentLevelIdx = idx;
+    Progress.setCurrent(idx);
     puzzle = KakuroEngine.parse(level);
     values = puzzle.cells.map(row => row.map(() => 0));
     notes = puzzle.cells.map(row => row.map(() => new Set()));
@@ -166,6 +167,7 @@ function checkSolved() {
     isSolved = true;
     selected = null;
     setStatus('status_solved');
+    Progress.markSolved(currentLevelIdx);
     render();
     const solvedLevelIdx = currentLevelIdx;
     setTimeout(() => {
@@ -218,4 +220,4 @@ window.addEventListener('langChanged', () => {
 });
 
 // Initial Load
-if (LevelRegistry.length > 0) loadLevel(0);
+if (LevelRegistry.length > 0) loadLevel(Progress.startLevel());

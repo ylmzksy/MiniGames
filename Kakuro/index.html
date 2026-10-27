@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Kakuro</title>
 </head>
-<body data-home="../index.html">
+<body data-home="../index.html" data-game="kakuro">
     <div id="app">
         <div id="status" class="status"></div>
         <div id="level-info" class="level-info"></div>
@@ -27,6 +27,7 @@
         </div>
         <div class="controls">
             <button id="notesBtn" onclick="toggleNotes()" data-i18n="notes">Notes</button>
+            <button onclick="LevelSelect.open(loadLevel)" data-i18n="levels_button">Levels</button>
             <button id="restartBtn" class="primary" data-i18n="restart">Restart Level</button>
         </div>
     </div>
@@ -35,6 +36,7 @@
     <script src="i18n.js"></script>
     <script src="../common/shell.js"></script>
     <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
     <script src="engine.js"></script>
 
     <script src="levels/level1.js"></script>

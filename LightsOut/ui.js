@@ -6,6 +6,7 @@ function loadLevel(idx) {
     if (!level) return;
 
     currentLevelIdx = idx;
+    Progress.setCurrent(idx);
     // Deep copy the initial state
     grid = level.initial.map(row => [...row]);
     render();
@@ -31,6 +32,7 @@ window.handleTap = (r, c) => {
     render();
     if (LightsEngine.isSolved(grid)) {
         document.getElementById('status').innerText = i18n.t('solved');
+        Progress.markSolved(currentLevelIdx);
         setTimeout(nextLevel, 1500);
     }
 };
@@ -51,4 +53,4 @@ function updateStatus() {
 window.addEventListener('langChanged', updateStatus);
 
 // Initial Load
-if (LevelRegistry.length > 0) loadLevel(0);
+if (LevelRegistry.length > 0) loadLevel(Progress.startLevel());

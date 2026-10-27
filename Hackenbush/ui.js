@@ -19,6 +19,7 @@ function loadLevel(idx) {
     if (!level) return;
 
     currentLevelIdx = idx;
+    Progress.setCurrent(idx);
     gameId++;
     game = HackenbushEngine.create(level);
     mask = HackenbushEngine.startMask(game);
@@ -185,6 +186,7 @@ function checkEnd(nextPlayer) {
     updateBoard();
     if (nextPlayer === AI) {
         setStatus('win');
+        Progress.markSolved(currentLevelIdx);
         const winGameId = gameId;
         setTimeout(() => {
             if (winGameId === gameId) nextLevel();
@@ -221,4 +223,4 @@ window.addEventListener('langChanged', () => {
 });
 
 // Initial Load
-if (LevelRegistry.length > 0) loadLevel(0);
+if (LevelRegistry.length > 0) loadLevel(Progress.startLevel());

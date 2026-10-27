@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <title>Lights Out</title>
 </head>
-<body data-home="../index.html">
+<body data-home="../index.html" data-game="lightsout">
     <div id="app">
         <div id="status" class="status"></div>
         <div id="game-board" class="grid-container"></div>
         <div class="controls">
+            <button onclick="LevelSelect.open(loadLevel)" data-i18n="levels_button">Levels</button>
             <button onclick="loadLevel(currentLevelIdx)" class="primary" data-i18n="reset_level">Reset Level</button>
         </div>
     </div>
@@ -20,6 +21,7 @@
     <script src="i18n.js"></script>
     <script src="../common/shell.js"></script>
     <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
     <script src="engine.js"></script>
 
     <script src="levels/level1.js"></script>

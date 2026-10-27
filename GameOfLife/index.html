@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Game of Life Architect</title>
 </head>
-<body data-home="../index.html">
+<body data-home="../index.html" data-game="gameoflife">
     <div id="app">
         <div id="status" class="status"></div>
         <div id="goal" class="goal"></div>
@@ -16,6 +16,7 @@
             <button id="playBtn" class="primary">▶ Play</button>
             <button id="resetBtn" data-i18n="reset">Reset</button>
             <button id="settingsBtn" data-i18n="settings">Rules</button>
+            <button onclick="LevelSelect.open(loadLevel)" data-i18n="levels_button">Levels</button>
         </div>
     </div>
 
@@ -53,6 +54,7 @@
     <script src="i18n.js"></script>
     <script src="../common/shell.js"></script>
     <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
     <script src="engine.js"></script>
     <script src="levels/challenge1.js"></script>
     <script src="levels/glider.js"></script>

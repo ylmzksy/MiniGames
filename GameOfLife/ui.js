@@ -25,7 +25,7 @@ const Goals = {
 };
 
 function initUI() {
-    if (LevelRegistry.length > 0) loadLevel(0);
+    if (LevelRegistry.length > 0) loadLevel(Progress.startLevel());
     // Set up event listeners
     document.getElementById('settingsBtn').addEventListener('click', () => {
         Shell.openModal('settingsModal');
@@ -103,6 +103,7 @@ function updateSettingsOptionStates() {
 function loadLevel(idx) {
     stopPlaying();
     currentLevelIdx = idx;
+    Progress.setCurrent(idx);
     currentLevel = LevelRegistry[idx];
     generation = 0;
     seeds = new Set();
@@ -169,6 +170,7 @@ function step() {
     } else if (checkGoal(alive)) {
         stopPlaying();
         statusKey = 'win';
+        Progress.markSolved(currentLevelIdx);
         setTimeout(nextLevel, 1500);
     }
     renderStatus();

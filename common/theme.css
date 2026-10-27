@@ -246,6 +246,24 @@ input:disabled { opacity: 0.6; }
     margin-top: 8px;
 }
 
+/* Level picker */
+.level-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.level-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+}
+
+.level-btn.current { border-color: var(--accent); }
+.level-mark { color: var(--success); font-weight: 700; }
+
 /* Bottom sheet */
 .sheet {
     position: fixed;

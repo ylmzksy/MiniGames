@@ -16,6 +16,11 @@ const i18n = {
             close: "Close",
             how_to_play: "How to play",
             language: "Language",
+            level: "Level",
+            levels_button: "Levels",
+            levels_title: "Choose a level",
+            reset_progress: "Reset progress",
+            reset_progress_confirm: "Delete your progress in this game?",
             rules_title: "Rules:",
             tips_title: "Tips:"
         },
@@ -24,6 +29,11 @@ const i18n = {
             close: "Schließen",
             how_to_play: "Spielanleitung",
             language: "Sprache",
+            level: "Level",
+            levels_button: "Levelauswahl",
+            levels_title: "Wähle ein Level",
+            reset_progress: "Fortschritt zurücksetzen",
+            reset_progress_confirm: "Deinen Fortschritt in diesem Spiel löschen?",
             rules_title: "Regeln:",
             tips_title: "Tipps:"
         },
@@ -32,6 +42,11 @@ const i18n = {
             close: "Kapat",
             how_to_play: "Nasıl oynanır",
             language: "Dil",
+            level: "Seviye",
+            levels_button: "Seviyeler",
+            levels_title: "Bir seviye seçin",
+            reset_progress: "İlerlemeyi sıfırla",
+            reset_progress_confirm: "Bu oyundaki ilerlemeniz silinsin mi?",
             rules_title: "Kurallar:",
             tips_title: "İpuçları:"
         }
