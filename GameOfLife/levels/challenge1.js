@@ -3,9 +3,9 @@ registerLevel({
     name: "The Eternal Flame",
     size: 20,
     budget: 5,
-    goal: "Reach 50 generations.",
+    goal: { type: 'survive', generations: 50 },
+    // Pre-placed living cells as [row, col]
     initial: [
-        {r: 10, c: 10, state: true},
-        {r: 10, c: 11, state: true}
+        [10, 10], [10, 11]
     ]
 });

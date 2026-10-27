@@ -1,0 +1,81 @@
+.level-info {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+}
+
+.ground {
+    stroke: var(--text-muted);
+    stroke-width: 6;
+    stroke-linecap: round;
+}
+
+.edge .stroke {
+    fill: none;
+    stroke-width: 9;
+    stroke-linecap: round;
+    transition: opacity 0.4s, transform 0.4s, stroke-width 0.15s;
+}
+
+/* Wide invisible stroke so thin edges are easy to tap */
+.edge .hit {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 30;
+    stroke-linecap: round;
+}
+
+.edge.blue .stroke { stroke: var(--accent); }
+.edge.red .stroke { stroke: var(--danger); }
+.edge.green .stroke { stroke: var(--success); }
+
+.edge.cuttable { cursor: pointer; }
+.edge.cuttable:hover .stroke { stroke-width: 13; }
+
+.edge.gone { pointer-events: none; }
+
+.edge.gone .stroke {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.node {
+    fill: var(--text);
+    transition: opacity 0.4s;
+}
+
+.node.gone { opacity: 0; }
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.swatch {
+    display: inline-block;
+    width: 18px;
+    height: 6px;
+    margin-right: 6px;
+    vertical-align: middle;
+    border-radius: var(--radius-xs);
+}
+
+.swatch.blue { background: var(--accent); }
+.swatch.red { background: var(--danger); }
+.swatch.green { background: var(--success); }

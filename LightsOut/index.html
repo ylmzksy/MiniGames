@@ -3,60 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../common/theme.css">
     <link rel="stylesheet" href="style.css">
-    <title>Lights Out Levels</title>
+    <title>Lights Out</title>
 </head>
-<body>
+<body data-home="../index.html">
     <div id="app">
-        <header>
-            <h1 id="title">Lights Out</h1>
-        </header>
-        <div id="status"></div>
+        <div id="status" class="status"></div>
         <div id="game-board" class="grid-container"></div>
-        <div class="button-row">
-            <button onclick="loadLevel(currentLevelIdx)" id="resetBtn">Reset Level</button>
-            <div class="lang-select-wrapper">
-                <button onclick="toggleLangMenu()" id="langBtn">Language</button>
-                <div id="langMenu" class="lang-menu">
-                    <button onclick="selectLanguage('en')">English</button>
-                    <button onclick="selectLanguage('de')">Deutsch</button>
-                    <button onclick="selectLanguage('tr')">Türkçe</button>
-                </div>
-            </div>
-            <button onclick="showInfo()" id="infoBtn">ℹ️</button>
+        <div class="controls">
+            <button onclick="loadLevel(currentLevelIdx)" class="primary" data-i18n="reset_level">Reset Level</button>
         </div>
     </div>
 
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <h2 id="info-title">How to Play Lights Out</h2>
-            <p id="info-description">Lights Out is a puzzle game where you need to turn off all the lights on the grid.</p>
-
-            <h3 id="rules-title">Rules:</h3>
-            <ul>
-                <li id="rule-1">Click on a light to toggle it and its adjacent lights (up, down, left, right)</li>
-                <li id="rule-2">The goal is to turn off all lights (make them all dark)</li>
-                <li id="rule-3">Each level has a different starting configuration</li>
-                <li id="rule-4">Complete all levels to win the game!</li>
-            </ul>
-
-            <h3 id="tips-title">Tips:</h3>
-            <ul>
-                <li id="tip-1">Think carefully about each move - it affects multiple lights</li>
-                <li id="tip-2">Some levels may require you to think several moves ahead</li>
-                <li id="tip-3">Use the Reset button if you get stuck</li>
-            </ul>
-
-            <button onclick="hideInfo()" id="closeBtn" class="close-btn">Close</button>
-        </div>
-    </div>
-
+    <script src="../common/i18n.js"></script>
     <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
+    <script src="../common/levels.js"></script>
     <script src="engine.js"></script>
-    
+
     <script src="levels/level1.js"></script>
-    <script src="levels/level2.js"></script>
-    
+
     <script src="ui.js"></script>
 </body>
 </html>

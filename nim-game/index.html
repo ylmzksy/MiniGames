@@ -4,89 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nim Master</title>
+    <link rel="stylesheet" href="../common/theme.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-home="../index.html">
     <div id="app">
-        <header>
-            <h1 id="title">Nim</h1>
-            <div class="settings-bar">
-                <select id="langSelect" onchange="i18n.setLanguage(this.value)">
-                    <option value="en">EN</option><option value="de">DE</option><option value="tr">TR</option>
-                </select>
-                <select id="difficulty">
-                    <option value="master">Master</option>
-                    <option value="novice">Novice</option>
-                </select>
-                <button id="setupBtn">⚙️</button>
-                <button id="infoBtn" onclick="showInfo()">ℹ️</button>
-            </div>
-        </header>
-
-        <div id="status"></div>
+        <div id="status" class="status"></div>
         <div id="game-board" class="board"></div>
+        <div class="controls">
+            <select id="difficulty">
+                <option value="master" data-i18n="master">Master</option>
+                <option value="novice" data-i18n="novice">Novice</option>
+            </select>
+            <button id="setupBtn" class="primary" data-i18n="reset">New Game</button>
+        </div>
+    </div>
 
-        <div id="setupModal" class="modal">
-            <div class="modal-content">
-                <h3 id="setup-title">Setup Game</h3>
-                
-                <div id="step1">
-                    <p>How many piles?</p>
-                    <div class="btn-grid">
-                        <button onclick="setPileCount(1)">1</button>
-                        <button onclick="setPileCount(2)">2</button>
-                        <button onclick="setPileCount(3)">3</button>
-                        <button onclick="setPileCount(4)">4</button>
-                        <button onclick="setPileCount(5)">5</button>
-                    </div>
-                </div>
+    <div id="setupModal" class="modal" data-static>
+        <div class="modal-content">
+            <h2 data-i18n="setup_title">New Game</h2>
 
-                <div id="step2" style="display:none;">
-                    <p>Tap a pile to set sticks</p>
-                    <div id="setup-preview" class="board"></div>
-                    <button class="primary-btn" onclick="finalizeGame()" style="margin-top:20px; width:100%">Start Game</button>
-                </div>
-
-                <div id="step3" style="display:none;">
-                    <p id="step3-prompt">Set sticks for pile</p>
-                    <div id="step3-buttons" class="btn-grid"></div>
-                    <button class="secondary" onclick="backToStep2()" style="margin-top:20px; width:100%">Back</button>
+            <div id="step1" class="setup-step">
+                <p data-i18n="setup_piles">How many piles?</p>
+                <div class="btn-grid">
+                    <button onclick="setPileCount(1)">1</button>
+                    <button onclick="setPileCount(2)">2</button>
+                    <button onclick="setPileCount(3)">3</button>
+                    <button onclick="setPileCount(4)">4</button>
+                    <button onclick="setPileCount(5)">5</button>
                 </div>
             </div>
-        </div>
 
-        <div id="actionMenu" class="action-menu">
-            <p id="remove-prompt"></p>
-            <div id="buttonGrid" class="btn-grid"></div>
-            <button id="cancelBtn" class="secondary">Cancel</button>
-        </div>
+            <div id="step2" class="setup-step" style="display:none;">
+                <p data-i18n="setup_tap">Tap a pile to set sticks</p>
+                <div id="setup-preview" class="board setup-preview"></div>
+                <button class="primary wide" onclick="finalizeGame()" data-i18n="start_game">Start Game</button>
+            </div>
 
-        <div id="infoModal" class="modal">
-            <div class="modal-content">
-                <h2 id="info-title">How to Play Nim</h2>
-                <p id="info-description">Nim is an ancient game of strategy where two players take turns removing objects from piles.</p>
-
-                <h3 id="rules-title">Rules:</h3>
-                <ul>
-                    <li id="rule-1">Click on a pile to select it</li>
-                    <li id="rule-2">Choose how many sticks to remove from that pile</li>
-                    <li id="rule-3">The player who takes the last stick(s) wins</li>
-                    <li id="rule-4">You play against the AI opponent</li>
-                </ul>
-
-                <h3 id="tips-title">Tips:</h3>
-                <ul>
-                    <li id="tip-1">The game has strategic positions that can guarantee a win</li>
-                    <li id="tip-2">Try to leave your opponent with equal sticks in each pile</li>
-                    <li id="tip-3">When playing against the Master, strategy is crucial</li>
-                </ul>
-
-                <button onclick="hideInfo()" id="closeBtn" class="close-btn">Close</button>
+            <div id="step3" class="setup-step" style="display:none;">
+                <p id="step3-prompt"></p>
+                <div id="step3-buttons" class="btn-grid"></div>
+                <button class="wide" onclick="backToStep2()" data-i18n="back">Back</button>
             </div>
         </div>
     </div>
 
+    <div id="actionMenu" class="sheet">
+        <p id="remove-prompt" data-i18n="remove_prompt">Remove how many?</p>
+        <div id="buttonGrid" class="btn-grid"></div>
+        <button id="cancelBtn" class="wide" data-i18n="cancel">Cancel</button>
+    </div>
+
+    <script src="../common/i18n.js"></script>
     <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
     <script src="engine.js"></script>
     <script src="ui.js"></script>
 </body>

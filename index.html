@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="common/theme.css">
+    <title>Mini Games</title>
+    <style>
+        .game-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            color: var(--text);
+            text-align: left;
+            text-decoration: none;
+            transition: border-color 0.15s, transform 0.1s;
+        }
+
+        .game-card:hover { border-color: var(--accent); }
+        .game-card:active { transform: scale(0.99); }
+        .game-card strong { font-size: 1.1rem; }
+        .game-card span { color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <nav class="game-list">
+            <a class="game-card" href="LightsOut/index.html">
+                <strong data-i18n="lights_title"></strong>
+                <span data-i18n="lights_desc"></span>
+            </a>
+            <a class="game-card" href="GameOfLife/index.html">
+                <strong data-i18n="life_title"></strong>
+                <span data-i18n="life_desc"></span>
+            </a>
+            <a class="game-card" href="nim-game/index.html">
+                <strong data-i18n="nim_title"></strong>
+                <span data-i18n="nim_desc"></span>
+            </a>
+            <a class="game-card" href="Wordgrid/index.html">
+                <strong data-i18n="word_title"></strong>
+                <span data-i18n="word_desc"></span>
+            </a>
+            <a class="game-card" href="Hackenbush/index.html">
+                <strong data-i18n="hack_title"></strong>
+                <span data-i18n="hack_desc"></span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="common/i18n.js"></script>
+    <script>
+        i18n.register({
+            en: {
+                title: "Mini Games",
+                lights_title: "Lights Out",
+                lights_desc: "Turn off every light on the grid.",
+                life_title: "Evolution Architect",
+                life_desc: "Place a few cells and let life evolve towards the goal.",
+                nim_title: "Nim Master",
+                nim_desc: "Take sticks from piles and outsmart the AI.",
+                word_title: "Word Grid",
+                word_desc: "Fill the grid with Turkish words that match each row and column.",
+                hack_title: "Hackenbush",
+                hack_desc: "Cut blue edges and outlast the red AI."
+            },
+            de: {
+                title: "Minispiele",
+                lights_title: "Lichter Aus",
+                lights_desc: "Schalte alle Lichter auf dem Gitter aus.",
+                life_title: "Evolutionsarchitekt",
+                life_desc: "Setze ein paar Zellen und lass das Leben sich zum Ziel entwickeln.",
+                nim_title: "Nim Meister",
+                nim_desc: "Nimm Stäbchen von den Haufen und überliste die KI.",
+                word_title: "Wortgitter",
+                word_desc: "Fülle das Gitter mit türkischen Wörtern, die zu jeder Zeile und Spalte passen.",
+                hack_title: "Hackenbush",
+                hack_desc: "Schneide blaue Kanten und überdauere die rote KI."
+            },
+            tr: {
+                title: "Mini Oyunlar",
+                lights_title: "Işıklar Kapalı",
+                lights_desc: "Izgaradaki tüm ışıkları kapatın.",
+                life_title: "Evrim Mimarı",
+                life_desc: "Birkaç hücre yerleştirin ve hayatın hedefe doğru evrilmesini izleyin.",
+                nim_title: "Nim Ustası",
+                nim_desc: "Yığınlardan çubuk alın ve yapay zekayı alt edin.",
+                word_title: "Kelime Matrisi",
+                word_desc: "Izgarayı her satır ve sütuna uyan Türkçe kelimelerle doldurun.",
+                hack_title: "Hackenbush",
+                hack_desc: "Mavi kenarları kesin, kırmızı yapay zekadan uzun dayanın."
+            }
+        });
+    </script>
+    <script src="common/shell.js"></script>
+</body>
+</html>

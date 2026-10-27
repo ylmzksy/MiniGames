@@ -19,9 +19,3 @@ const LightsEngine = {
         return grid.every(row => row.every(cell => !cell));
     }
 };
-
-// Global Registry for levels
-const LevelRegistry = [];
-function registerLevel(config) {
-    LevelRegistry.push(config);
-}

@@ -1,193 +1,70 @@
-:root {
-    --bg: #f8f9fa;
-    --card: #ffffff;
-    --primary: #2c3e50;
-    --accent: #3498db;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: var(--bg);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    touch-action: manipulation; /* Prevents double-tap zoom delay */
-}
-
-#app { width: 100%; max-width: 600px; padding: 20px; text-align: center; }
-
 .board {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    margin: 40px 0;
-    min-height: 200px;
+    gap: 8px;
+    min-height: 220px;
+    padding: 16px 0;
 }
 
 .pile-container {
     flex: 1;
-    margin: 0 5px;
+    max-width: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
     cursor: pointer;
 }
 
 .pile-visual {
-    background: var(--card);
-    border: 2px solid transparent;
-    border-radius: 12px;
-    padding: 10px;
-    transition: 0.2s;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 100%;
+    min-height: 40px;
+    padding: 10px 8px;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    gap: 2px;
-    min-width: 40px;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
 }
 
 .pile-container.selected .pile-visual {
     border-color: var(--accent);
-    background: #ebf5fb;
-    transform: translateY(-10px);
+    background: var(--accent-soft);
+    transform: translateY(-8px);
 }
 
 .stick {
+    width: 100%;
+    max-width: 60px;
     height: 10px;
-    width: 60px;
-    background: #8b4513;
-    margin: 4px 0;
-    border-radius: 5px;
+    background: var(--highlight);
+    border-radius: var(--radius-sm);
 }
 
-/* Action Menu (Bottom Sheet) */
-.action-menu {
-    position: fixed;
-    bottom: -100%; /* Hidden by default */
-    left: 0; right: 0;
-    background: white;
-    padding: 20px;
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -10px 20px rgba(0,0,0,0.1);
-    transition: bottom 0.3s ease;
+.pile-count {
+    font-weight: 700;
+    color: var(--text-muted);
 }
 
-.action-menu.active { bottom: 0; }
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 60px;
-    z-index: 1000;
-    display: none;
+.setup-step > * + * {
+    margin-top: 12px;
 }
 
-.modal.active {
-    display: flex;
+.setup-preview {
+    flex-wrap: wrap;
+    min-height: 180px;
 }
 
-.modal-content {
-    background: white;
-    border-radius: 20px;
-    padding: 40px 30px;
-    max-width: 350px;
-    width: 90%;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+.sheet p {
+    margin: 0 0 12px;
+    font-weight: 600;
+    text-align: center;
 }
 
-.modal-content h3 {
-    margin: 0 0 30px 0;
-    font-size: 1.5rem;
-    color: var(--primary);
-}
-
-.modal-content p {
-    margin: 0 0 20px 0;
-    font-size: 1.1rem;
-    color: var(--primary);
-}
-
-.btn-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-#step3-buttons {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-#step3-buttons button {
-    padding: 25px 10px;
-    font-size: 1.3rem;
-}
-
-.btn-grid button {
-    padding: 25px 10px;
-    font-size: 1.3rem;
-}
-
-button {
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    background: var(--primary);
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button.primary-btn { background: var(--accent); width: 100%; }
-
-button.secondary { background: #95a5a6; margin-top: 10px; width: 100%; }
-
-#infoBtn {
-    background: #95a5a6;
-}
-
-#infoBtn:hover {
-    background: #7f8c8d;
-}
-
-.modal-content h2 {
-    margin: 0 0 20px 0;
-    color: #2c3e50;
-    font-size: 24px;
-}
-
-.modal-content ul {
-    margin: 0 0 20px 0;
-    padding-left: 20px;
-}
-
-.modal-content li {
-    margin: 5px 0;
-    line-height: 1.5;
-    color: #555;
-}
-
-.close-btn {
-    display: block;
-    margin: 20px auto 0 auto;
-    padding: 10px 30px;
-    background: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.close-btn:hover {
-    background: #c0392b;
+.sheet .btn-grid {
+    margin-bottom: 12px;
 }

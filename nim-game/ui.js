@@ -2,8 +2,10 @@ let currentPiles = [];
 let selectedIdx = null;
 let isGameActive = false;
 let isSettingUp = true;
+let isAiTurn = false;
+let gameId = 0; // Bumped on every new game so a pending AI move from an old game is dropped
+let statusKey = '';
 
-const setupModal = document.getElementById('setupModal');
 const board = document.getElementById('game-board');
 
 /**
@@ -21,21 +23,12 @@ function setPileCount(count) {
  */
 function renderSetupPreview() {
     const preview = document.getElementById('setup-preview');
-    preview.style.width = '100%';
-    preview.style.display = 'flex';
-    preview.style.justifyContent = 'center';
-    preview.style.alignItems = 'flex-end';
-    preview.style.flexWrap = 'wrap';
-    preview.style.gap = '20px';
-    preview.style.padding = '20px 10px';
-    preview.style.minHeight = '180px';
-
     preview.innerHTML = currentPiles.map((count, i) => `
-        <div class="pile-container ${selectedIdx === i ? 'selected' : ''}" onclick="selectForConfig(${i})" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
+        <div class="pile-container ${selectedIdx === i ? 'selected' : ''}" onclick="selectForConfig(${i})">
             <div class="pile-visual">
                 ${Array.from({length: count}, () => '<div class="stick"></div>').join('')}
             </div>
-            <strong style="display: block; margin-top: 8px; font-size: 0.9rem;">${count}</strong>
+            <div class="pile-count">${count}</div>
         </div>
     `).join('');
 }
@@ -50,7 +43,7 @@ function selectForConfig(idx) {
         .map(num => `<button onclick="setHeight(${num})">${num}</button>`)
         .join('');
     
-    document.getElementById('step3-prompt').innerText = "Set sticks for pile " + (idx + 1);
+    document.getElementById('step3-prompt').innerText = `${i18n.t('setup_pile_prompt')} ${idx + 1}`;
     document.getElementById('step2').style.display = 'none';
     document.getElementById('step3').style.display = 'block';
 }
@@ -71,49 +64,31 @@ function backToStep2() {
     document.getElementById('step2').style.display = 'block';
 }
 
+function setStatus(key) {
+    statusKey = key;
+    document.getElementById('status').innerText = key ? i18n.t(key) : '';
+}
+
 function refreshText() {
-    document.getElementById('title').innerText = i18n.t('title');
-    document.getElementById('status').innerText = isGameActive ? i18n.t('status_start') : '';
-    if (document.getElementById('infoModal') && document.getElementById('infoModal').classList.contains('active')) {
-        updateInfoModal();
+    setStatus(statusKey);
+    if (selectedIdx !== null && isSettingUp) {
+        document.getElementById('step3-prompt').innerText = `${i18n.t('setup_pile_prompt')} ${selectedIdx + 1}`;
     }
 }
 
 window.backToStep2 = backToStep2;
-
-window.showInfo = () => {
-    updateInfoModal();
-    document.getElementById('infoModal').classList.add('active');
-};
-
-window.hideInfo = () => {
-    document.getElementById('infoModal').classList.remove('active');
-};
-
-function updateInfoModal() {
-    document.getElementById('info-title').innerText = i18n.t('info_title');
-    document.getElementById('info-description').innerText = i18n.t('info_description');
-    document.getElementById('rules-title').innerText = i18n.t('rules_title');
-    document.getElementById('rule-1').innerText = i18n.t('rule_1');
-    document.getElementById('rule-2').innerText = i18n.t('rule_2');
-    document.getElementById('rule-3').innerText = i18n.t('rule_3');
-    document.getElementById('rule-4').innerText = i18n.t('rule_4');
-    document.getElementById('tips-title').innerText = i18n.t('tips_title');
-    document.getElementById('tip-1').innerText = i18n.t('tip_1');
-    document.getElementById('tip-2').innerText = i18n.t('tip_2');
-    document.getElementById('tip-3').innerText = i18n.t('tip_3');
-    document.getElementById('closeBtn').innerText = i18n.t('close');
-}
 
 /**
  * Step 3: Finalize
  */
 function finalizeGame() {
     isSettingUp = false;
-    setupModal.style.display = 'none';
+    Shell.closeModal('setupModal');
     isGameActive = true;
+    isAiTurn = false;
+    gameId++;
     selectedIdx = null;
-    refreshText();
+    setStatus('status_start');
     render();
 }
 
@@ -135,7 +110,7 @@ function render() {
 // but ensure they check if (!isSettingUp)
 
 window.onPileSelect = function(i) {
-    if (isSettingUp || !isGameActive || currentPiles[i] === 0) return;
+    if (isSettingUp || !isGameActive || isAiTurn || currentPiles[i] === 0) return;
     selectedIdx = i;
     render();
     
@@ -143,8 +118,7 @@ window.onPileSelect = function(i) {
     grid.innerHTML = Array.from({length: currentPiles[i]}, (_, n) => n + 1)
         .map(n => `<button class="num-btn" onclick="handleMove(${n})">${n}</button>`)
         .join('');
-    
-    document.getElementById('remove-prompt').innerText = i18n.t('remove_prompt');
+
     document.getElementById('actionMenu').classList.add('active');
 };
 
@@ -154,13 +128,16 @@ window.handleMove = function(count) {
     selectedIdx = null;
     render();
     if (checkEndState(true)) return;
-    setTimeout(processAiTurn, 800);
+    isAiTurn = true;
+    setStatus('status_ai');
+    const moveGameId = gameId;
+    setTimeout(() => processAiTurn(moveGameId), 800);
 };
 
-function processAiTurn() {
-    if (!isGameActive) return;
-    document.getElementById('status').innerText = i18n.t('status_ai');
-    
+function processAiTurn(moveGameId) {
+    if (!isGameActive || moveGameId !== gameId) return;
+    isAiTurn = false;
+
     const difficulty = document.getElementById('difficulty').value;
     const move = difficulty === 'master' ? NimEngine.getMasterMove(currentPiles) : NimEngine.getNoviceMove(currentPiles);
     
@@ -168,14 +145,14 @@ function processAiTurn() {
     render();
     
     if (checkEndState(false)) return;
-    
-    document.getElementById('status').innerText = i18n.t('status_your_turn');
+
+    setStatus('status_your_turn');
 }
 
 function checkEndState(isHuman) {
     if (currentPiles.every(p => p === 0)) {
         isGameActive = false;
-        document.getElementById('status').innerText = isHuman ? i18n.t('win_human') : i18n.t('win_ai');
+        setStatus(isHuman ? 'win_human' : 'win_ai');
         return true;
     }
     return false;
@@ -193,7 +170,8 @@ document.getElementById('setupBtn').onclick = () => {
     isSettingUp = true;
     document.getElementById('step1').style.display = 'block';
     document.getElementById('step2').style.display = 'none';
-    setupModal.style.display = 'flex';
+    document.getElementById('step3').style.display = 'none';
+    Shell.openModal('setupModal');
 };
 
 // Trigger setup on load

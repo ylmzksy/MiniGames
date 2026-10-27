@@ -1,44 +1,52 @@
-const i18n = {
-    currentLang: 'tr', // Defaulting to Turkish
-    locales: {
-        tr: {
-            title: "Kelime Matrisi",
-            placeholder: "Seçili hücre için kelime girin...",
-            status_select: "Hamle yapmak için bir hücre seçin.",
-            status_valid: "Harika! Kelime kaydedildi.",
-            err_dict: "Kelime sözlükte bulunamadı!",
-            err_rule: "Kelime hücre kurallarına uymuyor!",
-            err_duplicate: "Bu kelime zaten başka bir hücrede seçilmiş!",
-            col_6_letters: "6 harf veya daha az",
-            col_no_cgi: "c, g, ı içermez",
-            col_no_ir: "i, r içermez",
-            row_contains_ep: "ep içerir",
-            row_ends_p: "p ile biter",
-            row_ends_us: "us ile biter"
-        },
-        en: {
-            title: "Word Grid",
-            placeholder: "Enter word for chosen cell...",
-            status_select: "Select a grid cell to place a word.",
-            status_valid: "Perfect! Word accepted.",
-            err_dict: "Word not in dictionary!",
-            err_rule: "Word breaks cell constraints!",
-            err_duplicate: "Word is already active in another cell!",
-            col_6_letters: "6 letters or fewer",
-            col_no_cgi: "Does not contain c, g, i",
-            col_no_ir: "Does not contain i, r",
-            row_contains_ep: "Contains ep",
-            row_ends_p: "Ends with p",
-            row_ends_us: "Ends with us"
-        }
+i18n.register({
+    tr: {
+        status_loading: "Sözlük yükleniyor...",
+        err_dict_load: "Sözlük yüklenemedi. Oyunu bir web sunucusu üzerinden açın.",
+        info_title: "Kelime Matrisi Nasıl Oynanır",
+        info_description: "3×3 ızgaradaki her hücreyi, hem satır hem de sütun kuralına uyan bir kelimeyle doldurun.",
+        rule_1: "Bir hücreye dokunun, kelimeyi yazın ve Enter'a basın",
+        rule_2: "Kelime sözlükte olmalı ve hem satır hem sütun kuralına uymalı",
+        rule_3: "Bir kelime yalnızca bir hücrede kullanılabilir",
+        rule_4: "Seçili hücreye tekrar dokunarak o hücreye girdiğiniz kelimeler arasında geçiş yapın",
+        tip_1: "En kısıtlayıcı hücrelerden başlayın",
+        tip_2: "Kısa kelimeler genellikle daha fazla kurala uyar",
+        title: "Kelime Matrisi",
+        placeholder: "Seçili hücre için kelime girin...",
+        status_select: "Hamle yapmak için bir hücre seçin.",
+        status_valid: "Harika! Kelime kaydedildi.",
+        err_dict: "Kelime sözlükte bulunamadı!",
+        err_rule: "Kelime hücre kurallarına uymuyor!",
+        err_duplicate: "Bu kelime zaten başka bir hücrede seçilmiş!",
+        col_6_letters: "6 harf veya daha az",
+        col_no_cgi: "c, g, ı içermez",
+        col_no_ir: "i, r içermez",
+        row_contains_ep: "ep içerir",
+        row_ends_p: "p ile biter",
+        row_ends_us: "us ile biter"
     },
-    t(key) {
-        return this.locales[this.currentLang][key] || key;
-    },
-    setLanguage(lang) {
-        if (this.locales[lang]) {
-            this.currentLang = lang;
-            window.dispatchEvent(new CustomEvent('langChanged'));
-        }
+    en: {
+        status_loading: "Loading dictionary...",
+        err_dict_load: "Dictionary could not be loaded. Open the game through a web server.",
+        info_title: "How to Play Word Grid",
+        info_description: "Fill every cell of the 3×3 grid with a word that satisfies both its row rule and its column rule.",
+        rule_1: "Tap a cell, type a word and press Enter",
+        rule_2: "The word must be in the dictionary and match both the row and column rules",
+        rule_3: "A word can be used in only one cell",
+        rule_4: "Tap a selected cell again to cycle through the words you entered there",
+        tip_1: "Start with the most restrictive cells",
+        tip_2: "Short words often fit more rules",
+        title: "Word Grid",
+        placeholder: "Enter word for chosen cell...",
+        status_select: "Select a grid cell to place a word.",
+        status_valid: "Perfect! Word accepted.",
+        err_dict: "Word not in dictionary!",
+        err_rule: "Word breaks cell constraints!",
+        err_duplicate: "Word is already active in another cell!",
+        col_6_letters: "6 letters or fewer",
+        col_no_cgi: "Does not contain c, g, i",
+        col_no_ir: "Does not contain i, r",
+        row_contains_ep: "Contains ep",
+        row_ends_p: "Ends with p",
+        row_ends_us: "Ends with us"
     }
-};
+}, 'tr');

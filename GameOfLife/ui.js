@@ -1,22 +1,34 @@
+let currentLevelIdx = 0;
 let currentLevel = null;
 let grid = [];
+let seeds = new Set(); // "r,c" keys of the cells the player placed
 let isPlaying = false;
 let interval = null;
-let initialAlive = 0;
 let generation = 0;
+let statusKey = 'budget'; // budget | running | game_over | win | all_levels_cleared
 let engine = new LifeEngine(); // Default B3/S23
 
 const gridEl = document.getElementById('game-grid');
 const statusEl = document.getElementById('status');
 const goalEl = document.getElementById('goal');
 
+// Goal types used by levels: check() runs after every generation, text() describes the goal
+const Goals = {
+    survive: {
+        check: (goal, alive) => generation >= goal.generations && alive > 0,
+        text: goal => i18n.t('goal_survive', { n: goal.generations })
+    },
+    occupy: {
+        check: goal => grid[goal.r][goal.c],
+        text: () => i18n.t('goal_occupy')
+    }
+};
+
 function initUI() {
-    // Standard level loading logic
     if (LevelRegistry.length > 0) loadLevel(0);
-    updateTexts();
     // Set up event listeners
     document.getElementById('settingsBtn').addEventListener('click', () => {
-        document.getElementById('settingsModal').classList.add('active');
+        Shell.openModal('settingsModal');
         updateSettingsOptionStates();
     });
     const bornSelect = document.getElementById('bornRules');
@@ -25,14 +37,9 @@ function initUI() {
     surviveSelect.addEventListener('change', () => updateSettingsOptionStates());
 }
 
-function checkGoal() {
-    const alive = grid.flat().filter(Boolean).length;
-    if (currentLevel.id === 1) { // challenge1
-        return generation >= 50 && alive > 0;
-    } else if (currentLevel.name === "The Glider Challenge") {
-        return grid[10][10];
-    }
-    return false;
+function checkGoal(alive) {
+    const goal = currentLevel.goal;
+    return Goals[goal.type].check(goal, alive);
 }
 
 function parseRuleString(value) {
@@ -94,137 +101,121 @@ function updateSettingsOptionStates() {
 }
 
 function loadLevel(idx) {
+    stopPlaying();
+    currentLevelIdx = idx;
     currentLevel = LevelRegistry[idx];
-    initialAlive = currentLevel.initial.length;
     generation = 0;
-    // Create empty grid
+    seeds = new Set();
+    statusKey = 'budget';
+    // Create empty grid and add the pre-placed cells
     grid = Array(currentLevel.size).fill().map(() => Array(currentLevel.size).fill(false));
-    // Load initial seeds
-    currentLevel.initial.forEach(cell => {
-        if (cell.r !== undefined) {
-            grid[cell.r][cell.c] = cell.state;
-        } else {
-            grid[cell[0]][cell[1]] = true;
-        }
-    });
+    currentLevel.initial.forEach(([r, c]) => { grid[r][c] = true; });
     render();
-    const currentAlive = grid.flat().filter(Boolean).length;
-    const placed = currentAlive - initialAlive;
-    const remaining = Math.max(0, currentLevel.budget - placed);
-    statusEl.innerText = `${i18n.t('budget')}: ${remaining}`;
-    let goalText = '';
-    if (typeof currentLevel.goal === 'string') {
-        goalText = currentLevel.goal;
-    } else if (currentLevel.goal.type === 'occupy') {
-        goalText = `${i18n.t('occupy')} (${currentLevel.goal.r}, ${currentLevel.goal.c})`;
-    }
-    goalEl.innerText = `${i18n.t('goal')}: ${goalText}`;
+    updateTexts();
 }
 
 function render() {
+    const goal = currentLevel.goal;
+    const isTarget = (r, c) => goal.type === 'occupy' && goal.r === r && goal.c === c;
     gridEl.style.gridTemplateColumns = `repeat(${grid.length}, 1fr)`;
     gridEl.innerHTML = grid.flatMap((row, r) => 
         row.map((isAlive, c) => `
-            <div class="cell ${isAlive ? 'alive' : 'dead'}" 
+            <div class="cell ${isAlive ? 'alive' : 'dead'} ${isTarget(r, c) ? 'target' : ''}" 
                  onclick="handleCellClick(${r}, ${c})">
             </div>
         `)
     ).join('');
 }
 
+// Seeds can only be placed or removed before the evolution starts;
+// pre-placed cells are part of the level and stay locked.
 window.handleCellClick = (r, c) => {
-    if (isPlaying) return;
-    const currentAlive = grid.flat().filter(Boolean).length;
-    const placed = currentAlive - initialAlive;
-    const remaining = Math.max(0, currentLevel.budget - placed);
-    if (!grid[r][c] && remaining <= 0) return; // can't place more
-    grid[r][c] = !grid[r][c];
+    if (isPlaying || generation > 0) return;
+    const key = `${r},${c}`;
+    if (seeds.has(key)) {
+        seeds.delete(key);
+        grid[r][c] = false;
+    } else if (!grid[r][c] && seeds.size < currentLevel.budget) {
+        seeds.add(key);
+        grid[r][c] = true;
+    } else {
+        return;
+    }
     render();
-    const newAlive = grid.flat().filter(Boolean).length;
-    const newPlaced = newAlive - initialAlive;
-    const newRemaining = Math.max(0, currentLevel.budget - newPlaced);
-    statusEl.innerText = `${i18n.t('budget')}: ${newRemaining}`;
+    renderStatus();
 };
 
 window.updateRules = () => {
     const born = document.getElementById('bornRules').value.split(',').map(Number);
     const survive = document.getElementById('surviveRules').value.split(',').map(Number);
     engine = new LifeEngine(born, survive);
-    document.getElementById('settingsModal').classList.remove('active');
+    Shell.closeModal('settingsModal');
 };
+
+function stopPlaying() {
+    isPlaying = false;
+    clearInterval(interval);
+    document.getElementById('playBtn').innerText = i18n.t('play');
+}
+
+function step() {
+    grid = engine.getNextGen(grid);
+    render();
+    generation++;
+    const alive = grid.flat().filter(Boolean).length;
+    if (alive === 0) {
+        stopPlaying();
+        statusKey = 'game_over';
+    } else if (checkGoal(alive)) {
+        stopPlaying();
+        statusKey = 'win';
+        setTimeout(nextLevel, 1500);
+    }
+    renderStatus();
+}
+
+function nextLevel() {
+    if (currentLevelIdx + 1 < LevelRegistry.length) {
+        loadLevel(currentLevelIdx + 1);
+    } else {
+        statusKey = 'all_levels_cleared';
+        renderStatus();
+    }
+}
 
 document.getElementById('playBtn').onclick = () => {
-    isPlaying = !isPlaying;
-    document.getElementById('playBtn').innerText = isPlaying ? i18n.t('pause') : i18n.t('play');
+    if (statusKey === 'win' || statusKey === 'all_levels_cleared') return;
     if (isPlaying) {
-        interval = setInterval(() => {
-            grid = engine.getNextGen(grid);
-            render();
-            generation++;
-            const alive = grid.flat().filter(Boolean).length;
-            statusEl.innerText = `${i18n.t('generation')}: ${generation}, ${i18n.t('alive')}: ${alive}`;
-            if (alive === 0) {
-                isPlaying = false;
-                clearInterval(interval);
-                document.getElementById('playBtn').innerText = i18n.t('play');
-                statusEl.innerText = i18n.t('game_over');
-                return;
-            }
-            if (checkGoal()) {
-                isPlaying = false;
-                clearInterval(interval);
-                document.getElementById('playBtn').innerText = i18n.t('play');
-                statusEl.innerText = i18n.t('win');
-            }
-        }, 200);
-    } else {
-        clearInterval(interval);
+        stopPlaying();
+        return;
+    }
+    isPlaying = true;
+    statusKey = 'running';
+    document.getElementById('playBtn').innerText = i18n.t('pause');
+    renderStatus();
+    interval = setInterval(step, 200);
+};
+
+document.getElementById('resetBtn').onclick = () => loadLevel(currentLevelIdx);
+
+function renderStatus() {
+    if (statusKey === 'budget') {
+        statusEl.innerText = `${i18n.t('budget')}: ${currentLevel.budget - seeds.size}`;
+    } else if (statusKey === 'running') {
         const alive = grid.flat().filter(Boolean).length;
         statusEl.innerText = `${i18n.t('generation')}: ${generation}, ${i18n.t('alive')}: ${alive}`;
+    } else {
+        statusEl.innerText = i18n.t(statusKey);
     }
-};
-
-document.getElementById('resetBtn').onclick = () => {
-    isPlaying = false;
-    document.getElementById('playBtn').innerText = i18n.t('play');
-    clearInterval(interval);
-    loadLevel(0); // Reload current level
-};
-
-function updateStaticText() {
-    updateTexts();
 }
 
 function updateTexts() {
-    document.getElementById('title').innerText = i18n.t('title');
     document.getElementById('playBtn').innerText = isPlaying ? i18n.t('pause') : i18n.t('play');
-    document.getElementById('resetBtn').innerText = i18n.t('reset');
-    document.getElementById('settingsBtn').innerText = i18n.t('settings');
-    document.getElementById('rulesTitle').innerText = i18n.t('rules');
-    document.getElementById('bornLabel').innerText = `${i18n.t('born')}:`;
-    document.getElementById('surviveLabel').innerText = `${i18n.t('survive')}:`;
-    document.querySelector('#settingsModal button').innerText = i18n.t('apply');
-    // update goal
-    let goalText = '';
-    if (typeof currentLevel.goal === 'string') {
-        goalText = currentLevel.goal;
-    } else if (currentLevel.goal.type === 'occupy') {
-        goalText = `${i18n.t('occupy')} (${currentLevel.goal.r}, ${currentLevel.goal.c})`;
-    }
-    goalEl.innerText = `${i18n.t('goal')}: ${goalText}`;
-    // update status if not playing
-    if (!isPlaying) {
-        const currentAlive = grid.flat().filter(Boolean).length;
-        const placed = currentAlive - initialAlive;
-        const remaining = Math.max(0, currentLevel.budget - placed);
-        statusEl.innerText = `${i18n.t('budget')}: ${remaining}`;
-    }
+    const goalText = Goals[currentLevel.goal.type].text(currentLevel.goal);
+    goalEl.innerText = `${i18n.t('level')} ${currentLevelIdx + 1}: ${currentLevel.name} · ${i18n.t('goal')}: ${goalText}`;
+    renderStatus();
 }
 
 window.addEventListener('langChanged', updateTexts);
-
-document.getElementById('langSelect').addEventListener('change', (e) => {
-    i18n.setLanguage(e.target.value);
-});
 
 initUI();

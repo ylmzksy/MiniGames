@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../common/theme.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Hackenbush</title>
+</head>
+<body data-home="../index.html">
+    <div id="app">
+        <div id="status" class="status"></div>
+        <div id="level-info" class="level-info"></div>
+        <div id="game-board" class="board"></div>
+        <div class="legend">
+            <span><i class="swatch blue"></i><span data-i18n="legend_blue">You</span></span>
+            <span><i class="swatch red"></i><span data-i18n="legend_red">AI</span></span>
+            <span><i class="swatch green"></i><span data-i18n="legend_green">Both</span></span>
+        </div>
+        <div class="controls">
+            <select id="difficulty">
+                <option value="master" data-i18n="master">Master</option>
+                <option value="novice" data-i18n="novice">Novice</option>
+            </select>
+            <button id="restartBtn" class="primary" data-i18n="restart">Restart Level</button>
+        </div>
+    </div>
+
+    <script src="../common/i18n.js"></script>
+    <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
+    <script src="../common/levels.js"></script>
+    <script src="engine.js"></script>
+
+    <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
+    <script src="levels/level3.js"></script>
+    <script src="levels/level4.js"></script>
+    <script src="levels/level5.js"></script>
+    <script src="levels/level6.js"></script>
+    <script src="levels/level7.js"></script>
+    <script src="levels/level8.js"></script>
+
+    <script src="ui.js"></script>
+</body>
+</html>

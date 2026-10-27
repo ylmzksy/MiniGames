@@ -37,7 +37,3 @@ class LifeEngine {
         return count;
     }
 }
-
-// Level Registry (Plugin Architecture)
-const LevelRegistry = [];
-const registerLevel = (config) => LevelRegistry.push(config);
