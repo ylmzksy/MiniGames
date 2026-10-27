@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../common/theme.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Kakuro</title>
+</head>
+<body data-home="../index.html">
+    <div id="app">
+        <div id="status" class="status"></div>
+        <div id="level-info" class="level-info"></div>
+        <div id="game-board" class="board"></div>
+        <div id="hints" class="hints"></div>
+        <div class="pad btn-grid">
+            <button onclick="enterDigit(1)">1</button>
+            <button onclick="enterDigit(2)">2</button>
+            <button onclick="enterDigit(3)">3</button>
+            <button onclick="enterDigit(4)">4</button>
+            <button onclick="enterDigit(5)">5</button>
+            <button onclick="enterDigit(6)">6</button>
+            <button onclick="enterDigit(7)">7</button>
+            <button onclick="enterDigit(8)">8</button>
+            <button onclick="enterDigit(9)">9</button>
+            <button onclick="eraseCell()" data-i18n="erase">Erase</button>
+        </div>
+        <div class="controls">
+            <button id="notesBtn" onclick="toggleNotes()" data-i18n="notes">Notes</button>
+            <button id="restartBtn" class="primary" data-i18n="restart">Restart Level</button>
+        </div>
+    </div>
+
+    <script src="../common/i18n.js"></script>
+    <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
+    <script src="../common/levels.js"></script>
+    <script src="engine.js"></script>
+
+    <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
+    <script src="levels/level3.js"></script>
+    <script src="levels/level4.js"></script>
+
+    <script src="ui.js"></script>
+</body>
+</html>
