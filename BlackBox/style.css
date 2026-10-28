@@ -1,0 +1,97 @@
+/* The hidden box is always darker than the ports around it, in both themes */
+:root {
+    --box-bg: #2a3246;
+    --box-cell: #3a4460;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --box-bg: #0a0e18;
+        --box-cell: #141b2b;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 3px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-xs);
+}
+
+.cell.corner { background: transparent; }
+
+/* Edge ports are small buttons that show the ray result once fired */
+.cell.port {
+    padding: 0;
+    font-size: clamp(0.7rem, 2.8vw, 1rem);
+    font-weight: 700;
+    border-radius: var(--radius-xs);
+    background: var(--surface-2);
+}
+
+.cell.port:disabled { opacity: 1; }
+.cell.port.fired { cursor: default; }
+.cell.port.hit { background: var(--danger); border-color: var(--danger); color: #fff; }
+.cell.port.reflect { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.cell.port.exit { background: var(--highlight); border-color: var(--highlight); color: #1b2333; }
+
+.cell.inner {
+    background: var(--box-cell);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.cell.inner:hover { background: color-mix(in srgb, var(--box-cell) 70%, var(--accent)); }
+
+/* Guess markers, and the revealed atoms once the level is checked */
+.cell.inner::after {
+    content: '';
+    position: absolute;
+    inset: 22%;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.cell.guess::after {
+    opacity: 1;
+    border: 3px solid var(--highlight);
+}
+
+.cell.atom::after {
+    opacity: 1;
+    border: none;
+    background: var(--text-muted);
+}
+
+.cell.atom.correct::after {
+    background: var(--success);
+    box-shadow: 0 0 12px var(--success);
+}
+
+.cell.atom.missed::after {
+    background: var(--danger);
+}
+
+.cell.wrong::after {
+    opacity: 1;
+    border-color: var(--danger);
+    background: transparent;
+}
