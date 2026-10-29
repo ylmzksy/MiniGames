@@ -1,0 +1,15 @@
+.exit.right {
+    right: -6px;
+    width: 6px;
+}
+
+/* Vehicles get a windscreen stripe on the front end */
+.piece::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 2px;
+}
+
+.piece.axis-h::after { top: 22%; bottom: 22%; right: 16%; width: 10%; }
+.piece.axis-v::after { left: 22%; right: 22%; bottom: 16%; height: 10%; }

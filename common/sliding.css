@@ -1,0 +1,44 @@
+/* Board and pieces shared by the sliding-block games */
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--surface-2);
+    border: 6px solid var(--border);
+    border-radius: var(--radius);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.piece {
+    position: absolute;
+    padding: 3px;
+    cursor: grab;
+    transition: left 0.08s linear, top 0.08s linear;
+}
+
+.piece::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-sm);
+    background: var(--piece);
+    box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.piece.selected::before { outline: 3px solid var(--text); outline-offset: -3px; }
+.piece.solved::before { box-shadow: 0 0 16px var(--success); }
+.piece:active { cursor: grabbing; }
+
+/* The gap in the frame that the X piece must reach */
+.exit {
+    position: absolute;
+    background: var(--bg);
+}
