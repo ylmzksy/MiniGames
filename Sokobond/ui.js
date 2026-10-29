@@ -1,5 +1,11 @@
 const SWIPE_MIN = 24; // px a finger must travel on the board to count as a swipe
 
+// Bonds form only on the four sides of an atom, so free electrons sit on the
+// sides that are still open. Unbonded atoms use a symmetric layout.
+const SIDES = ['up', 'right', 'down', 'left'];
+const SIDE_ANGLE = { up: 0, right: 90, down: 180, left: 270 };
+const PREFERRED_SIDES = { 1: ['up'], 2: ['left', 'right'], 3: ['up', 'left', 'right'], 4: SIDES };
+
 let currentLevelIdx = 0;
 let puzzle = null;
 let state = null;      // { atoms: [{ element, pos }], bonds: { "a-b": count } }
@@ -58,19 +64,30 @@ function renderAtom(i, inPlayerMolecule) {
     const free = SokobondEngine.freeElectrons(state, i);
 
     // Half-bonds from this atom's center to the edge shared with each bonded neighbor
+    const bondedSides = new Set();
     const bonds = SokobondEngine.bondsOf(state, i).map(([j, n]) => {
         const [jr, jc] = state.atoms[j].pos;
         const side = jr < r ? 'up' : jr > r ? 'down' : jc < c ? 'left' : 'right';
+        bondedSides.add(side);
         return Array.from({ length: n }, (_, k) =>
             `<span class="bond ${side} n${n} k${k}"></span>`).join('');
     }).join('');
 
-    // Free electrons as dots around the atom, starting at the top and going clockwise
-    const dots = Array.from({ length: free }, (_, k) =>
-        `<span class="electron" style="transform: rotate(${k * (360 / free)}deg)"></span>`).join('');
+    const dots = electronSides(free, bondedSides).map(side =>
+        `<span class="electron" style="transform: rotate(${SIDE_ANGLE[side]}deg)"></span>`).join('');
 
     const classes = ['atom', `el-${atom.element}`, i === puzzle.player ? 'player' : '', inPlayerMolecule ? 'mine' : '', isSolved ? 'solved' : ''].join(' ');
     return `${bonds}<div class="${classes}">${atom.element}</div>${dots}`;
+}
+
+// Sides that show a free electron: the preferred layout where possible, then any open side
+function electronSides(free, bondedSides) {
+    const open = SIDES.filter(side => !bondedSides.has(side));
+    const sides = (PREFERRED_SIDES[free] || []).filter(side => open.includes(side));
+    open.forEach(side => {
+        if (sides.length < free && !sides.includes(side)) sides.push(side);
+    });
+    return sides.slice(0, free);
 }
 
 window.movePlayer = (dir) => {
