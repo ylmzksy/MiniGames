@@ -1,0 +1,90 @@
+.level-info {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xs);
+}
+
+.cell.corner { background: transparent; }
+
+.cell.clue {
+    font-size: clamp(0.8rem, 3vw, 1.05rem);
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.cell.clue.ok { color: var(--success); }
+.cell.clue.bad { color: var(--danger); }
+.cell.clue.lit { background: var(--accent-soft); color: var(--accent); }
+
+.cell.floor {
+    background: var(--surface-2);
+    font-size: clamp(1.1rem, 5.5vw, 1.9rem);
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.cell.floor:hover { box-shadow: inset 0 0 0 2px var(--accent); }
+.cell.floor.lit { background: var(--accent-soft); }
+.cell.floor.solved { background: color-mix(in srgb, var(--success) 18%, var(--surface-2)); }
+
+/* Mirrors are a diagonal line across the cell */
+.cell.mirror {
+    background: var(--surface);
+}
+
+.cell.mirror::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(var(--mirror-angle), transparent calc(50% - 2px), var(--text) calc(50% - 2px), var(--text) calc(50% + 2px), transparent calc(50% + 2px));
+}
+
+.cell.mirror.slash { --mirror-angle: -45deg; }
+.cell.mirror.backslash { --mirror-angle: 45deg; }
+.cell.mirror.lit { background: var(--accent-soft); }
+
+/* Monster palette with the remaining counts */
+.palette {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+.tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 4px;
+    font-size: 0.8rem;
+}
+
+.tool .icon { font-size: 1.5rem; line-height: 1.2; }
+.tool .count { font-size: 0.75rem; opacity: 0.8; min-height: 1em; }
+.tool.over .count { color: var(--danger); opacity: 1; }
+.tool.primary.over .count { color: inherit; }
