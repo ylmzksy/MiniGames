@@ -1,0 +1,152 @@
+:root {
+    --stone-blue: #3b6fe0;
+    --stone-red: #d64545;
+    --board-light: #f3e9d2;
+    --board-dark: #e4d5b3;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --stone-blue: #5b8cff;
+        --stone-red: #f06a6a;
+        --board-light: #4a4030;
+        --board-dark: #3b3326;
+    }
+}
+
+.level-info {
+    color: var(--text-muted);
+}
+
+.table {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "ai     middle"
+        "board  middle"
+        "player middle";
+    gap: 10px;
+    align-items: center;
+}
+
+.hand { display: flex; justify-content: center; gap: 10px; }
+.hand.ai { grid-area: ai; }
+.hand.player { grid-area: player; }
+.middle { grid-area: middle; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.middle .label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+.board {
+    grid-area: board;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    padding: 4px;
+    background: var(--board-dark);
+    border-radius: var(--radius);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--board-light);
+    border-radius: var(--radius-xs);
+}
+
+.cell.temple::before {
+    content: '⛩';
+    position: absolute;
+    font-size: 1.4rem;
+    opacity: 0.35;
+}
+
+.cell.temple.blue::before { color: var(--stone-blue); }
+.cell.temple.red::before { color: var(--stone-red); }
+
+.cell.mine { cursor: pointer; }
+.cell.last { box-shadow: inset 0 0 0 3px var(--highlight); }
+.cell.selected { box-shadow: inset 0 0 0 3px var(--accent); }
+
+.cell.target { cursor: pointer; }
+.cell.target::after {
+    content: '';
+    position: absolute;
+    inset: 32%;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+}
+
+.piece {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 1.2rem;
+    line-height: 1;
+    box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.piece.blue { background: var(--stone-blue); }
+.piece.red { background: var(--stone-red); }
+.piece.master { font-size: 1.5rem; }
+
+/* Movement cards: a 5x5 pattern with the piece in the middle */
+.card {
+    width: 92px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+
+.card.clickable { cursor: pointer; }
+.card.clickable:hover { border-color: var(--accent); }
+.card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+
+.pattern {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    width: 100%;
+}
+
+.pattern i {
+    aspect-ratio: 1 / 1;
+    background: var(--surface-2);
+    border-radius: 1px;
+}
+
+.pattern i.origin { background: var(--text); }
+.pattern i.move.blue { background: var(--stone-blue); }
+.pattern i.move.red { background: var(--stone-red); }
+
+.card .name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+@media (max-width: 480px) {
+    .table {
+        grid-template-columns: 1fr;
+        grid-template-areas: "ai" "board" "player" "middle";
+    }
+    .card { width: 80px; }
+}

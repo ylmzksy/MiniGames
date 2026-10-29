@@ -1,0 +1,74 @@
+:root {
+    --hex-empty: var(--surface);
+    --hex-line: var(--border);
+    --stone-blue: #3b6fe0;
+    --stone-red: #d64545;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --stone-blue: #5b8cff;
+        --stone-red: #f06a6a;
+    }
+}
+
+.level-info {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hex {
+    fill: var(--hex-empty);
+    stroke: var(--hex-line);
+    stroke-width: 2;
+    transition: fill 0.15s;
+}
+
+.hex.free { cursor: pointer; }
+.hex.free:hover { fill: var(--accent-soft); }
+.hex.blue { fill: var(--stone-blue); }
+.hex.red { fill: var(--stone-red); }
+.hex.last { stroke: var(--text); stroke-width: 3; }
+.hex.path { stroke: var(--highlight); stroke-width: 4; }
+
+.border {
+    fill: none;
+    stroke-width: 6;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.border.blue { stroke: var(--stone-blue); }
+.border.red { stroke: var(--stone-red); }
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.swatch.blue { background: var(--stone-blue); }
+.swatch.red { background: var(--stone-red); }
