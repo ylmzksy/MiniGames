@@ -1,0 +1,130 @@
+:root {
+    --el-H: #e9edf5;
+    --el-O: #f06a6a;
+    --el-N: #5b8cff;
+    --el-C: #4a5568;
+    --el-H-text: #1b2333;
+    --el-C-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --el-H: #d9deea;
+        --el-C: #2c3446;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+}
+
+.cell.wall {
+    background: var(--surface-2);
+    box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.cell.floor { background: var(--bg); }
+
+.atom {
+    position: absolute;
+    inset: 18%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+    color: #ffffff;
+    box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+}
+
+.atom.el-H { background: var(--el-H); color: var(--el-H-text); }
+.atom.el-O { background: var(--el-O); }
+.atom.el-N { background: var(--el-N); }
+.atom.el-C { background: var(--el-C); color: var(--el-C-text); }
+
+.atom.player { outline: 3px solid var(--accent); outline-offset: 2px; }
+.atom.mine:not(.player) { outline: 2px dashed var(--accent); outline-offset: 1px; }
+.atom.solved { box-shadow: 0 0 14px var(--success); }
+
+/* Free electrons orbit the atom: each dot sits at the top of a full-cell box
+   that is rotated by its angle, so the dots spread evenly around the atom */
+.electron {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.electron::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    width: 13%;
+    height: 13%;
+    margin-left: -6.5%;
+    border-radius: 50%;
+    background: var(--highlight);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+/* Half-bonds run from the atom's center to the edge of the cell; the neighbor draws the other half */
+.bond {
+    position: absolute;
+    background: var(--text);
+    z-index: 1;
+}
+
+.bond.left, .bond.right { top: calc(50% - 2px); height: 4px; width: 50%; }
+.bond.up, .bond.down { left: calc(50% - 2px); width: 4px; height: 50%; }
+.bond.left { left: 0; }
+.bond.right { right: 0; }
+.bond.up { top: 0; }
+.bond.down { bottom: 0; }
+
+/* Double and triple bonds are drawn as parallel lines */
+.bond.n2.k0.left, .bond.n2.k0.right { margin-top: -5px; }
+.bond.n2.k1.left, .bond.n2.k1.right { margin-top: 5px; }
+.bond.n2.k0.up, .bond.n2.k0.down { margin-left: -5px; }
+.bond.n2.k1.up, .bond.n2.k1.down { margin-left: 5px; }
+.bond.n3.k0.left, .bond.n3.k0.right { margin-top: -7px; }
+.bond.n3.k2.left, .bond.n3.k2.right { margin-top: 7px; }
+.bond.n3.k0.up, .bond.n3.k0.down { margin-left: -7px; }
+.bond.n3.k2.up, .bond.n3.k2.down { margin-left: 7px; }
+
+/* On-screen arrows for touch play */
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(2, 56px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.dpad button { padding: 0; font-size: 1.3rem; }
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }

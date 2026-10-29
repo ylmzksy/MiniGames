@@ -1,0 +1,107 @@
+:root {
+    --board-bg: #14131a;
+    --board-cell: #1c1b24;
+    --noun-text: #f3a3c8;
+    --verb-text: #f2f2f2;
+    --prop-text: #f4d35e;
+    --wall-color: #4a4458;
+    --water-color: #3a6fd8;
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 1px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--board-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--board-cell);
+}
+
+/* Objects stack inside a cell; the last one drawn is on top */
+.obj {
+    position: absolute;
+    inset: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18%;
+    font-size: clamp(0.8rem, 3.4vw, 1.3rem);
+    line-height: 1;
+}
+
+.obj.thing.wall { inset: 0; border-radius: 0; background: var(--wall-color); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.obj.thing.water { inset: 0; border-radius: 0; background: var(--water-color); opacity: 0.85; }
+.obj.thing.you { filter: drop-shadow(0 0 4px #ffffff); }
+.obj.thing.solved { filter: drop-shadow(0 0 8px var(--success)); }
+
+/* Text blocks are small signs with the word on them */
+.obj.text {
+    background: #2b2936;
+    border: 2px solid currentColor;
+    font-size: clamp(0.42rem, 1.9vw, 0.68rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-align: center;
+    overflow: hidden;
+}
+
+.obj.text.noun { color: var(--noun-text); }
+.obj.text.verb { color: var(--verb-text); }
+.obj.text.prop { color: var(--prop-text); }
+.obj.text.w-YOU { color: #f27ad0; }
+.obj.text.w-WIN { color: #f4d35e; }
+.obj.text.w-STOP { color: #7fd36b; }
+.obj.text.w-PUSH { color: #c9a27e; }
+.obj.text.w-SINK { color: #6fb4ff; }
+.obj.text.w-DEFEAT { color: #f06a6a; }
+
+/* Active rules under the board */
+.rules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    min-height: 1.8em;
+}
+
+.rule {
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.rule.none { color: var(--text-muted); font-weight: 500; }
+
+/* On-screen arrows for touch play */
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(2, 56px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.dpad button { padding: 0; font-size: 1.3rem; }
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }

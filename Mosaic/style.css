@@ -1,0 +1,56 @@
+/* Undecided cells must always be lighter than white-marked cells' dots and darker than paper */
+:root {
+    --cell-empty: var(--surface-2);
+    --cell-white: #ffffff;
+    --cell-black: #1b2333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cell-empty: #2a3449;
+        --cell-white: #e8ecf4;
+        --cell-black: #05080f;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9rem, 4vw, 1.3rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+}
+
+.cell.empty { background: var(--cell-empty); color: var(--text); }
+.cell.white { background: var(--cell-white); color: var(--text); }
+.cell.black { background: var(--cell-black); color: #ffffff; }
+
+.cell.ok { color: var(--success); }
+.cell.bad { color: var(--danger); }
+.cell.black.ok { color: color-mix(in srgb, var(--success) 70%, #ffffff); }
+.cell.black.bad { color: color-mix(in srgb, var(--danger) 70%, #ffffff); }
+
+.cell.solved.empty,
+.cell.solved.white { background: color-mix(in srgb, var(--success) 15%, var(--cell-white)); }
