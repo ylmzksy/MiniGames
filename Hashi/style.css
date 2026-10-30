@@ -1,0 +1,69 @@
+:root {
+    --water: #dbeafe;
+    --bridge: #1b2333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --water: #16243d;
+        --bridge: #e8ecf4;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--water);
+    border-radius: var(--radius);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.island {
+    position: absolute;
+    width: calc(var(--cell) * 0.8);
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 3px solid var(--bridge);
+    border-radius: 50%;
+    font-size: clamp(0.8rem, 3.2vw, 1.2rem);
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.island.ok { border-color: var(--success); color: var(--success); }
+.island.bad { border-color: var(--danger); color: var(--danger); }
+.island.selected { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.island.target { box-shadow: 0 0 0 4px var(--accent-soft); }
+.island.solved { background: color-mix(in srgb, var(--success) 20%, var(--surface)); }
+
+/* A bridge is a clickable strip between two island centers holding one or two lines */
+.bridge {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.bridge.h { height: calc(var(--cell) * 0.5); transform: translateY(-50%); flex-direction: column; }
+.bridge.v { width: calc(var(--cell) * 0.5); transform: translateX(-50%); flex-direction: row; }
+
+.bridge i { display: none; background: var(--bridge); }
+.bridge.h i { width: 100%; height: 4px; }
+.bridge.v i { height: 100%; width: 4px; }
+.bridge.n1 i:first-child { display: block; }
+.bridge.n2 i { display: block; }

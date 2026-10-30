@@ -1,0 +1,105 @@
+:root {
+    --line: var(--text);
+    --circle-white: #ffffff;
+    --circle-black: #1b2333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --circle-white: #e8ecf4;
+        --circle-black: #05080f;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    padding: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dot {
+    width: 12%;
+    height: 12%;
+    border-radius: 50%;
+    background: var(--border);
+}
+
+.circle {
+    position: relative;
+    width: 62%;
+    height: 62%;
+    border-radius: 50%;
+    border: 3px solid var(--circle-black);
+    z-index: 2;
+}
+
+.circle.white { background: var(--circle-white); }
+.circle.black { background: var(--circle-black); }
+.circle.ok { border-color: var(--success); }
+.circle.black.ok { background: var(--success); }
+.circle.bad { border-color: var(--danger); }
+.circle.black.bad { background: var(--danger); }
+
+/* Line pieces: stubs from the cell center to its edges, and bars in the gaps between cells */
+.stub {
+    position: absolute;
+    background: var(--line);
+    z-index: 1;
+}
+
+.stub.up, .stub.down { left: 42%; width: 16%; height: 50%; }
+.stub.left, .stub.right { top: 42%; height: 16%; width: 50%; }
+.stub.up { top: 0; }
+.stub.down { bottom: 0; }
+.stub.left { left: 0; }
+.stub.right { right: 0; }
+
+.edge {
+    position: relative;
+    cursor: pointer;
+}
+
+.edge.line::before {
+    content: '';
+    position: absolute;
+    background: var(--line);
+}
+
+.edge.h.line::before { left: 0; right: 0; top: 42%; height: 16%; }
+.edge.v.line::before { top: 0; bottom: 0; left: 42%; width: 16%; }
+
+.edge.cross::before {
+    content: '×';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.cell.bad .stub { background: var(--danger); }
+.cell.solved .stub { background: var(--success); }
+.board:has(.cell.solved) .edge.line::before { background: var(--success); }
