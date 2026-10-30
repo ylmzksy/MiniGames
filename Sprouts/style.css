@@ -1,0 +1,71 @@
+:root {
+    --paper: #fffdf5;
+    --ink-blue: #3b6fe0;
+    --ink-red: #d64545;
+    --spot: #1b2333;
+    --spot-dead: #b5bcc9;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --paper: #1c2130;
+        --ink-blue: #5b8cff;
+        --ink-red: #f06a6a;
+        --spot: #e8ecf4;
+        --spot-dead: #4a5568;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.paper { fill: var(--paper); }
+
+.curve {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.curve.blue { stroke: var(--ink-blue); }
+.curve.red { stroke: var(--ink-red); }
+.curve.drawing { stroke: var(--ink-blue); stroke-dasharray: 6 4; }
+.curve.drawing.invalid { stroke: var(--danger); }
+
+.spot circle { fill: var(--spot); }
+.spot.dead circle { fill: var(--spot-dead); }
+.spot.live { cursor: crosshair; }
+.spot .pip { fill: var(--highlight); stroke: var(--spot); stroke-width: 0.8; }
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { display: inline-block; width: 22px; height: 4px; border-radius: 2px; }
+.swatch.blue { background: var(--ink-blue); }
+.swatch.red { background: var(--ink-red); }
