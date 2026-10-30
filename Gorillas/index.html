@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../common/theme.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Gorillas</title>
+</head>
+<body data-home="../index.html" data-game="gorillas">
+    <div id="app">
+        <div id="status" class="status"></div>
+        <div id="level-info" class="level-info"></div>
+        <div id="wind" class="wind"></div>
+        <div id="game-board" class="board"><canvas id="game-canvas" width="640" height="400"></canvas></div>
+        <div class="aim">
+            <label><span data-i18n="angle">Angle</span><input id="angle" type="number" min="0" max="90" value="45"></label>
+            <label><span data-i18n="speed">Speed</span><input id="speed" type="number" min="1" max="120" value="60"></label>
+            <button id="throwBtn" class="primary" onclick="throwBanana()" data-i18n="throw">Throw</button>
+        </div>
+        <div id="counters" class="counters"></div>
+        <div class="legend">
+            <span><i class="swatch blue"></i><span data-i18n="legend_you">You</span></span>
+            <span><i class="swatch red"></i><span data-i18n="legend_ai">AI</span></span>
+        </div>
+        <div class="controls">
+            <select id="difficulty">
+                <option value="novice" data-i18n="novice">Novice</option>
+                <option value="master" data-i18n="master">Master</option>
+            </select>
+            <button onclick="LevelSelect.open(loadLevel)" data-i18n="levels_button">Levels</button>
+            <button id="restartBtn" data-i18n="restart">Restart Level</button>
+        </div>
+    </div>
+
+    <script src="../common/i18n.js"></script>
+    <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
+    <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
+    <script src="engine.js"></script>
+
+    <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
+    <script src="levels/level3.js"></script>
+    <script src="levels/level4.js"></script>
+    <script src="levels/level5.js"></script>
+    <script src="levels/level6.js"></script>
+
+    <script src="ui.js"></script>
+</body>
+</html>

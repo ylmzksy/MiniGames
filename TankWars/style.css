@@ -1,0 +1,84 @@
+.level-info,
+.counters,
+.wind {
+    color: var(--text-muted);
+}
+
+.wind { font-weight: 600; }
+
+.board {
+    width: 100%;
+    margin: 0 auto;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: #79b7e8;
+}
+
+.health {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.health .side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.health .side.ai { flex-direction: row-reverse; }
+
+.bar {
+    flex: 1;
+    height: 10px;
+    background: var(--surface-2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.bar i {
+    display: block;
+    height: 100%;
+    width: 100%;
+    transition: width 0.3s;
+}
+
+.bar.you i { background: #3b6fe0; }
+.bar.ai i { background: #d64545; }
+.hp { min-width: 2.2em; font-weight: 700; color: var(--text); }
+
+.aim {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.aim label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: left;
+}
+
+.aim input[type="number"] {
+    width: 96px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-size: 1.05rem;
+    font-weight: 600;
+}
