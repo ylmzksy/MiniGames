@@ -1,0 +1,103 @@
+:root {
+    --cave: #0d0b14;
+    --dirt: #6b4a2a;
+    --dirt-dot: #8a6236;
+    --wall: #5c6475;
+    --boulder: #9aa3b2;
+    --player: #f5b301;
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--cave);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--cave);
+}
+
+.cell.dirt {
+    background: var(--dirt);
+    background-image: radial-gradient(var(--dirt-dot) 15%, transparent 16%), radial-gradient(var(--dirt-dot) 15%, transparent 16%);
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 5px;
+}
+
+.cell.wall {
+    background: var(--wall);
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.35), inset 0 0 0 3px rgba(255, 255, 255, 0.12);
+}
+
+.cell.boulder::after {
+    content: '';
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #d2d8e2, var(--boulder) 55%, #5e6675);
+}
+
+.cell.boulder.falling::after { box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+
+.cell.diamond::after {
+    content: '';
+    position: absolute;
+    inset: 18%;
+    background: linear-gradient(135deg, #bff3ff, #35c0ff 50%, #1670d8);
+    clip-path: polygon(50% 0, 100% 35%, 50% 100%, 0 35%);
+    filter: drop-shadow(0 0 4px rgba(120, 220, 255, 0.8));
+}
+
+.cell.player::after {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border-radius: 45% 45% 35% 35%;
+    background: radial-gradient(circle at 35% 40%, #ffffff 0 10%, transparent 11%), radial-gradient(circle at 65% 40%, #ffffff 0 10%, transparent 11%), var(--player);
+}
+
+.cell.player.dead::after { background: var(--danger); }
+
+.cell.exit {
+    background: #2a2440;
+    box-shadow: inset 0 0 0 3px #4a3f6b;
+}
+
+.cell.exit.open {
+    background: #3b2f12;
+    box-shadow: inset 0 0 0 3px var(--highlight);
+    animation: blink 0.8s infinite alternate;
+}
+
+@keyframes blink {
+    from { box-shadow: inset 0 0 0 3px var(--highlight); }
+    to { box-shadow: inset 0 0 0 6px var(--highlight); }
+}
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(2, 56px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.dpad button { padding: 0; font-size: 1.3rem; touch-action: none; }
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }

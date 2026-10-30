@@ -1,0 +1,128 @@
+:root {
+    --tunnel: #120b06;
+    --dirt: #8a5a2b;
+    --dirt-dot: #a9743b;
+    --wall: #4a4f5c;
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--tunnel);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--tunnel);
+}
+
+.cell.dirt {
+    background: var(--dirt);
+    background-image: radial-gradient(var(--dirt-dot) 15%, transparent 16%), radial-gradient(var(--dirt-dot) 15%, transparent 16%);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+}
+
+.cell.wall { background: var(--wall); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.35); }
+.cell.den { box-shadow: inset 0 0 0 3px #7a3fb0; }
+
+.cell.emerald::after {
+    content: '';
+    position: absolute;
+    inset: 22%;
+    background: linear-gradient(135deg, #b9ffd4, #22c55e 50%, #0f7a3a);
+    clip-path: polygon(50% 0, 100% 35%, 50% 100%, 0 35%);
+    filter: drop-shadow(0 0 3px rgba(80, 255, 160, 0.8));
+}
+
+.cell.bag::after {
+    content: '';
+    position: absolute;
+    inset: 12% 18% 10% 18%;
+    border-radius: 30% 30% 45% 45%;
+    background: radial-gradient(circle at 40% 35%, #d9a066, #9c6a35 60%, #6a4522);
+}
+
+.cell.bag.falling::after { filter: drop-shadow(0 0 5px #fff); }
+
+.cell.gold::after {
+    content: '';
+    position: absolute;
+    inset: 30% 20% 25% 20%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff2a8, #f5b301 55%, #b37d00);
+    box-shadow: 0 0 6px rgba(255, 220, 80, 0.8);
+}
+
+/* Digger: a small orange machine with a drill on the side it faces */
+.cell.digger::after {
+    content: '';
+    position: absolute;
+    inset: 22% 14%;
+    border-radius: 25%;
+    background: #ff8c1a;
+    box-shadow: inset 0 -4px 0 #b35a00, 0 2px 0 #222;
+}
+
+.cell.digger::before {
+    content: '';
+    position: absolute;
+    width: 22%;
+    height: 22%;
+    background: #ffd166;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    z-index: 1;
+}
+
+.cell.digger.right::before { right: 2%; top: 39%; }
+.cell.digger.left::before { left: 2%; top: 39%; transform: scaleX(-1); }
+.cell.digger.up::before { top: 2%; left: 39%; transform: rotate(-90deg); }
+.cell.digger.down::before { bottom: 2%; left: 39%; transform: rotate(90deg); }
+.cell.digger.dead::after { background: var(--danger); }
+
+.cell.monster::after {
+    content: '';
+    position: absolute;
+    inset: 15%;
+    border-radius: 50% 50% 40% 40%;
+    background: radial-gradient(circle at 35% 40%, #ffffff 0 9%, transparent 10%), radial-gradient(circle at 65% 40%, #ffffff 0 9%, transparent 10%), #9b4ddb;
+    z-index: 2;
+}
+
+.cell.bullet::before {
+    content: '';
+    position: absolute;
+    inset: 40%;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 6px #fff;
+    z-index: 3;
+}
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 56px) 72px;
+    grid-template-rows: repeat(2, 56px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.dpad button { padding: 0; font-size: 1.3rem; touch-action: none; }
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }
+.dpad .fire { grid-column: 4; grid-row: 1 / 3; font-size: 1rem; }
