@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../common/theme.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Akari</title>
+</head>
+<body data-home="../index.html" data-game="akari">
+    <div id="app">
+        <div id="status" class="status"></div>
+        <div id="level-info" class="level-info"></div>
+        <div id="game-board" class="board"></div>
+        <div id="counters" class="counters"></div>
+        <div class="controls">
+            <button onclick="LevelSelect.open(loadLevel)" data-i18n="levels_button">Levels</button>
+            <button id="restartBtn" class="primary" data-i18n="restart">Restart Level</button>
+        </div>
+    </div>
+
+    <script src="../common/i18n.js"></script>
+    <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
+    <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
+    <script src="engine.js"></script>
+
+    <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
+    <script src="levels/level3.js"></script>
+    <script src="levels/level4.js"></script>
+    <script src="levels/level5.js"></script>
+    <script src="levels/level6.js"></script>
+
+    <script src="ui.js"></script>
+</body>
+</html>
