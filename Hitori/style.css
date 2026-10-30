@@ -1,0 +1,60 @@
+:root {
+    --cell-open: var(--surface);
+    --cell-shaded: #1b2333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cell-open: var(--surface-2);
+        --cell-shaded: #05080f;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+}
+
+.cell.open { background: var(--cell-open); color: var(--text); }
+.cell.white { background: var(--cell-open); color: var(--text); }
+.cell.shaded { background: var(--cell-shaded); color: rgba(255, 255, 255, 0.35); }
+
+/* The "surely white" note is a ring around the number */
+.cell.white::after {
+    content: '';
+    position: absolute;
+    inset: 18%;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+}
+
+.cell.bad { color: var(--danger); }
+.cell.shaded.bad { box-shadow: inset 0 0 0 3px var(--danger); }
+.cell.solved.open,
+.cell.solved.white { background: color-mix(in srgb, var(--success) 15%, var(--cell-open)); }

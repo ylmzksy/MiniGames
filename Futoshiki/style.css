@@ -1,0 +1,57 @@
+.level-info {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.cell.given {
+    background: var(--surface-2);
+    color: var(--text-muted);
+    cursor: default;
+}
+
+.cell.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.cell.conflict { color: var(--danger); }
+.cell.solved { background: color-mix(in srgb, var(--success) 18%, var(--surface)); }
+
+.sign,
+.gap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9rem, 3.6vw, 1.2rem);
+    font-weight: 700;
+    color: var(--text);
+}
+
+.sign.bad { color: var(--danger); }
+
+.pad {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
