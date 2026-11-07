@@ -1,0 +1,97 @@
+:root {
+    --pm-bg: #2b2d3a;
+    --pm-cell: #3a3d4e;
+    --pipe: #b8bcc9;
+    --ooze: #5ad35a;
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.table {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: start;
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    padding: 2px;
+    background: var(--pm-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--pm-cell);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell.empty { cursor: pointer; }
+.cell.empty:hover { box-shadow: inset 0 0 0 2px var(--accent); }
+.cell.laid { cursor: pointer; }
+.cell.front { box-shadow: inset 0 0 0 2px var(--ooze); }
+.cell.spilled { background: #5a2a2a; }
+.cell.source, .cell.drain-cell { background: #4a4420; cursor: default; }
+.pump, .drain { position: relative; z-index: 2; font-size: clamp(0.9rem, 3.5vw, 1.3rem); }
+
+/* pipe arms run from the center to the edge of the cell */
+.pipe {
+    position: absolute;
+    background: var(--pipe);
+    z-index: 1;
+}
+
+.pipe.up, .pipe.down { left: 36%; width: 28%; height: 50%; }
+.pipe.left, .pipe.right { top: 36%; height: 28%; width: 50%; }
+.pipe.up { top: 0; }
+.pipe.down { bottom: 0; }
+.pipe.left { left: 0; }
+.pipe.right { right: 0; }
+.pipe.filled { background: var(--ooze); box-shadow: 0 0 6px var(--ooze); }
+
+.hub {
+    position: absolute;
+    inset: 36%;
+    background: var(--pipe);
+    border-radius: 20%;
+    z-index: 1;
+}
+
+.hub.filled { background: var(--ooze); }
+
+.queue {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+.queue .label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+.piece {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    background: var(--pm-cell);
+    border-radius: var(--radius-sm);
+    opacity: 0.6;
+}
+
+.piece.next { opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
+
+@media (max-width: 480px) {
+    .table { grid-template-columns: 1fr; }
+    .queue { flex-direction: row; justify-content: center; }
+}

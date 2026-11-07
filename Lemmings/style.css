@@ -1,0 +1,79 @@
+:root {
+    --sky: #1c2b4a;
+    --earth: #6b4a2a;
+    --earth-dot: #8a6236;
+    --steel: #7a8395;
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    position: relative;
+    display: grid;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--sky);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.cell { aspect-ratio: 1 / 1; background: var(--sky); }
+
+.cell.earth {
+    background: var(--earth);
+    background-image: radial-gradient(var(--earth-dot) 18%, transparent 19%);
+    background-size: 7px 7px;
+}
+
+.cell.steel { background: var(--steel); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4); }
+.cell.door { box-shadow: inset 0 0 0 3px #d9a066; }
+.cell.exit { background: #2f6b3a; box-shadow: inset 0 0 0 3px #7fe3a5; }
+
+/* Lemmings are tiny green-haired figures placed by their cell center */
+.lem {
+    position: absolute;
+    width: 3.2%;
+    height: 5.5%;
+    transform: translate(-50%, -50%);
+    border-radius: 40% 40% 20% 20%;
+    background: linear-gradient(#4ade80 0 30%, #3b6fe0 30%);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.lem.fall { background: linear-gradient(#4ade80 0 30%, #7aa2ff 30%); }
+.lem.block { background: linear-gradient(#4ade80 0 30%, #d64545 30%); width: 4%; }
+.lem.dig, .lem.bash { background: linear-gradient(#4ade80 0 30%, #f5b301 30%); }
+.lem.build { background: linear-gradient(#4ade80 0 30%, #9b4ddb 30%); }
+.lem.bomb { background: linear-gradient(#ffffff 0 30%, #ff6b6b 30%); animation: pulse 0.3s infinite alternate; }
+
+@keyframes pulse { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.3); } }
+
+.skills {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.skill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 2px;
+    font-size: 0.7rem;
+}
+
+.skill .icon { font-size: 1.3rem; line-height: 1.2; }
+.skill .count { font-weight: 700; }

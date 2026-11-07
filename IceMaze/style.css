@@ -1,0 +1,69 @@
+:root {
+    --ice: #d6ecff;
+    --ice-line: #b9dbf7;
+    --rock: #5b6478;
+    --rough: #b08968;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root { --ice: #27405e; --ice-line: #1d3249; --rock: #3a4252; --rough: #7a5a3a; }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 1px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--ice-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--ice);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9rem, 4vw, 1.4rem);
+    line-height: 1;
+}
+
+.cell.wall { background: var(--rock); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3); border-radius: 20%; }
+.cell.rough { background: var(--rough); background-image: radial-gradient(rgba(0, 0, 0, 0.15) 20%, transparent 21%); background-size: 8px 8px; }
+.cell.gem::before { content: '💎'; }
+.cell.exit::before { content: '🚪'; }
+.cell.exit.locked::before { content: '🔒'; }
+.cell.player::after {
+    content: '⛄';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+}
+.cell.player.done::after { content: '🎉'; }
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(2, 56px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.dpad button { padding: 0; font-size: 1.3rem; }
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }

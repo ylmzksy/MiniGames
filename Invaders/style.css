@@ -1,0 +1,6 @@
+.level-info { color: var(--text-muted); }
+.board { width: 100%; margin: 0 auto; }
+canvas { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); background: #05070f; }
+.hud { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.pad { display: grid; grid-template-columns: 64px 64px 80px; gap: 6px; justify-content: center; }
+.pad button { height: 56px; padding: 0; font-size: 1.2rem; touch-action: none; }

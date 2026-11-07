@@ -1,0 +1,75 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    padding: 4px;
+    background: #14131a;
+    border-radius: var(--radius);
+    border: 4px solid #2a2836;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.side .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.next {
+    display: grid;
+    gap: 2px;
+    padding: 4px;
+    background: #14131a;
+    border-radius: var(--radius-sm);
+}
+
+.next .cell { width: 22px; height: 22px; }
+
+.cell {
+    aspect-ratio: 1 / 1;
+    border-radius: 20%;
+    background: #1f1e28;
+}
+
+.cell.empty { background: #1f1e28; }
+.cell.c0 { background: radial-gradient(circle at 35% 35%, #ff9a9a, #e03b3b 60%, #8f1f1f); }
+.cell.c1 { background: radial-gradient(circle at 35% 35%, #9ab8ff, #3b6fe0 60%, #1f3f8f); }
+.cell.c2 { background: radial-gradient(circle at 35% 35%, #9affc4, #1f9d55 60%, #0f5a30); }
+.cell.c3 { background: radial-gradient(circle at 35% 35%, #ffe79a, #f5b301 60%, #8f6700); }
+.cell.c4 { background: radial-gradient(circle at 35% 35%, #d9a8ff, #9b4ddb 60%, #5a2a85); }
+.cell.c5 { background: radial-gradient(circle at 35% 35%, #9af0ff, #17b8c8 60%, #0b6a75); }
+.cell.falling { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35); }
+.cell.virus { border-radius: 25%; box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.35); }
+.cell.virus::after { content: '✦'; display: block; text-align: center; color: rgba(255,255,255,0.8); font-size: 0.8rem; line-height: 1.9; }
+.cell.over:not(.empty) { filter: grayscale(0.8); }
+.cell.won:not(.empty) { filter: brightness(1.3); }
+
+.pad {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.pad button { padding: 12px 0; font-size: 1.2rem; touch-action: none; }

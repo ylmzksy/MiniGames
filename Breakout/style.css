@@ -1,0 +1,6 @@
+.level-info, .counters { color: var(--text-muted); }
+.board { width: 100%; max-width: 480px; margin: 0 auto; touch-action: none; }
+canvas { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); background: #0d0b14; cursor: crosshair; }
+.pad { display: flex; justify-content: center; gap: 8px; }
+.pad button { width: 64px; height: 52px; padding: 0; font-size: 1.3rem; touch-action: none; }
+.pad button.wide { width: auto; padding: 0 20px; font-size: 1rem; }

@@ -1,0 +1,10 @@
+.level-info { color: var(--text-muted); }
+.board { width: 100%; max-width: 440px; margin: 0 auto; }
+canvas { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); background: #2b2f3a; touch-action: none; }
+.hud { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.dpad { display: grid; grid-template-columns: repeat(3, 56px); grid-template-rows: repeat(2, 56px); gap: 6px; justify-content: center; }
+.dpad button { padding: 0; font-size: 1.3rem; }
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }

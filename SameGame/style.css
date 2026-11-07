@@ -1,0 +1,30 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 4px;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    border-radius: 3px;
+    background: var(--block);
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: filter 0.1s;
+}
+
+.cell.empty { box-shadow: none; cursor: default; }
+.cell.hover { filter: brightness(1.25); box-shadow: inset 0 0 0 2px #ffffff; }

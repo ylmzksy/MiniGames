@@ -1,0 +1,45 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 1px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 3px;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.cell.flooded { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35); }
+
+.palette {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.swatch {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--swatch);
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.swatch:hover { background: var(--swatch); filter: brightness(1.15); }

@@ -1,0 +1,83 @@
+:root {
+    --floor: #2f8f4e;
+    --floor-2: #2a7f45;
+    --wall: #6b7280;
+    --brick: #b4653c;
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--wall);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell { position: relative; aspect-ratio: 1 / 1; background: var(--floor); }
+.cell.floor:nth-child(odd) { background: var(--floor-2); }
+.cell.wall { background: var(--wall); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3), inset 0 0 0 4px rgba(255, 255, 255, 0.12); }
+.cell.brick {
+    background: var(--brick);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.25) 1px, transparent 1px);
+    background-size: 100% 33%, 50% 100%;
+}
+
+.cell.exit { background: #4b3b8a; box-shadow: inset 0 0 0 3px #8b7fd1; }
+.cell.exit.open { animation: blink 0.8s infinite alternate; }
+@keyframes blink { from { box-shadow: inset 0 0 0 3px #f5b301; } to { box-shadow: inset 0 0 0 6px #f5b301; } }
+
+.cell.bomb::after {
+    content: '';
+    position: absolute;
+    inset: 18%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #555, #111 60%);
+    animation: pulse 0.5s infinite alternate;
+}
+@keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.05); } }
+
+.cell.flame { background: radial-gradient(circle, #fff3a0, #ff9a1a 55%, #ff4d1a); }
+
+.cell.player::before {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border-radius: 45% 45% 35% 35%;
+    background: radial-gradient(circle at 35% 40%, #fff 0 10%, transparent 11%), radial-gradient(circle at 65% 40%, #fff 0 10%, transparent 11%), #f5f5f5;
+    box-shadow: inset 0 -5px 0 #3b6fe0;
+    z-index: 2;
+}
+.cell.player.dead::before { background: var(--danger); }
+
+.cell.enemy::before {
+    content: '';
+    position: absolute;
+    inset: 15%;
+    border-radius: 50% 50% 40% 40%;
+    background: radial-gradient(circle at 35% 40%, #fff 0 9%, transparent 10%), radial-gradient(circle at 65% 40%, #fff 0 9%, transparent 10%), #e06b3b;
+    z-index: 2;
+}
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 56px) 72px;
+    grid-template-rows: repeat(2, 56px);
+    gap: 6px;
+    justify-content: center;
+}
+.dpad button { padding: 0; font-size: 1.3rem; touch-action: none; }
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }
+.dpad .bomb { grid-column: 4; grid-row: 1 / 3; font-size: 1rem; }
