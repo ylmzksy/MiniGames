@@ -1,0 +1,10 @@
+:root { --frame: #2457c5; --hole: #0f1a33; --disc1: #e03b3b; --disc2: #f5b301; }
+.level-info, .counters { color: var(--text-muted); }
+.board { display: grid; gap: 4px; width: 100%; margin: 0 auto; padding: 8px; background: var(--frame); border-radius: var(--radius); user-select: none; -webkit-user-select: none; }
+.cell { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.cell i { display: block; width: 84%; height: 84%; border-radius: 50%; background: var(--hole); box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5); transition: background 0.15s; }
+.cell.p1 i { background: radial-gradient(circle at 35% 35%, #ff8a8a, var(--disc1) 60%, #9c1f1f); }
+.cell.p2 i { background: radial-gradient(circle at 35% 35%, #ffe08a, var(--disc2) 60%, #a87500); }
+.cell.preview i { background: rgba(224, 59, 59, 0.35); }
+.cell.last i { outline: 3px solid #ffffff; outline-offset: -3px; }
+.cell.win i { box-shadow: 0 0 0 4px var(--success), 0 0 14px var(--success); }

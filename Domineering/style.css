@@ -1,0 +1,52 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 3px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xs);
+    background: var(--surface-2);
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }
+.swatch.blue { background: var(--accent); }
+.swatch.red { background: var(--danger); }
+
+.cell.blue { background: var(--accent); }
+.cell.red { background: var(--danger); }
+/* the two halves of a domino are drawn without a gap between them */
+.cell.join-down { border-bottom-left-radius: 0; border-bottom-right-radius: 0; box-shadow: 0 3px 0 var(--accent); }
+.cell.join-up { border-top-left-radius: 0; border-top-right-radius: 0; }
+.cell.join-right { border-top-right-radius: 0; border-bottom-right-radius: 0; box-shadow: 3px 0 0 var(--danger); }
+.cell.join-left { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.cell.playable { cursor: pointer; }
+.cell.playable::after { content: ''; position: absolute; inset: 38%; border-radius: 50%; background: var(--accent); opacity: 0.35; }
+.cell.playable:hover::after { opacity: 0.7; }
+.cell.last { outline: 2px solid var(--text); outline-offset: -2px; }

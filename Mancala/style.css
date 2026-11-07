@@ -1,0 +1,85 @@
+:root {
+    --wood: #8b5a2b;
+    --wood-dark: #6b4420;
+    --pit: #d9b382;
+    --seed: #2f6f4e;
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    gap: 8px;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 10px;
+    background: var(--wood);
+    border: 4px solid var(--wood-dark);
+    border-radius: var(--radius-lg);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.pit,
+.store {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--pit);
+    border-radius: 50%;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35);
+}
+
+.pit { aspect-ratio: 1 / 1; min-width: 0; overflow: hidden; }
+.store { border-radius: 30px; }
+
+.pit.legal { cursor: pointer; box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35), 0 0 0 3px var(--accent); }
+.pit.legal:hover { filter: brightness(1.08); }
+.pit.picked { box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35), 0 0 0 3px var(--highlight); }
+.pit.last::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.6); }
+
+.seeds {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px;
+    width: 70%;
+}
+
+.seeds i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--seed);
+    box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.count {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #3b2a14;
+}
+
+.store .count { font-size: 1.3rem; }
+.store.you { box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35), 0 0 0 3px var(--accent); }
+.store.ai { box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35), 0 0 0 3px var(--danger); }

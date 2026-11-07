@@ -1,0 +1,8 @@
+.level-info { color: var(--text-muted); }
+.board { display: grid; gap: 4px; width: 100%; margin: 0 auto; padding: 4px; background: var(--border); border-radius: var(--radius); user-select: none; -webkit-user-select: none; }
+.cell { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: var(--surface); border-radius: var(--radius-xs); font-size: clamp(1.2rem, 6vw, 2.2rem); font-weight: 800; }
+.cell.free { cursor: pointer; }
+.cell.free:hover { background: var(--accent-soft); }
+.cell.x { color: var(--accent); }
+.cell.o { color: var(--danger); }
+.cell.hit { background: color-mix(in srgb, var(--highlight) 35%, var(--surface)); }

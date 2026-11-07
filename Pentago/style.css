@@ -1,0 +1,17 @@
+:root { --quad: #8a2f2f; --hole: #5c1d1d; --m1: #1b1b1f; --m2: #f4f4f4; }
+.level-info, .counters { color: var(--text-muted); }
+.board { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; max-width: 380px; margin: 0 auto; padding: 8px; background: #3a1414; border-radius: var(--radius); user-select: none; -webkit-user-select: none; }
+.quadrant { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 6px; background: var(--quad); border-radius: var(--radius-sm); transition: transform 0.25s; }
+.quadrant.turned { box-shadow: 0 0 0 3px var(--highlight); }
+.cell { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; }
+.cell i { display: block; width: 78%; height: 78%; border-radius: 50%; background: var(--hole); box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5); }
+.cell.free { cursor: pointer; }
+.cell.free:hover i { background: #7a2a2a; }
+.cell.p1 i { background: radial-gradient(circle at 35% 35%, #6b6b75, var(--m1) 60%); }
+.cell.p2 i { background: radial-gradient(circle at 35% 35%, #ffffff, var(--m2) 60%, #b5b5b5); }
+.cell.pending { cursor: pointer; }
+.cell.pending i { background: radial-gradient(circle at 35% 35%, #6b6b75, var(--m1) 60%); opacity: 0.55; outline: 2px dashed #fff; outline-offset: -2px; }
+.cell.win i { box-shadow: 0 0 0 4px var(--success), 0 0 12px var(--success); }
+.rotations { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; max-width: 380px; margin: 0 auto; }
+.rotations .quad-ctl { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted); }
+.rotations button { width: 44px; padding: 8px 0; font-size: 1.2rem; }

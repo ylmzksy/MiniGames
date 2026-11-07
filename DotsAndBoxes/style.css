@@ -1,0 +1,19 @@
+:root { --dot: #1b2333; --line: #1b2333; --box-blue: #3b6fe0; --box-red: #d64545; }
+@media (prefers-color-scheme: dark) { :root { --dot: #e8ecf4; --line: #e8ecf4; } }
+.level-info, .counters { color: var(--text-muted); }
+.counters { font-weight: 700; color: var(--text); }
+.board { display: grid; width: 100%; margin: 0 auto; padding: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); user-select: none; -webkit-user-select: none; }
+.dot { width: 14px; height: 14px; border-radius: 50%; background: var(--dot); }
+.edge { position: relative; cursor: default; }
+.edge.h { height: 14px; }
+.edge.v { width: 14px; }
+.edge::before { content: ''; position: absolute; border-radius: 3px; background: var(--border); opacity: 0; transition: opacity 0.15s, background 0.15s; }
+.edge.h::before { left: 0; right: 0; top: 4px; height: 6px; }
+.edge.v::before { top: 0; bottom: 0; left: 4px; width: 6px; }
+.edge.free { cursor: pointer; }
+.edge.free:hover::before { opacity: 0.7; background: var(--accent); }
+.edge.drawn::before { opacity: 1; background: var(--line); }
+.edge.last::before { background: var(--highlight); }
+.box { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-xs); font-weight: 800; color: #fff; font-size: clamp(0.8rem, 3vw, 1.2rem); }
+.box.blue { background: var(--box-blue); }
+.box.red { background: var(--box-red); }

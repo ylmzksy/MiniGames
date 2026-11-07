@@ -1,0 +1,61 @@
+.level-info,
+.limit {
+    color: var(--text-muted);
+}
+
+.pile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    min-height: 60px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.coin {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff2a8, #f5b301 55%, #b37d00);
+    box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s, opacity 0.15s;
+}
+
+.coin.picked { transform: translateY(-6px); box-shadow: 0 0 0 2px var(--accent), inset -2px -2px 3px rgba(0, 0, 0, 0.25); }
+
+.picker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.picker .amount {
+    min-width: 2.5em;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.picker button.step { width: 46px; font-size: 1.3rem; }
+
+.history {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    min-height: 1.6em;
+}
+
+.take {
+    padding: 2px 10px;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.take.blue { background: #3b6fe0; }
+.take.red { background: #d64545; }

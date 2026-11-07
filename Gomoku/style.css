@@ -1,0 +1,12 @@
+.level-info, .counters { color: var(--text-muted); }
+.board { width: 100%; max-width: 520px; margin: 0 auto; user-select: none; -webkit-user-select: none; }
+.board svg { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+.wood { fill: #d9a95c; }
+.grid { stroke: #5a3a12; stroke-width: 1.5; }
+.spot { fill: transparent; }
+.spot.free { cursor: pointer; }
+.spot.free:hover { fill: rgba(0, 0, 0, 0.12); }
+.stone.black { fill: #1b1b1f; }
+.stone.white { fill: #f4f4f4; stroke: #777; stroke-width: 1; }
+.stone.win { stroke: var(--success); stroke-width: 4; }
+.mark { fill: var(--danger); }

@@ -1,0 +1,50 @@
+i18n.register({
+    en: {
+        title: "Pentago", level: "Level", restart: "Restart Level", master: "Master", novice: "Novice", moves: "Moves",
+        status_your_turn: "Your turn: place a marble", status_rotate: "Now turn one quadrant with the arrows below (tap the marble again to pick it up)",
+        status_ai: "AI is thinking...",
+        win: "You win! Five in a row.", lose: "AI wins! It made five in a row.", draw: "Draw!", all_levels_cleared: "All levels cleared!",
+        quadrant: "Quadrant",
+        info_title: "How to Play Pentago",
+        info_description: "A board of four quadrants that spin. Every move places a marble and then turns one quadrant, which can make or break a line of five.",
+        rule_1: "Tap an empty cell to place your marble, then tap one of the arrows to turn a quadrant a quarter turn clockwise or counterclockwise",
+        rule_2: "Five marbles of your color in a row, in any direction and even across quadrants, win; the check happens after the rotation",
+        rule_3: "If a rotation gives both players five in a row, or the board fills with no line, it is a draw. You play black and move first",
+        tip_1: "Lines of five must pass through the middle of the board; the center cells of each quadrant are the strongest",
+        tip_2: "Before you rotate, picture where the AI's marbles end up: a spin can hand it a line",
+        tip_3: "Turning a quadrant that is symmetric changes nothing, which is a useful way to 'pass' the rotation",
+        tip_4: "Choose Novice or Master to set how far ahead the AI looks"
+    },
+    de: {
+        title: "Pentago", level: "Level", restart: "Level neu starten", master: "Profi", novice: "Anfänger", moves: "Züge",
+        status_your_turn: "Du bist dran: Setze eine Murmel", status_rotate: "Drehe jetzt ein Viertel mit den Pfeilen unten (tippe die Murmel erneut an, um sie zurückzunehmen)",
+        status_ai: "KI denkt nach...",
+        win: "Du gewinnst! Fünf in einer Reihe.", lose: "KI gewinnt! Sie hat fünf in einer Reihe.", draw: "Unentschieden!", all_levels_cleared: "Alle Level geschafft!",
+        quadrant: "Viertel",
+        info_title: "Wie man Pentago spielt",
+        info_description: "Ein Brett aus vier drehbaren Vierteln. Jeder Zug setzt eine Murmel und dreht dann ein Viertel, was eine Fünferreihe bilden oder zerstören kann.",
+        rule_1: "Tippe auf ein leeres Feld, um deine Murmel zu setzen, und dann auf einen der Pfeile, um ein Viertel eine Vierteldrehung im oder gegen den Uhrzeigersinn zu drehen",
+        rule_2: "Fünf Murmeln deiner Farbe in einer Reihe, in jede Richtung und auch über Viertel hinweg, gewinnen; geprüft wird nach der Drehung",
+        rule_3: "Ergibt eine Drehung für beide Spieler fünf in einer Reihe oder füllt sich das Brett ohne Reihe, ist es unentschieden. Du spielst Schwarz und beginnst",
+        tip_1: "Fünferreihen müssen durch die Brettmitte laufen; die Mittelfelder jedes Viertels sind am stärksten",
+        tip_2: "Stell dir vor dem Drehen vor, wo die Murmeln der KI landen: Eine Drehung kann ihr eine Reihe schenken",
+        tip_3: "Ein symmetrisches Viertel zu drehen ändert nichts, ein nützlicher Weg, die Drehung zu 'passen'",
+        tip_4: "Wähle Anfänger oder Profi, um festzulegen, wie weit die KI vorausdenkt"
+    },
+    tr: {
+        title: "Pentago", level: "Seviye", restart: "Seviyeyi Yeniden Başlat", master: "Usta", novice: "Acemi", moves: "Hamle",
+        status_your_turn: "Sıra sizde: bir bilye koyun", status_rotate: "Şimdi aşağıdaki oklarla bir çeyreği döndürün (geri almak için bilyeye tekrar dokunun)",
+        status_ai: "Yapay zeka düşünüyor...",
+        win: "Kazandınız! Beşli sıra.", lose: "Yapay zeka kazandı! Beşli sıra yaptı.", draw: "Berabere!", all_levels_cleared: "Tüm seviyeler tamamlandı!",
+        quadrant: "Çeyrek",
+        info_title: "Pentago Nasıl Oynanır",
+        info_description: "Dönen dört çeyrekten oluşan bir tahta. Her hamle bir bilye koyar ve ardından bir çeyreği döndürür; bu bir beşli sıra kurabilir ya da bozabilir.",
+        rule_1: "Bilyenizi koymak için boş bir hücreye dokunun, sonra bir çeyreği saat yönünde ya da tersine çeyrek tur döndürmek için oklardan birine dokunun",
+        rule_2: "Herhangi bir yönde, çeyrekler arasında bile, renginizden beş bilye kazandırır; kontrol döndürmeden sonra yapılır",
+        rule_3: "Bir döndürme iki oyuncuya da beşli verirse ya da tahta sırasız dolarsa berabere olur. Siz siyahla oynar ve ilk başlarsınız",
+        tip_1: "Beşli sıralar tahtanın ortasından geçmelidir; her çeyreğin merkez hücreleri en güçlüdür",
+        tip_2: "Döndürmeden önce yapay zekanın bilyelerinin nereye gideceğini hayal edin: bir dönüş ona sıra verebilir",
+        tip_3: "Simetrik bir çeyreği döndürmek hiçbir şeyi değiştirmez; döndürmeyi 'pas geçmenin' kullanışlı bir yoludur",
+        tip_4: "Yapay zekanın ne kadar ileriyi düşüneceğini belirlemek için Acemi veya Usta seçin"
+    }
+});

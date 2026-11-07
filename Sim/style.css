@@ -1,0 +1,13 @@
+:root { --sim-blue: #3b6fe0; --sim-red: #d64545; --sim-free: #c5ccd8; --sim-dot: #1b2333; }
+@media (prefers-color-scheme: dark) { :root { --sim-free: #3b4660; --sim-dot: #e8ecf4; } }
+.level-info, .counters { color: var(--text-muted); }
+.board { width: 100%; max-width: 420px; margin: 0 auto; user-select: none; -webkit-user-select: none; }
+.board svg { display: block; width: 100%; height: auto; }
+.edge .hit { stroke: transparent; stroke-width: 18; }
+.edge .stroke { stroke: var(--sim-free); stroke-width: 3; stroke-linecap: round; transition: stroke 0.15s, stroke-width 0.15s; }
+.edge.active { cursor: pointer; }
+.edge.active:hover .stroke { stroke: var(--accent); stroke-width: 6; }
+.edge.blue .stroke { stroke: var(--sim-blue); stroke-width: 7; }
+.edge.red .stroke { stroke: var(--sim-red); stroke-width: 7; }
+.edge.lost .stroke { stroke-width: 11; filter: drop-shadow(0 0 6px currentColor); }
+.dot { fill: var(--sim-dot); }

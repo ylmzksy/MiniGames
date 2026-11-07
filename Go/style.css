@@ -1,0 +1,32 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.wood { fill: #d9a95b; }
+.grid { stroke: #4a3416; stroke-width: 1.5; }
+.star { fill: #4a3416; }
+
+.stone.black { fill: #141414; stroke: #000; stroke-width: 1; }
+.stone.white { fill: #f6f6f6; stroke: #777; stroke-width: 1; }
+.stone.last { stroke: var(--danger); stroke-width: 3; }
+
+.spot { fill: transparent; }
+.spot.free { cursor: pointer; }
+.spot.free:hover { fill: rgba(20, 20, 20, 0.25); }
