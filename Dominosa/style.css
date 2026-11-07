@@ -1,0 +1,82 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    position: relative;
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--border);
+    border-radius: var(--radius);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cell span { position: relative; z-index: 2; }
+.cell.selected { background: var(--accent-soft); box-shadow: inset 0 0 0 3px var(--accent); }
+.cell.covered { color: #ffffff; }
+
+/* A placed domino is a pill laid over its two cells */
+.domino {
+    position: absolute;
+    padding: 5px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.domino::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    background: var(--accent);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.domino.h::after, .domino.v::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.domino.h::after { top: 20%; bottom: 20%; left: calc(50% - 1px); width: 2px; }
+.domino.v::after { left: 20%; right: 20%; top: calc(50% - 1px); height: 2px; }
+.domino.dup::before { background: var(--danger); }
+.domino.solved::before { background: var(--success); }
+
+.tray {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.pair {
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.pair.used { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.pair.dup { background: var(--danger); border-color: var(--danger); color: #ffffff; }

@@ -1,0 +1,71 @@
+:root {
+    --cell-bg: var(--surface);
+    --given-bg: var(--surface-2);
+}
+
+.level-info {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    border: 3px solid var(--text);
+    border-radius: var(--radius-xs);
+    background: var(--border);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cell-bg);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.cell.box-left { border-left: 3px solid var(--text); }
+.cell.box-top { border-top: 3px solid var(--text); }
+
+.cell.given { background: var(--given-bg); cursor: default; }
+.cell.related { background: color-mix(in srgb, var(--accent-soft) 45%, var(--cell-bg)); }
+.cell.given.related { background: color-mix(in srgb, var(--accent-soft) 45%, var(--given-bg)); }
+.cell.selected { background: var(--accent-soft); box-shadow: inset 0 0 0 3px var(--accent); }
+.cell.solved { background: color-mix(in srgb, var(--success) 18%, var(--cell-bg)); }
+
+.value {
+    font-size: clamp(0.9rem, 4.2vw, 1.4rem);
+    font-weight: 700;
+}
+
+.cell.given .value { color: var(--text-muted); }
+.cell.conflict .value { color: var(--danger); }
+
+.notes {
+    display: grid;
+    grid-template-columns: repeat(var(--note-cols, 3), 1fr);
+    width: 100%;
+    height: 100%;
+    padding: 6%;
+    font-size: clamp(0.4rem, 1.6vw, 0.62rem);
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.notes span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pad {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}

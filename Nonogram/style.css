@@ -1,0 +1,78 @@
+:root {
+    --cell-empty: var(--surface);
+    --cell-filled: #1b2333;
+    --cell-line: var(--border);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cell-empty: var(--surface-2);
+        --cell-filled: #05080f;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 1px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 4px;
+    background: var(--cell-line);
+    border-radius: var(--radius);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.corner { background: var(--bg); }
+
+.clue {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 3px;
+    padding: 3px 5px;
+    background: var(--bg);
+    font-size: clamp(0.65rem, 2.6vw, 0.9rem);
+    font-weight: 700;
+    color: var(--text);
+}
+
+.clue.col { flex-direction: column; align-items: center; justify-content: flex-end; }
+.clue.row { flex-direction: row; }
+.clue.ok { color: var(--success); }
+.clue.bad { color: var(--danger); }
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.cell.empty { background: var(--cell-empty); }
+.cell.filled { background: var(--cell-filled); }
+.cell.cross { background: var(--cell-empty); }
+.cell.cross::after {
+    content: '×';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.8rem, 3vw, 1.1rem);
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+/* Thicker lines every five cells, like printed puzzles */
+.cell.gap-right { box-shadow: 2px 0 0 var(--text-muted); }
+.cell.gap-bottom { box-shadow: 0 2px 0 var(--text-muted); }
+.cell.gap-right.gap-bottom { box-shadow: 2px 0 0 var(--text-muted), 0 2px 0 var(--text-muted); }
+
+.cell.solved.filled { background: var(--accent); }

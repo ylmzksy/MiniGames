@@ -1,0 +1,66 @@
+:root {
+    --grass: #d9f2c4;
+    --grass-dark: #b7dc9a;
+    --cell-open: var(--surface);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --grass: #2f4a2a;
+        --grass-dark: #3f6238;
+        --cell-open: var(--surface-2);
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cell-open);
+    font-size: clamp(1rem, 4.5vw, 1.6rem);
+    line-height: 1;
+    cursor: pointer;
+}
+
+.cell.tree { background: var(--grass); cursor: default; }
+.cell.tree::after { content: '🌲'; }
+.cell.tent::after { content: '⛺'; }
+.cell.grass { background: var(--grass); }
+.cell.grass::after { content: ''; position: absolute; inset: 40%; border-radius: 50%; background: var(--grass-dark); }
+.cell.bad { box-shadow: inset 0 0 0 3px var(--danger); }
+.cell.solved.open, .cell.solved.grass { background: var(--grass); }
+
+.clue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-2);
+    font-size: clamp(0.8rem, 3.2vw, 1.05rem);
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.clue.ok { color: var(--success); }
+.clue.bad { color: var(--danger); }
+.clue.corner { background: transparent; }

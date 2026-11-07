@@ -1,0 +1,58 @@
+:root {
+    --land: var(--surface);
+    --sea: #1f3a66;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --land: var(--surface-2);
+        --sea: #0b1a33;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.cell.open, .cell.white, .cell.number { background: var(--land); color: var(--text); }
+.cell.number { cursor: default; }
+.cell.sea { background: var(--sea); }
+
+.cell.white::after {
+    content: '';
+    position: absolute;
+    inset: 40%;
+    border-radius: 50%;
+    background: var(--text-muted);
+}
+
+.cell.bad.number, .cell.bad.white { color: var(--danger); box-shadow: inset 0 0 0 3px var(--danger); }
+.cell.bad.sea { box-shadow: inset 0 0 0 3px var(--danger); }
+.cell.solved.sea { background: color-mix(in srgb, var(--success) 25%, var(--sea)); }

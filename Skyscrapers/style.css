@@ -1,0 +1,70 @@
+.level-info {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 3px;
+    width: 100%;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.corner { aspect-ratio: 1 / 1; }
+
+.clue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.85rem, 3.4vw, 1.1rem);
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.clue.ok { color: var(--success); }
+.clue.bad { color: var(--danger); }
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.15s;
+}
+
+.cell.related { background: color-mix(in srgb, var(--accent-soft) 45%, var(--surface)); }
+.cell.selected { border-color: var(--accent); background: var(--accent-soft); }
+.cell.solved { background: color-mix(in srgb, var(--success) 18%, var(--surface)); }
+
+/* A bar along the bottom shows the building's height at a glance */
+.tower {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 0;
+    height: calc(var(--h) * 28%);
+    background: color-mix(in srgb, var(--accent) 35%, transparent);
+    border-radius: 2px 2px 0 0;
+}
+
+.value {
+    position: relative;
+    font-size: clamp(1rem, 4.6vw, 1.5rem);
+    font-weight: 700;
+    z-index: 1;
+}
+
+.cell.conflict .value { color: var(--danger); }
+
+.pad {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+}
