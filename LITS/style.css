@@ -1,0 +1,49 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+    border: 3px solid var(--text);
+    border-radius: var(--radius-xs);
+    background: var(--surface);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tint);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: clamp(0.9rem, 4vw, 1.3rem);
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cell { background: color-mix(in srgb, var(--tint) 35%, var(--surface)); }
+}
+
+/* Thick lines where the region changes */
+.cell.bt { border-top: 3px solid var(--text); }
+.cell.br { border-right: 3px solid var(--text); }
+.cell.bb { border-bottom: 3px solid var(--text); }
+.cell.bl { border-left: 3px solid var(--text); }
+
+.cell.shaded { background: #1b2333; color: #ffffff; }
+@media (prefers-color-scheme: dark) { .cell.shaded { background: #05080f; } }
+.cell.dot { color: var(--text-muted); font-size: 1.2em; }
+.cell.over { background: color-mix(in srgb, var(--danger) 30%, var(--tint)); }
+.cell.shaded.over { background: color-mix(in srgb, var(--danger) 45%, #1b2333); }
+.cell.shaded.bad { box-shadow: inset 0 0 0 3px var(--danger); color: var(--danger); }
+.cell.shaded.done { color: #7fd36b; }
+.cell.solved.shaded { background: color-mix(in srgb, var(--success) 45%, #1b2333); color: #ffffff; }
