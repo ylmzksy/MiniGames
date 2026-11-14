@@ -1,0 +1,53 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board.grid {
+    display: grid;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+    border: 4px solid #5a3a22;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cell.light { background: #f3e3c3; }
+.cell.dark { background: #c9a97a; }
+.cell.camp-you { box-shadow: inset 0 0 0 100px rgba(59, 111, 224, 0.18); }
+.cell.camp-ai { box-shadow: inset 0 0 0 100px rgba(214, 69, 69, 0.18); }
+.cell.last { box-shadow: inset 0 0 0 3px rgba(255, 220, 80, 0.8); }
+.cell.taken { background: rgba(214, 69, 69, 0.35); }
+.cell.movable { box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.6); }
+.cell.selected { box-shadow: inset 0 0 0 4px var(--highlight); }
+
+.cell.target::after {
+    content: '';
+    position: absolute;
+    inset: 36%;
+    border-radius: 50%;
+    background: var(--highlight);
+    opacity: 0.85;
+}
+
+.piece {
+    width: 74%;
+    height: 74%;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.35), inset 3px 3px 6px rgba(255, 255, 255, 0.25), 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.piece.you { background: #3b6fe0; }
+.piece.ai { background: #d64545; }

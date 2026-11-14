@@ -1,0 +1,53 @@
+i18n.register({
+    en: {
+        title: "Abalone", level: "Level", restart: "Restart Level", master: "Master", novice: "Novice",
+        moves: "Moves", pushed_off: "Pushed off", lost: "Lost",
+        status_your_turn: "Your turn: tap one to three marbles in a line, then a highlighted cell",
+        status_ai: "AI is thinking...",
+        win: "You win! Enough red marbles are off the board.", lose: "AI wins! Too many of your marbles were pushed off.", draw: "Draw: the move limit was reached.",
+        all_levels_cleared: "All levels cleared!",
+        info_title: "How to Play Abalone",
+        info_description: "A sumo match with marbles on a hexagonal board. Push the AI's marbles off the edge before it pushes yours.",
+        rule_1: "Select one, two or three of your marbles that lie in a straight line, then tap a highlighted cell to move them one step",
+        rule_2: "Moving along the line is an in-line move; moving sideways is a broadside move, which needs every target cell to be empty",
+        rule_3: "An in-line move can push a shorter enemy line: two against one, three against one or three against two, as long as the cell behind the enemy line is empty or off the board",
+        rule_4: "A marble pushed over the edge is lost. The first side to push off the level's target number of marbles wins. You play blue and move first",
+        tip_1: "Stay in the center: marbles near the edge are the ones that get pushed off",
+        tip_2: "Keep your marbles in compact groups so the AI never gets a three-against-two push",
+        tip_3: "Choose Novice or Master to set how far ahead the AI looks"
+    },
+    de: {
+        title: "Abalone", level: "Level", restart: "Level neu starten", master: "Profi", novice: "Anfänger",
+        moves: "Züge", pushed_off: "Hinausgeschoben", lost: "Verloren",
+        status_your_turn: "Du bist dran: Tippe auf ein bis drei Kugeln in einer Linie und dann auf ein markiertes Feld",
+        status_ai: "KI denkt nach...",
+        win: "Du gewinnst! Genug rote Kugeln sind vom Brett.", lose: "KI gewinnt! Zu viele deiner Kugeln wurden hinausgeschoben.", draw: "Unentschieden: Die Zuggrenze ist erreicht.",
+        all_levels_cleared: "Alle Level geschafft!",
+        info_title: "Wie man Abalone spielt",
+        info_description: "Ein Sumo-Kampf mit Kugeln auf einem sechseckigen Brett. Schiebe die Kugeln der KI über den Rand, bevor sie deine hinausschiebt.",
+        rule_1: "Wähle eine, zwei oder drei deiner Kugeln in einer geraden Linie und tippe dann auf ein markiertes Feld, um sie einen Schritt zu bewegen",
+        rule_2: "Entlang der Linie ist es ein Linienzug; seitwärts ist es ein Breitseitenzug, bei dem jedes Zielfeld leer sein muss",
+        rule_3: "Ein Linienzug kann eine kürzere gegnerische Linie schieben: zwei gegen eine, drei gegen eine oder drei gegen zwei, solange das Feld hinter der gegnerischen Linie leer oder außerhalb des Bretts ist",
+        rule_4: "Eine über den Rand geschobene Kugel ist verloren. Wer zuerst die Zielzahl des Levels hinausschiebt, gewinnt. Du spielst Blau und beginnst",
+        tip_1: "Bleib in der Mitte: Kugeln am Rand sind die, die hinausgeschoben werden",
+        tip_2: "Halte deine Kugeln in kompakten Gruppen, damit die KI nie drei gegen zwei schieben kann",
+        tip_3: "Wähle Anfänger oder Profi, um festzulegen, wie weit die KI vorausdenkt"
+    },
+    tr: {
+        title: "Abalone", level: "Seviye", restart: "Seviyeyi Yeniden Başlat", master: "Usta", novice: "Acemi",
+        moves: "Hamle", pushed_off: "Dışarı itilen", lost: "Kaybedilen",
+        status_your_turn: "Sıra sizde: bir çizgide bir ila üç bilyeye, sonra vurgulanan bir hücreye dokunun",
+        status_ai: "Yapay zeka düşünüyor...",
+        win: "Kazandınız! Yeterince kırmızı bilye tahtadan çıktı.", lose: "Yapay zeka kazandı! Çok fazla bilyeniz dışarı itildi.", draw: "Berabere: hamle sınırına ulaşıldı.",
+        all_levels_cleared: "Tüm seviyeler tamamlandı!",
+        info_title: "Abalone Nasıl Oynanır",
+        info_description: "Altıgen tahtada bilyelerle bir sumo maçı. Yapay zeka sizinkileri itmeden önce onun bilyelerini kenardan dışarı itin.",
+        rule_1: "Düz bir çizgideki bir, iki veya üç bilyenizi seçin, sonra onları bir adım taşımak için vurgulanan bir hücreye dokunun",
+        rule_2: "Çizgi boyunca hareket düz hamledir; yana hareket yan hamledir ve her hedef hücrenin boş olması gerekir",
+        rule_3: "Düz hamle daha kısa bir rakip çizgisini itebilir: bire karşı iki, bire karşı üç veya ikiye karşı üç; yeter ki rakip çizginin arkasındaki hücre boş ya da tahta dışı olsun",
+        rule_4: "Kenardan itilen bilye kaybedilir. Seviyenin hedef sayısını ilk dışarı iten kazanır. Maviyle oynar ve ilk siz başlarsınız",
+        tip_1: "Merkezde kalın: kenardaki bilyeler dışarı itilenlerdir",
+        tip_2: "Bilyelerinizi sıkı gruplar halinde tutun ki yapay zeka asla ikiye karşı üç itişi bulamasın",
+        tip_3: "Yapay zekanın ne kadar ileriyi düşüneceğini belirlemek için Acemi veya Usta seçin"
+    }
+});

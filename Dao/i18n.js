@@ -1,0 +1,50 @@
+i18n.register({
+    en: {
+        title: "Dao", level: "Level", restart: "Restart Level", master: "Master", novice: "Novice", moves: "Moves",
+        status_your_turn: "Your turn: tap a piece, then where it should slide",
+        status_ai: "AI is thinking...",
+        win: "You win!", lose: "AI wins!", draw: "Draw: the move limit was reached.",
+        all_levels_cleared: "All levels cleared!",
+        info_title: "How to Play Dao",
+        info_description: "A quick abstract game on a 4x4 board. Each side has four pieces that slide like rooks and bishops, but always as far as they can go.",
+        rule_1: "A piece slides in a straight line, in any of eight directions, until it reaches the edge or another piece. It must move at least one square",
+        rule_2: "You win with your four pieces in one row or column, in a 2x2 square anywhere, or on the four corners",
+        rule_3: "Trapping is forbidden: if your three pieces surround an enemy piece sitting in a corner, the trapped side wins",
+        rule_4: "You play blue and move first",
+        tip_1: "Pieces always run to the end, so plan where they will stop, not where you want them",
+        tip_2: "Blocking a line with one of your pieces shortens the AI's slides",
+        tip_3: "Choose Novice or Master to set how far ahead the AI looks"
+    },
+    de: {
+        title: "Dao", level: "Level", restart: "Level neu starten", master: "Profi", novice: "Anfänger", moves: "Züge",
+        status_your_turn: "Du bist dran: Tippe auf einen Stein und dann dorthin, wohin er gleiten soll",
+        status_ai: "KI denkt nach...",
+        win: "Du gewinnst!", lose: "KI gewinnt!", draw: "Unentschieden: Die Zuggrenze ist erreicht.",
+        all_levels_cleared: "Alle Level geschafft!",
+        info_title: "Wie man Dao spielt",
+        info_description: "Ein schnelles abstraktes Spiel auf einem 4x4-Brett. Jede Seite hat vier Steine, die wie Türme und Läufer gleiten, aber immer so weit wie möglich.",
+        rule_1: "Ein Stein gleitet in gerader Linie in eine der acht Richtungen, bis er den Rand oder einen anderen Stein erreicht. Er muss mindestens ein Feld ziehen",
+        rule_2: "Du gewinnst mit deinen vier Steinen in einer Zeile oder Spalte, in einem 2x2-Quadrat irgendwo oder auf den vier Ecken",
+        rule_3: "Einsperren ist verboten: Umzingeln deine drei Steine einen gegnerischen Stein in einer Ecke, gewinnt die eingesperrte Seite",
+        rule_4: "Du spielst Blau und beginnst",
+        tip_1: "Steine laufen immer bis zum Ende, also plane, wo sie anhalten, nicht wo du sie haben willst",
+        tip_2: "Ein eigener Stein auf einer Linie verkürzt die Züge der KI",
+        tip_3: "Wähle Anfänger oder Profi, um festzulegen, wie weit die KI vorausdenkt"
+    },
+    tr: {
+        title: "Dao", level: "Seviye", restart: "Seviyeyi Yeniden Başlat", master: "Usta", novice: "Acemi", moves: "Hamle",
+        status_your_turn: "Sıra sizde: bir taşa, sonra kayacağı yere dokunun",
+        status_ai: "Yapay zeka düşünüyor...",
+        win: "Kazandınız!", lose: "Yapay zeka kazandı!", draw: "Berabere: hamle sınırına ulaşıldı.",
+        all_levels_cleared: "Tüm seviyeler tamamlandı!",
+        info_title: "Dao Nasıl Oynanır",
+        info_description: "4x4 tahtada hızlı bir soyut oyun. Her tarafın kale ve fil gibi kayan ama her zaman gidebildiği kadar giden dört taşı vardır.",
+        rule_1: "Bir taş sekiz yönden birinde düz bir çizgide kenara veya başka bir taşa ulaşana kadar kayar. En az bir kare hareket etmelidir",
+        rule_2: "Dört taşınız bir satır veya sütunda, herhangi bir yerde 2x2 karede ya da dört köşede olunca kazanırsınız",
+        rule_3: "Tuzaklamak yasaktır: üç taşınız köşede duran bir rakip taşı çevrelerse tuzaklanan taraf kazanır",
+        rule_4: "Maviyle oynar ve ilk siz başlarsınız",
+        tip_1: "Taşlar her zaman sona kadar gider, bu yüzden nereye gitmelerini istediğinizi değil nerede duracaklarını planlayın",
+        tip_2: "Bir çizgiye kendi taşınızı koymak yapay zekanın kaymalarını kısaltır",
+        tip_3: "Yapay zekanın ne kadar ileriyi düşüneceğini belirlemek için Acemi veya Usta seçin"
+    }
+});

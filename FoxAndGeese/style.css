@@ -1,0 +1,33 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.board line { stroke: var(--border); stroke-width: 3; }
+
+.point .spot { fill: var(--surface-2); stroke: var(--border); stroke-width: 2; }
+.point.goose .spot { fill: #ffffff; stroke: #8a94a6; }
+.point.fox .spot { fill: #ff8c1a; stroke: #b35a00; }
+.point text { font-size: 24px; pointer-events: none; }
+.point.mine { cursor: pointer; }
+.point.selected .spot { stroke: var(--accent); stroke-width: 4; }
+.point.target { cursor: pointer; }
+.point.target .spot { fill: var(--accent); opacity: 0.55; }
+.point.last .spot { stroke: var(--highlight); stroke-width: 4; }

@@ -1,0 +1,15 @@
+:root { --board-bg: #f3e9d2; --line: #8b7355; --stone-blue: #3b6fe0; --stone-red: #d64545; }
+@media (prefers-color-scheme: dark) { :root { --board-bg: #4a3f2e; --line: #9c8569; --stone-blue: #5b8cff; --stone-red: #f06a6a; } }
+.level-info, .counters { color: var(--text-muted); }
+.board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; width: 100%; max-width: 320px; margin: 0 auto; padding: 8px; background: var(--board-bg); border-radius: var(--radius); user-select: none; -webkit-user-select: none; }
+.cell { position: relative; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;
+    background-image: linear-gradient(var(--line), var(--line)), linear-gradient(var(--line), var(--line)); background-size: 100% 2px, 2px 100%; background-position: center, center; background-repeat: no-repeat; }
+.cell .dot { position: absolute; width: 18%; height: 18%; border-radius: 50%; background: var(--line); }
+.cell.mine, .cell.target { cursor: pointer; }
+.cell.target::after { content: ''; position: absolute; inset: 32%; border-radius: 50%; background: var(--accent); opacity: 0.45; }
+.cell.selected .stone { outline: 3px solid var(--accent); outline-offset: 2px; }
+.cell.last .stone { box-shadow: 0 0 0 3px var(--highlight), inset -3px -3px 6px rgba(0,0,0,0.3); }
+.cell.win .stone { box-shadow: 0 0 0 4px var(--success), inset -3px -3px 6px rgba(0,0,0,0.3); }
+.stone { position: relative; width: 62%; height: 62%; border-radius: 50%; box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.3); z-index: 1; }
+.stone.blue { background: var(--stone-blue); }
+.stone.red { background: var(--stone-red); }

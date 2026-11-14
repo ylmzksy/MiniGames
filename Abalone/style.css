@@ -1,0 +1,15 @@
+:root { --felt: #2f4f3f; --hole: #1f3a2d; --marble-blue: #3b6fe0; --marble-red: #d64545; }
+.level-info, .counters { color: var(--text-muted); }
+.board { width: 100%; max-width: 440px; margin: 0 auto; user-select: none; -webkit-user-select: none; }
+.board svg { display: block; width: 100%; height: auto; }
+.felt { fill: var(--felt); }
+.hole { fill: var(--hole); }
+.marble { stroke: rgba(0,0,0,0.35); stroke-width: 1.5; }
+.cell.blue .marble { fill: var(--marble-blue); }
+.cell.red .marble { fill: var(--marble-red); }
+.cell.mine, .cell.target { cursor: pointer; }
+.cell.selected .marble { stroke: #ffffff; stroke-width: 3; }
+.cell.last .marble { stroke: var(--highlight); stroke-width: 3; }
+.hint { fill: var(--accent); opacity: 0.8; }
+.cell.target.push .hint { fill: var(--danger); }
+.cell.target.push .marble { stroke: var(--danger); stroke-width: 3; }

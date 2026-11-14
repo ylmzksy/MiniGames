@@ -1,0 +1,37 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board.points {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #e9d8b4;
+    border: 4px solid #5a3a22;
+    border-radius: var(--radius-sm);
+}
+
+.lines line { stroke: #6b4a2b; stroke-width: 3; stroke-linecap: round; }
+
+.cell { cursor: pointer; }
+.cell .hit { fill: transparent; }
+.cell .mark { fill: none; }
+.cell .stone { fill: none; }
+.cell.empty .stone { fill: #6b4a2b; r: 6; }
+.cell.you .stone { fill: #3b6fe0; stroke: #1f3f8a; stroke-width: 2; }
+.cell.ai .stone { fill: #d64545; stroke: #7a2020; stroke-width: 2; }
+.cell.movable .mark { stroke: #ffffff; stroke-width: 3; }
+.cell.selected .mark { stroke: var(--highlight); stroke-width: 4; }
+.cell.last .mark { stroke: rgba(255, 200, 40, 0.9); stroke-width: 3; }
+.cell.taken .mark { stroke: rgba(214, 69, 69, 0.8); stroke-width: 3; stroke-dasharray: 4 3; }
+.cell.target .stone { fill: var(--highlight); r: 11; opacity: 0.9; }
+.cell.target.you .stone { r: 19; stroke: var(--highlight); stroke-width: 5; fill: #3b6fe0; }

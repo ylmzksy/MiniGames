@@ -1,0 +1,16 @@
+:root { --sq-light: #f3e9d2; --sq-dark: #c9ae82; --stone-blue: #3b6fe0; --stone-red: #d64545; }
+@media (prefers-color-scheme: dark) { :root { --sq-light: #5a4b33; --sq-dark: #3d3222; --stone-blue: #5b8cff; --stone-red: #f06a6a; } }
+.level-info, .counters { color: var(--text-muted); }
+.board { display: grid; gap: 0; width: 100%; margin: 0 auto; border: 4px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; user-select: none; -webkit-user-select: none; }
+.cell { position: relative; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; }
+.cell.light { background: var(--sq-light); }
+.cell.dark { background: var(--sq-dark); }
+.cell.mine { cursor: pointer; }
+.cell.selected { box-shadow: inset 0 0 0 3px var(--accent); }
+.cell.last { box-shadow: inset 0 0 0 3px var(--highlight); }
+.cell.target { cursor: pointer; }
+.cell.target::after { content: ''; position: absolute; inset: 36%; border-radius: 50%; background: var(--accent); opacity: 0.5; }
+.cell.target .stone { outline: 3px solid var(--danger); outline-offset: -3px; }
+.stone { width: 72%; height: 72%; border-radius: 50%; box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.3); }
+.stone.blue { background: var(--stone-blue); }
+.stone.red { background: var(--stone-red); }

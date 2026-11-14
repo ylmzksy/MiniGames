@@ -1,0 +1,66 @@
+:root {
+    --cell-bg: #e3d2b1;
+    --cell-alt: #d6c19a;
+    --piece-you: #3b6fe0;
+    --piece-ai: #d64545;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cell-bg: #5a4a32;
+        --cell-alt: #4a3c28;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    display: grid;
+    gap: 3px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 4px;
+    background: #7a5a3a;
+    border-radius: var(--radius);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cell-bg);
+    border-radius: var(--radius-xs);
+}
+
+.cell:nth-child(odd) { background: var(--cell-alt); }
+.cell.placeable, .cell.target, .cell.bonus { cursor: pointer; }
+.cell.placeable::after, .cell.target::after {
+    content: '';
+    position: absolute;
+    inset: 36%;
+    border-radius: 50%;
+    background: var(--piece-you);
+    opacity: 0.35;
+}
+.cell.target::after { opacity: 0.6; }
+.cell.selected { box-shadow: inset 0 0 0 3px var(--highlight); }
+.cell.bonus { box-shadow: inset 0 0 0 3px var(--danger); }
+.cell.last.you { box-shadow: inset 0 0 0 3px rgba(59, 111, 224, 0.6); }
+.cell.last.ai { box-shadow: inset 0 0 0 3px rgba(214, 69, 69, 0.6); }
+
+.piece {
+    width: 66%;
+    height: 66%;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.piece.you { background: var(--piece-you); }
+.piece.ai { background: var(--piece-ai); }

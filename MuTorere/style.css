@@ -1,0 +1,48 @@
+:root {
+    --star-bg: #f3e9d2;
+    --star-line: #8a6d4b;
+    --stone-you: #3b6fe0;
+    --stone-ai: #d64545;
+    --point-empty: #fffdf5;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --star-bg: #3b3326;
+        --star-line: #c9a27e;
+        --point-empty: #5a4b33;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--star-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.edge { stroke: var(--star-line); stroke-width: 4; stroke-linecap: round; }
+
+.point circle { stroke: var(--star-line); stroke-width: 3; fill: var(--point-empty); }
+.point.stone.you circle { fill: var(--stone-you); }
+.point.stone.ai circle { fill: var(--stone-ai); }
+.point.movable { cursor: pointer; }
+.point.selected circle { stroke: var(--highlight); stroke-width: 6; }
+.point.target { cursor: pointer; }
+.point.target circle { fill: var(--accent-soft); stroke: var(--accent); stroke-dasharray: 6 4; }
+.point.last circle { stroke: var(--text); stroke-width: 5; }
