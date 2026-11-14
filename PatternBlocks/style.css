@@ -1,0 +1,57 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.target { fill: var(--surface-2); stroke: var(--border); stroke-width: 0.6; }
+
+.piece polygon { fill: var(--c); stroke: var(--c); stroke-width: 1.2; cursor: pointer; }
+.piece.solved polygon { filter: brightness(1.08); }
+.ghost polygon { fill: var(--c); stroke: #fff; stroke-width: 1; opacity: 0.55; }
+.ghost.bad polygon { fill: var(--danger); }
+.hint polygon { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 5 4; }
+
+/* Tray of blocks with remaining counts; press one and drag it onto the shape */
+.tray {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    touch-action: none;
+}
+
+.tray-piece {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 86px;
+    padding: 8px 6px 6px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    cursor: grab;
+}
+
+.tray-piece svg { width: 60px; height: 52px; }
+.tray-piece polygon { fill: var(--c); stroke: var(--c); stroke-width: 1; }
+.tray-piece.active { border-color: var(--accent); }
+.tray-piece.empty { opacity: 0.35; cursor: default; }
+.tray-piece .count { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }

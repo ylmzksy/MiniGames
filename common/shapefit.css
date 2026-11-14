@@ -1,0 +1,61 @@
+/* Board and pieces shared by the shape-fitting games */
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.board {
+    width: 100%;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.target {
+    fill: #2b3140;
+    stroke: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .target { fill: #0b1020; }
+}
+
+.piece {
+    fill: var(--piece);
+    stroke: rgba(0, 0, 0, 0.45);
+    stroke-width: 0.06;
+    stroke-linejoin: round;
+    cursor: grab;
+}
+
+.piece.selected {
+    stroke: #ffffff;
+    stroke-width: 0.1;
+    filter: drop-shadow(0 0 0.15px rgba(0, 0, 0, 0.6));
+}
+
+.piece.solved { stroke: var(--success); stroke-width: 0.08; }
+
+.hint {
+    fill: rgba(255, 255, 255, 0.25);
+    stroke: var(--highlight);
+    stroke-width: 0.1;
+    stroke-dasharray: 0.25 0.15;
+}
+
+.piece-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}

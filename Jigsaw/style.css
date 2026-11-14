@@ -1,0 +1,53 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.top-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+#preview {
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+
+.board {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.frame {
+    position: absolute;
+    background: var(--surface-2);
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-sm);
+    box-sizing: border-box;
+}
+
+.slot {
+    position: absolute;
+    box-sizing: border-box;
+    border: 1px dashed var(--border);
+}
+
+.piece {
+    position: absolute;
+    cursor: grab;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    border-radius: 2px;
+    transition: left 0.12s, top 0.12s;
+}
+
+.piece.dragging { transition: none; cursor: grabbing; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45); }
+.piece.locked { cursor: default; box-shadow: none; }
+.piece.solved { box-shadow: 0 0 0 0 transparent; }
