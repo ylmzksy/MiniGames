@@ -1,0 +1,25 @@
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.counters { font-weight: 600; }
+
+.board {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: #25532f;
+    cursor: crosshair;
+}
