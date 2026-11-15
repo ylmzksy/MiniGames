@@ -1,0 +1,108 @@
+/* Playing cards and the card table, shared by the card games */
+:root {
+    --card-face: #fdfcf8;
+    --card-edge: #b9b4a6;
+    --card-red: #c8242f;
+    --card-black: #1b1f2a;
+    --card-back: #2f5cc2;
+    --felt: #2e6b45;
+    --felt-line: rgba(255, 255, 255, 0.28);
+    --cw: 64px; /* card width */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --card-face: #ece8dc;
+        --card-edge: #0b0b0b;
+        --card-red: #b81f2a;
+        --card-back: #3d5fae;
+        --felt: #24543a;
+    }
+}
+
+.card {
+    position: relative;
+    width: var(--cw);
+    height: calc(var(--cw) * 1.4);
+    flex-shrink: 0;
+    border-radius: calc(var(--cw) * 0.1);
+    background: var(--card-face);
+    border: 1px solid var(--card-edge);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.card.red { color: var(--card-red); }
+.card.black { color: var(--card-black); }
+
+.card .corner {
+    position: absolute;
+    top: calc(var(--cw) * 0.05);
+    left: calc(var(--cw) * 0.08);
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    font-size: calc(var(--cw) * 0.3);
+    line-height: 1;
+    font-weight: 700;
+}
+
+.card .corner i { font-style: normal; font-size: 0.9em; }
+
+.card .center {
+    position: absolute;
+    inset: 32% 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--cw) * 0.62);
+    line-height: 1;
+}
+
+.card.back {
+    background: repeating-linear-gradient(45deg, var(--card-back) 0 4px, color-mix(in srgb, var(--card-back) 80%, #fff) 4px 8px);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px var(--card-edge), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card.slot {
+    background: transparent;
+    border: 2px dashed var(--felt-line);
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--felt-line);
+    font-size: calc(var(--cw) * 0.4);
+    font-weight: 700;
+}
+
+.card.selected { box-shadow: 0 0 0 3px var(--accent); }
+.card.target { box-shadow: 0 0 0 3px var(--highlight); cursor: pointer; }
+.card.slot.target { border-color: var(--highlight); }
+.card.dim { filter: brightness(0.7); }
+.card.clickable { cursor: pointer; }
+
+/* The green table */
+.table {
+    background: var(--felt);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 10px 8px;
+}
+
+/* A hand of cards in a row, overlapping when there are many */
+.card-hand {
+    display: flex;
+    justify-content: center;
+    min-height: calc(var(--cw) * 1.4);
+    padding: 0 calc(var(--cw) * 0.2);
+}
+
+.card-hand .card { transition: transform 0.12s; }
+.card-hand .card + .card { margin-left: var(--overlap, calc(var(--cw) * -0.45)); }
+.card-hand .card.playable { cursor: pointer; }
+.card-hand .card.playable:hover { transform: translateY(-6px); }
+.card-hand.small { --cw: 38px; }
+.card-hand.small .card + .card { margin-left: calc(var(--cw) * -0.6); }

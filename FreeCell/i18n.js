@@ -1,0 +1,53 @@
+i18n.register({
+    en: {
+        ...SolitaireStrings.en,
+        title: "FreeCell",
+        cells: "Free cells",
+        info_title: "How to Play FreeCell",
+        info_description: "A patience with no luck after the deal: every card is face up, and every level's deal can be solved.",
+        rule_1: "Move all cards to the four foundations (top right), building up by suit from ace to king",
+        rule_2: "The eight columns build down in alternating colours: a black 9 goes on a red 10",
+        rule_3: "Each free cell (top left) holds any one card. Any card or run can fill an empty column",
+        rule_4: "A run moves at once only if it could move card by card: the longest run is (free cells + 1), doubled for each empty column",
+        rule_5: "Later levels give you fewer free cells, down to just one",
+        rule_6: "Tap a card to move it; if it fits in several places, the targets light up. Double tap sends a card to its foundation",
+        tip_1: "Free the aces and twos early",
+        tip_2: "Empty columns are worth more than free cells: they double the run you can move",
+        tip_3: "Plan a few moves ahead before filling your last free cell",
+        tip_4: "Undo as much as you like: every deal can be won"
+    },
+    de: {
+        ...SolitaireStrings.de,
+        title: "FreeCell",
+        cells: "Freie Zellen",
+        info_title: "So spielst du FreeCell",
+        info_description: "Eine Patience ohne Glück nach dem Geben: Alle Karten liegen offen, und jedes Level ist lösbar.",
+        rule_1: "Lege alle Karten auf die vier Ablagestapel (oben rechts), nach Farbe aufsteigend vom Ass bis zum König",
+        rule_2: "Die acht Spalten werden absteigend in wechselnden Farben gebaut: Eine schwarze 9 kommt auf eine rote 10",
+        rule_3: "Jede freie Zelle (oben links) nimmt eine beliebige Karte auf. Jede Karte oder Reihe darf in eine leere Spalte",
+        rule_4: "Eine Reihe bewegt sich nur auf einmal, wenn sie auch Karte für Karte ginge: höchstens (freie Zellen + 1), verdoppelt für jede leere Spalte",
+        rule_5: "Spätere Level haben weniger freie Zellen, bis hin zu einer einzigen",
+        rule_6: "Tippe eine Karte an, um sie zu bewegen; passt sie an mehrere Stellen, leuchten die Ziele auf. Doppeltippen legt eine Karte auf ihren Ablagestapel",
+        tip_1: "Befreie Asse und Zweien früh",
+        tip_2: "Leere Spalten sind mehr wert als freie Zellen: Sie verdoppeln die bewegbare Reihe",
+        tip_3: "Plane ein paar Züge voraus, bevor du die letzte freie Zelle belegst",
+        tip_4: "Nimm so oft zurück, wie du willst: Jedes Spiel ist gewinnbar"
+    },
+    tr: {
+        ...SolitaireStrings.tr,
+        title: "FreeCell",
+        cells: "Boş hücre",
+        info_title: "FreeCell Nasıl Oynanır",
+        info_description: "Dağıtımdan sonra şansın olmadığı bir pasiyans: tüm kartlar açıktır ve her seviyenin dağıtımı çözülebilir.",
+        rule_1: "Tüm kartları dört temel desteye (sağ üst) taşıyın; türe göre as'tan papaza yukarı doğru dizin",
+        rule_2: "Sekiz sütun renkler değişerek aşağı doğru dizilir: siyah 9 kırmızı 10'un üstüne gelir",
+        rule_3: "Her boş hücre (sol üst) herhangi bir kartı tutar. Boş bir sütuna her kart ya da dizi konabilir",
+        rule_4: "Bir dizi ancak kart kart da taşınabiliyorsa tek seferde taşınır: en fazla (boş hücre + 1), her boş sütun için iki katı",
+        rule_5: "Sonraki seviyelerde boş hücre sayısı tek hücreye kadar azalır",
+        rule_6: "Taşımak için bir karta dokunun; birden fazla yere uyuyorsa hedefler yanar. Çift dokunuş kartı temel destesine gönderir",
+        tip_1: "As'ları ve ikileri erkenden kurtarın",
+        tip_2: "Boş sütunlar boş hücrelerden değerlidir: taşınabilecek diziyi ikiye katlarlar",
+        tip_3: "Son boş hücreyi doldurmadan önce birkaç hamle ileriyi düşünün",
+        tip_4: "İstediğiniz kadar geri alın: her dağıtım kazanılabilir"
+    }
+});

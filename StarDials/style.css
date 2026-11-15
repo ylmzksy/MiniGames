@@ -1,0 +1,92 @@
+.level-info,
+.off-by { color: var(--text-muted); }
+
+.off-by { min-height: 1.4em; margin-top: -8px; }
+
+.views {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.views figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Deep space, the same in light and dark themes */
+.space {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at 50% 40%, #1d2550 0%, #0b0f24 70%, #05070f 100%);
+    border: 1px solid var(--border);
+}
+
+.space.target { outline: 2px dashed color-mix(in srgb, var(--highlight) 70%, transparent); outline-offset: 3px; }
+
+.meter {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-2);
+    overflow: hidden;
+}
+
+.meter[hidden] { display: none; }
+
+.meter span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--danger), var(--highlight), var(--success));
+    transition: width 0.1s;
+}
+
+/* Knobs */
+.dials {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.dial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    border-radius: var(--radius-lg);
+    border: 2px solid transparent;
+}
+
+.dial.active { border-color: color-mix(in srgb, var(--tone) 60%, transparent); background: var(--surface); }
+
+.knob {
+    width: 104px;
+    height: 104px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+.knob:active { cursor: grabbing; }
+.knob .rim { fill: var(--surface-2); stroke: var(--tone); stroke-width: 4; }
+.knob .ticks line { stroke: var(--text-muted); stroke-width: 2; stroke-linecap: round; }
+.knob .face { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+.knob .pointer { stroke: var(--tone); stroke-width: 5; stroke-linecap: round; }
+.knob .value { fill: var(--text); font-size: 15px; font-weight: 700; text-anchor: middle; }
+.dial.done .rim { stroke: var(--success); }
+
+.nudge { display: flex; gap: 6px; }
+.nudge button { width: 44px; padding: 6px 0; font-size: 1.1rem; }
+
+@media (max-width: 420px) {
+    .dials { gap: 2px; flex-wrap: nowrap; }
+    .dial { padding: 4px; }
+    .knob { width: 80px; height: 80px; }
+    .nudge button { width: 36px; }
+}

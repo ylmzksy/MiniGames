@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../common/theme.css">
+    <link rel="stylesheet" href="../common/cards.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Crazy Eights</title>
+</head>
+<body data-home="../index.html" data-game="crazyeights">
+    <div id="app">
+        <div id="status" class="status"></div>
+        <div id="level-info" class="level-info"></div>
+        <div id="scoreboard" class="scoreboard"></div>
+        <div class="table c8-table">
+            <div id="ai-hand" class="card-hand small"></div>
+            <div id="pile-area" class="pile-area"></div>
+            <div id="suit-picker" class="suit-picker" hidden></div>
+            <div id="player-hand" class="card-hand"></div>
+        </div>
+        <div class="actions">
+            <button id="drawBtn" data-i18n="draw">Draw</button>
+            <button id="passBtn" data-i18n="pass">Pass</button>
+            <button id="nextRoundBtn" class="primary" data-i18n="next_round" hidden>Next round</button>
+        </div>
+        <div class="controls">
+            <select id="difficulty">
+                <option value="novice" data-i18n="novice">Novice</option>
+                <option value="master" data-i18n="master">Master</option>
+            </select>
+            <button onclick="LevelSelect.open(idx => Game.loadLevel(idx))" data-i18n="levels_button">Levels</button>
+            <button id="restartBtn" data-i18n="restart">Restart Level</button>
+        </div>
+    </div>
+
+    <script src="../common/i18n.js"></script>
+    <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
+    <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
+    <script src="../common/cards.js"></script>
+    <script src="engine.js"></script>
+
+    <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
+    <script src="levels/level3.js"></script>
+    <script src="levels/level4.js"></script>
+
+    <script src="ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+i18n.register({
+    en: {
+        ...SolitaireStrings.en,
+        title: "Klondike",
+        redeals: "Redeals",
+        info_title: "How to Play Klondike",
+        info_description: "The classic patience: move all 52 cards up to the four foundations, sorted by suit from ace to king.",
+        rule_1: "Foundations (top right) build up by suit: ace, 2, 3 ... king",
+        rule_2: "The seven columns build down in alternating colours: a red 6 goes on a black 7. You can move a whole run at once",
+        rule_3: "Only a king, or a run starting with a king, can fill an empty column. Face-down cards turn over when uncovered",
+        rule_4: "Tap the stock to turn over one card (three in the Draw Three levels); only the top waste card can be played",
+        rule_5: "An empty stock can be refilled from the waste as often as the level allows",
+        rule_6: "Tap a card to move it; if it fits in several places, the targets light up. Double tap sends a card to its foundation",
+        tip_1: "Uncover face-down cards first, starting with the longest columns",
+        tip_2: "Don't empty a column unless you have a king ready to move into it",
+        tip_3: "Auto puts up every card that is no longer needed in the columns",
+        tip_4: "Stuck? New deal shuffles a fresh game"
+    },
+    de: {
+        ...SolitaireStrings.de,
+        title: "Klondike",
+        redeals: "Durchgänge",
+        info_title: "So spielst du Klondike",
+        info_description: "Die klassische Patience: Lege alle 52 Karten auf die vier Ablagestapel, nach Farbe sortiert vom Ass bis zum König.",
+        rule_1: "Die Ablagestapel (oben rechts) werden nach Farbe aufsteigend gebaut: Ass, 2, 3 ... König",
+        rule_2: "Die sieben Spalten werden absteigend in wechselnden Farben gebaut: Eine rote 6 kommt auf eine schwarze 7. Ganze Reihen lassen sich auf einmal verschieben",
+        rule_3: "Nur ein König oder eine Reihe, die mit einem König beginnt, darf in eine leere Spalte. Verdeckte Karten werden aufgedeckt, sobald sie frei liegen",
+        rule_4: "Tippe auf den Talon, um eine Karte aufzudecken (drei in den Drei-Karten-Leveln); nur die oberste Karte des Abwurfs ist spielbar",
+        rule_5: "Ein leerer Talon darf so oft aus dem Abwurf neu gefüllt werden, wie das Level erlaubt",
+        rule_6: "Tippe eine Karte an, um sie zu bewegen; passt sie an mehrere Stellen, leuchten die Ziele auf. Doppeltippen legt eine Karte auf ihren Ablagestapel",
+        tip_1: "Decke zuerst verdeckte Karten auf, am besten in den längsten Spalten",
+        tip_2: "Leere eine Spalte nur, wenn ein König bereitsteht",
+        tip_3: "Auto legt alle Karten ab, die in den Spalten nicht mehr gebraucht werden",
+        tip_4: "Festgefahren? Neues Spiel mischt neu"
+    },
+    tr: {
+        ...SolitaireStrings.tr,
+        title: "Klondike",
+        redeals: "Tekrar",
+        info_title: "Klondike Nasıl Oynanır",
+        info_description: "Klasik pasiyans: 52 kartın hepsini, as'tan papaza kadar türüne göre sıralayarak dört temel desteye taşıyın.",
+        rule_1: "Temel desteler (sağ üst) türe göre yukarı doğru dizilir: as, 2, 3 ... papaz",
+        rule_2: "Yedi sütun, renkler değişerek aşağı doğru dizilir: kırmızı 6 siyah 7'nin üstüne gelir. Bir diziyi tek seferde taşıyabilirsiniz",
+        rule_3: "Boş bir sütuna yalnızca papaz ya da papazla başlayan bir dizi konabilir. Kapalı kartlar açıkta kalınca çevrilir",
+        rule_4: "Bir kart çevirmek için desteye dokunun (Üç Kart seviyelerinde üç); atık yığınının yalnızca en üstteki kartı oynanabilir",
+        rule_5: "Boşalan deste, seviyenin izin verdiği kadar atık yığınından yeniden doldurulabilir",
+        rule_6: "Taşımak için bir karta dokunun; birden fazla yere uyuyorsa hedefler yanar. Çift dokunuş kartı temel destesine gönderir",
+        tip_1: "Önce kapalı kartları açın, en uzun sütunlardan başlayın",
+        tip_2: "Hazırda bir papaz yoksa sütun boşaltmayın",
+        tip_3: "Otomatik, sütunlarda artık gerekmeyen tüm kartları yukarı taşır",
+        tip_4: "Takıldınız mı? Yeni dağıt yeni bir oyun karıştırır"
+    }
+});

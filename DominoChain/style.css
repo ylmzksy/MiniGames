@@ -1,0 +1,3 @@
+.counters { color: var(--text-muted); font-weight: 600; }
+
+.board.solved .domino-line { box-shadow: 0 0 0 3px var(--success); }

@@ -1,0 +1,77 @@
+.c8-table {
+    --cw: min(64px, calc((min(100vw, 560px) - 60px) / 6.5));
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 12px 8px;
+}
+
+.pile-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 18px;
+}
+
+.pile-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+}
+
+.suit-now b {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--cw) * 0.9);
+    height: calc(var(--cw) * 0.9);
+    border-radius: 50%;
+    background: var(--card-face);
+    font-size: calc(var(--cw) * 0.6);
+    line-height: 1;
+}
+
+.suit-now.red b { color: var(--card-red); }
+.suit-now.black b { color: var(--card-black); }
+
+.suit-picker {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.suit-picker[hidden] { display: none; }
+
+.suit-picker button {
+    width: 54px;
+    font-size: 1.6rem;
+    padding: 4px 0;
+    background: var(--card-face);
+    border-color: var(--highlight);
+}
+
+.suit-picker button.red { color: var(--card-red); }
+.suit-picker button.black { color: var(--card-black); }
+
+.card-hand .card.dim { filter: brightness(0.75); }
+
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    color: var(--text-muted);
+}
+
+.scoreboard strong { color: var(--text); }
+.level-info { color: var(--text-muted); }
+
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}

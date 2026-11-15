@@ -1,0 +1,65 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+.views {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.views figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Deep space, the same in light and dark themes */
+.space {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at 50% 40%, #1d2550 0%, #0b0f24 70%, #05070f 100%);
+    border: 1px solid var(--border);
+    touch-action: none;
+}
+
+body.free-mode #view { cursor: grab; }
+body.free-mode #view:active { cursor: grabbing; }
+.space.target { outline: 2px dashed color-mix(in srgb, var(--highlight) 70%, transparent); outline-offset: 3px; }
+
+.meter {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-2);
+    overflow: hidden;
+}
+
+.meter[hidden] { display: none; }
+
+.meter span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--danger), var(--highlight), var(--success));
+    transition: width 0.1s;
+}
+
+.turn-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    gap: 8px;
+    justify-content: center;
+}
+
+.turn-pad button { font-size: 1.3rem; padding: 8px 0; }
+
+.drag-hint {
+    margin: -6px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    display: none;
+}
+
+body.free-mode .drag-hint { display: block; }

@@ -1,0 +1,136 @@
+/* Domino tiles and the line of play, shared by the domino games */
+:root {
+    --tile-face: #fbf8f0;
+    --tile-edge: #2b2b2b;
+    --tile-pip: #1b1b1b;
+    --tile-back: #2f5cc2;
+    --u: 26px; /* size of one half */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --tile-face: #ece6d6;
+        --tile-edge: #0b0b0b;
+        --tile-back: #3d5fae;
+    }
+}
+
+.domino {
+    display: inline-flex;
+    flex-shrink: 0;
+    background: var(--tile-face);
+    border: 1.5px solid var(--tile-edge);
+    border-radius: calc(var(--u) * 0.18);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.domino.h { flex-direction: row; }
+.domino.v { flex-direction: column; }
+
+.domino .half {
+    width: var(--u);
+    height: var(--u);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: calc(var(--u) * 0.12);
+    place-items: center;
+}
+
+.domino.h .half + .half { border-left: 1.5px solid rgba(0, 0, 0, 0.45); }
+.domino.v .half + .half { border-top: 1.5px solid rgba(0, 0, 0, 0.45); }
+
+.domino .pip {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background: var(--tile-pip);
+}
+
+.domino.back {
+    background: repeating-linear-gradient(45deg, var(--tile-back) 0 4px, color-mix(in srgb, var(--tile-back) 80%, #fff) 4px 8px);
+    width: calc(var(--u) * 0.7);
+    height: calc(var(--u) * 1.4);
+}
+
+.domino.last { box-shadow: 0 0 0 2px var(--highlight); }
+
+/* The line of play wraps like text, from the left end to the right end */
+.domino-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: calc(var(--u) * 2.4);
+    padding: 10px;
+    background: #2e6b45;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+/* Where a selected tile can go */
+.domino.ghost {
+    opacity: 0.75;
+    border: 2px dashed var(--highlight);
+    cursor: pointer;
+    animation: ghost-pulse 1s ease-in-out infinite;
+}
+
+@keyframes ghost-pulse { 50% { opacity: 0.45; } }
+
+.ghost-empty {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border: 2px dashed var(--highlight);
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* A hand of tiles standing upright */
+.hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    min-height: calc(var(--u) * 2 + 8px);
+}
+
+.hand .domino { --u: 30px; cursor: pointer; transition: transform 0.12s; }
+.hand .domino.playable:hover { transform: translateY(-4px); }
+.hand .domino.dim { opacity: 0.45; cursor: default; }
+.hand .domino.selected { transform: translateY(-8px); box-shadow: 0 0 0 3px var(--accent); }
+
+.hand.small { gap: 3px; min-height: 0; }
+.hand.small .domino { --u: 18px; cursor: default; }
+
+/* Match table */
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    color: var(--text-muted);
+}
+
+.scoreboard strong { color: var(--text); }
+
+.level-info { color: var(--text-muted); }
+
+.board { width: 100%; }
+
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+@media (max-width: 420px) {
+    :root { --u: 20px; }
+    .hand .domino { --u: 24px; }
+}
