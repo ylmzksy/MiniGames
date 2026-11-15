@@ -1,0 +1,187 @@
+:root {
+    --key-a: #d64545;
+    --key-b: #3b6fe0;
+    --key-c: #e0a100;
+    --pad-1: #12a39a;
+    --pad-2: #d0578f;
+    --pad-3: #8e5bd8;
+    --crystal: #29b6e8;
+    --beam: rgba(41, 182, 232, 0.35);
+    --chasm: #1b2130;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --key-a: #f06a6a;
+        --key-b: #6f97ff;
+        --key-c: #ffc933;
+        --pad-1: #2fd1c6;
+        --pad-2: #f07aae;
+        --pad-3: #b48cf2;
+        --crystal: #5fd3ff;
+        --beam: rgba(95, 211, 255, 0.3);
+        --chasm: #05070c;
+    }
+}
+
+.level-info,
+.counters {
+    color: var(--text-muted);
+}
+
+.counters { font-weight: 600; }
+
+.board {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: box-shadow 0.15s;
+}
+
+.board.aiming { box-shadow: 0 0 0 3px var(--crystal); }
+
+.cell {
+    --key: var(--text-muted);
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-xs);
+}
+
+.cell.key-a { --key: var(--key-a); }
+.cell.key-b { --key: var(--key-b); }
+.cell.key-c { --key: var(--key-c); }
+.cell.pad-1 { --key: var(--pad-1); }
+.cell.pad-2 { --key: var(--pad-2); }
+.cell.pad-3 { --key: var(--pad-3); }
+
+.cell.void { background: transparent; }
+
+.cell.wall {
+    background: var(--surface-2);
+    box-shadow: inset 0 0 0 2px var(--border);
+}
+
+.cell.floor { background: var(--bg); }
+
+.cell.chasm {
+    background: radial-gradient(circle at 50% 40%, #2c3550 0%, var(--chasm) 75%);
+}
+
+.cell.plate::before {
+    content: '';
+    position: absolute;
+    inset: 16%;
+    border: 3px solid var(--key);
+    border-radius: var(--radius-sm);
+    opacity: 0.85;
+}
+
+.cell.plate.pressed::before { background: var(--key); opacity: 0.45; }
+
+.cell.door.closed {
+    background: repeating-linear-gradient(90deg, var(--key) 0 18%, transparent 18% 33%);
+}
+
+.cell.door.open { box-shadow: inset 0 0 0 2px var(--key); }
+
+/* Portal pads: a swirl of rings in the pair's color */
+.cell.pad::before {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle, var(--key) 0 2px, transparent 2px 5px);
+    opacity: 0.7;
+}
+
+.door-label,
+.pad-label {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.cell.exit { background: color-mix(in srgb, var(--success) 25%, var(--bg)); }
+
+.cell.exit::before {
+    content: '';
+    position: absolute;
+    inset: 22%;
+    border: 3px solid var(--success);
+    border-radius: 50%;
+}
+
+/* The beam lights up every cell it crossed */
+.cell.beam::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--beam);
+    border-radius: var(--radius-xs);
+    animation: fade 0.35s ease-out forwards;
+}
+
+@keyframes fade { from { opacity: 1; } to { opacity: 0; } }
+
+.crystal,
+.player {
+    position: absolute;
+    z-index: 1;
+}
+
+.crystal {
+    inset: 20%;
+    background: linear-gradient(135deg, #ffffff 0%, var(--crystal) 45%, #1679a8 100%);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+/* While aiming, the crystals the beam would hit pulse */
+.crystal.target { animation: pulse 0.9s ease-in-out infinite; cursor: pointer; }
+
+@keyframes pulse {
+    50% { transform: scale(1.15); filter: brightness(1.3); }
+}
+
+.player {
+    inset: 18%;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.player.solved { box-shadow: 0 0 14px var(--success); }
+
+/* On-screen arrows and the blink toggle */
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(3, 56px);
+    gap: 6px;
+    justify-content: center;
+}
+
+.dpad button { padding: 0; font-size: 1.3rem; }
+.dpad .blink { font-size: 0.8rem; }
+
+.dpad .blink.active {
+    background: var(--crystal);
+    border-color: var(--crystal);
+    color: #0b1020;
+}
+
+.dpad .up { grid-column: 2; grid-row: 1; }
+.dpad .left { grid-column: 1; grid-row: 2; }
+.dpad .blink { grid-column: 2; grid-row: 2; }
+.dpad .right { grid-column: 3; grid-row: 2; }
+.dpad .down { grid-column: 2; grid-row: 3; }
