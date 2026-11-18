@@ -1,0 +1,112 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+/* Trail colours; the grid uses the shared theme */
+:root {
+    --trail: #12a39a;
+    --trail-soft: color-mix(in srgb, var(--trail) 22%, var(--surface));
+}
+
+@media (prefers-color-scheme: dark) {
+    :root { --trail: #2ccbbf; }
+}
+
+.board {
+    position: relative;
+    display: grid;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 6px;
+    gap: 4px;
+    background: var(--surface-2);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.12s;
+}
+
+.cell.visited { background: var(--trail-soft); }
+
+/* Walls sit in the gap between two cells */
+.cell.wall-r::after,
+.cell.wall-b::before {
+    content: "";
+    position: absolute;
+    background: var(--text);
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.cell.wall-r::after { top: -3px; bottom: -3px; right: -5px; width: 6px; }
+.cell.wall-b::before { left: -3px; right: -3px; bottom: -5px; height: 6px; }
+
+/* The trail is drawn over the cells, in grid units */
+.trail {
+    position: absolute;
+    inset: 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.trail polyline {
+    fill: none;
+    stroke: var(--trail);
+    stroke-width: 0.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.trail circle { fill: var(--trail); }
+
+/* Checkpoints: an upright number on a diamond */
+.checkpoint {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 66%;
+    aspect-ratio: 1;
+    color: var(--surface);
+    font-weight: 800;
+    font-size: clamp(0.85rem, 4vw, 1.2rem);
+}
+
+.checkpoint::before {
+    content: "";
+    position: absolute;
+    inset: 9%;
+    z-index: -1;
+    background: var(--mark, var(--text));
+    border-radius: 22%;
+    transform: rotate(45deg);
+}
+
+.checkpoint.first { --mark: var(--trail); color: #fff; }
+.checkpoint.last { --mark: var(--highlight); color: #1b2333; }
+
+.board.solved .cell.visited { background: color-mix(in srgb, var(--success) 25%, var(--surface)); }
+.board.solved .trail polyline,
+.board.solved .trail circle { stroke: var(--success); fill: none; }
+.board.solved .trail circle { fill: var(--success); }
+
+/* Keep the one-word title clear of the language picker on phones */
+@media (max-width: 400px) {
+    .game-header h1 { font-size: 1.2rem; }
+}

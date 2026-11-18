@@ -1,0 +1,97 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+:root {
+    --circle: #f08a24;
+    --square: #2f7ad8;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --circle: #ff9d3d;
+        --square: #4a93f0;
+    }
+}
+
+.board {
+    display: grid;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    gap: 3px;
+    padding: 3px;
+    background: var(--border);
+    border-radius: var(--radius);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border-radius: var(--radius-xs);
+    cursor: pointer;
+}
+
+.cell.given { background: var(--surface-2); cursor: default; }
+.cell.cursor { box-shadow: inset 0 0 0 2px var(--accent); }
+.cell.bad { background: color-mix(in srgb, var(--danger) 18%, var(--surface)); }
+
+/* Holds the symbol; it fills the cell so the symbol is sized and centred as before */
+.holder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The two symbols: a circle and a square, told apart by shape as well as colour */
+.sym {
+    width: 56%;
+    aspect-ratio: 1;
+    animation: pop 0.12s ease-out;
+}
+
+.sym.circle {
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--circle) 60%, #fff), var(--circle) 70%);
+}
+
+.sym.square {
+    border-radius: 18%;
+    background: linear-gradient(140deg, color-mix(in srgb, var(--square) 60%, #fff), var(--square) 75%);
+}
+
+.cell.given .sym { filter: saturate(0.7); box-shadow: 0 0 0 2px var(--surface-2), 0 0 0 3px var(--text-muted); }
+
+@keyframes pop { from { transform: scale(0.6); } }
+
+/* Signs sit on the line between two cells */
+.sign {
+    position: absolute;
+    z-index: 2;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1.5px solid var(--text-muted);
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 800;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.sign.right { right: -11.5px; top: calc(50% - 10px); }
+.sign.down { bottom: -11.5px; left: calc(50% - 10px); }
+.sign.bad { border-color: var(--danger); color: var(--danger); }
+
+.board.solved { background: var(--success); }
