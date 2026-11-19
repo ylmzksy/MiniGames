@@ -1,0 +1,155 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+/* Tile colours: the same in light and dark themes, each with its own glyph */
+.c-R { --tone: #e2474f; }
+.c-G { --tone: #2e9e58; }
+.c-B { --tone: #3a6fdc; }
+.c-Y { --tone: #e0a500; }
+.c-P { --tone: #8d58d2; }
+.c-O { --tone: #ee7a1f; }
+
+/* Target preview and counters */
+.goal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.goal-row figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.target {
+    display: grid;
+    gap: 1px;
+    padding: 3px;
+    background: var(--border);
+    border-radius: 6px;
+    outline: 2px dashed color-mix(in srgb, var(--highlight) 70%, transparent);
+    outline-offset: 3px;
+}
+
+.target i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tone);
+    border-radius: 2px;
+    color: #fff;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.target i.num { background: color-mix(in srgb, var(--tone) 30%, var(--surface)); color: var(--text); }
+
+/* The frame: arrow buttons around the board */
+.frame {
+    display: grid;
+    gap: 4px;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.arrow {
+    padding: 0;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    line-height: 1;
+    color: var(--text-muted);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow:hover { color: var(--accent); }
+
+.board {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    box-shadow: inset 0 0 0 1px var(--border);
+    touch-action: none;
+    cursor: grab;
+}
+
+.board:active { cursor: grabbing; }
+
+.tile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cell);
+    height: var(--cell);
+    padding: 3px;
+    will-change: transform;
+}
+
+.tile span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 22%;
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 55%),
+        var(--tone);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: calc(var(--cell) * 0.36);
+    font-weight: 800;
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+}
+
+/* Numbered tiles: a light face with a coloured band showing which row they belong in */
+.tile.num span {
+    background: var(--surface);
+    color: var(--text);
+    font-size: calc(var(--cell) * 0.4);
+    box-shadow: inset 0 -5px 0 var(--tone), 0 0 0 1px var(--border);
+}
+
+.tile.lifted span { filter: brightness(1.08); }
+.tile.ghost { opacity: 0.95; }
+
+.cursor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cell);
+    height: var(--cell);
+    border: 3px solid var(--accent);
+    border-radius: 26%;
+    pointer-events: none;
+    display: none;
+    z-index: 2;
+}
+
+.frame.keys .cursor { display: block; }
+
+.frame.solved .board { box-shadow: inset 0 0 0 1px var(--border), 0 0 0 3px var(--success); }
+
+.hint {
+    margin: -6px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.strip { display: grid; }
+.strip.h { grid-template-columns: repeat(var(--n), 1fr); }
+.strip.v { grid-template-rows: repeat(var(--n), 1fr); }
+.strip .arrow { margin: 2px; }
