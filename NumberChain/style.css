@@ -1,0 +1,232 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+/* Beads on a copper string: the chain look of this game */
+:root {
+    --chain: #c26a2e;
+    --bead-given: #3a2f4a;
+    --on-bead-given: #fbf6ee;
+    --tile: #efe9e1;
+    --tile-near: #f6dcc4;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --chain: #e98d4c;
+        --bead-given: #d9cfe8;
+        --on-bead-given: #1d1726;
+        --tile: #222a3b;
+        --tile-near: #3b3030;
+    }
+}
+
+.level-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 12px;
+    margin: -6px 0;
+}
+
+/* Neighbourhood badge: a little star with 4 or 8 rays */
+.mode {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px 3px 6px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.mode svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--chain);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.mode svg circle { fill: var(--chain); stroke: none; }
+.mode.diag { border-color: color-mix(in srgb, var(--chain) 55%, var(--border)); }
+
+/* Board: tiles + chain lines in an SVG underneath, number beads on top */
+.board {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    container-type: inline-size;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.board .chain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.tile {
+    fill: var(--tile);
+    transition: fill 0.12s;
+}
+
+.tile.near { fill: var(--tile-near); }
+.tile.sel { fill: color-mix(in srgb, var(--accent) 22%, var(--tile)); }
+
+.links line {
+    stroke: var(--chain);
+    stroke-width: 0.13;
+    stroke-linecap: round;
+    opacity: 0.55;
+}
+
+.cells {
+    position: relative;
+    display: grid;
+    width: 100%;
+    height: 100%;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cell.hole { cursor: default; }
+
+.bead {
+    width: 74%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+    /* about 40% of a cell; --cols is set per level */
+    font-size: clamp(0.7rem, calc(100cqw / var(--cols) * 0.4), 1.35rem);
+    line-height: 1;
+    color: var(--accent);
+    transition: background 0.12s, box-shadow 0.12s;
+}
+
+.cell.filled:not(.given) .bead {
+    background: var(--surface);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--chain) 70%, transparent);
+    animation: pop 0.12s ease-out;
+}
+
+.cell.given .bead {
+    background: var(--bead-given);
+    color: var(--on-bead-given);
+    cursor: default;
+}
+
+.cell.selected .bead { box-shadow: 0 0 0 3px var(--accent); }
+.cell.selected.filled:not(.given) .bead { box-shadow: 0 0 0 3px var(--accent); }
+
+.cell.pending .bead {
+    background: var(--accent-soft);
+    color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+    animation: blink 1.2s steps(2) infinite;
+}
+
+.cell.bad .bead { color: var(--danger); }
+.cell.bad.filled:not(.given) .bead {
+    background: color-mix(in srgb, var(--danger) 14%, var(--surface));
+    box-shadow: 0 0 0 2px var(--danger);
+}
+.cell.bad.given .bead { box-shadow: 0 0 0 3px var(--danger); color: var(--on-bead-given); }
+
+@keyframes pop { from { transform: scale(0.7); } }
+@keyframes blink { 50% { box-shadow: 0 0 0 2px transparent; } }
+
+.board.solved .links line { stroke: var(--success); opacity: 0.85; }
+.board.solved .cell.filled:not(.given) .bead { box-shadow: 0 0 0 2px var(--success); color: var(--success); }
+
+/* Number pad */
+.pad {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.pad.disabled .keys { opacity: 0.55; }
+
+.suggest {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    text-align: left;
+}
+
+.suggest-label {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.suggestions .none { font-size: 0.85rem; color: var(--text-muted); }
+
+.chip {
+    min-width: 44px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border-color: color-mix(in srgb, var(--chain) 60%, var(--border));
+    font-variant-numeric: tabular-nums;
+}
+
+.chip.on { background: color-mix(in srgb, var(--chain) 20%, var(--surface)); }
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 1.6fr;
+    gap: 6px;
+}
+
+.keys button {
+    padding: 9px 0;
+    min-width: 0;
+    font-size: 1.05rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.keys .wide-key {
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 9px 4px;
+}
+
+/* Keep the title clear of the language picker on phones */
+@media (max-width: 400px) {
+    .game-header h1 { font-size: 1.1rem; line-height: 1.15; }
+}

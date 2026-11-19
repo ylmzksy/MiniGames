@@ -1,0 +1,130 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+:root {
+    --tile: #fffdf7;
+    --tile-edge: #e4dccb;
+    --strike: #c2410c;
+    --keep: #2563eb;
+    --target-bg: #f3efe4;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --tile: var(--surface-2);
+        --tile-edge: var(--border);
+        --strike: #fb923c;
+        --keep: #7aa7ff;
+        --target-bg: var(--surface);
+    }
+}
+
+/* Number tiles with the targets in an extra column on the right and an extra row below */
+.board {
+    display: grid;
+    align-items: stretch;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    gap: 4px;
+    user-select: none;
+    -webkit-user-select: none;
+    --fs: clamp(0.85rem, calc(19rem / (var(--n) + 5)), 1.6rem);
+}
+
+.cell {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tile);
+    border: 1px solid var(--tile-edge);
+    border-bottom-width: 3px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: opacity 0.15s, background 0.15s;
+}
+
+.num {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2.5px solid transparent;
+    font-size: var(--fs);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--text);
+}
+
+/* Crossed out: faded and struck through */
+.cell.crossed { background: var(--surface-2); border-bottom-width: 1px; }
+.cell.crossed .num { opacity: 0.4; }
+
+.cell.crossed::after {
+    content: "";
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    top: calc(50% - 1.5px);
+    height: 3px;
+    border-radius: 2px;
+    background: var(--strike);
+    transform: rotate(-35deg);
+    animation: strike 0.15s ease-out;
+}
+
+/* Kept: circled */
+.cell.kept .num {
+    border-color: var(--keep);
+    color: var(--keep);
+    animation: ring 0.15s ease-out;
+}
+
+.cell.cursor { box-shadow: 0 0 0 2px var(--accent); }
+
+@keyframes strike { from { transform: rotate(-35deg) scaleX(0); } }
+@keyframes ring { from { transform: scale(0.7); } }
+
+/* Targets: the goal, with the current sum of the line above it */
+.clue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    line-height: 1.05;
+    background: var(--target-bg);
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.row-clue { aspect-ratio: 1; margin-left: 4px; }
+.col-clue { aspect-ratio: 1; margin-top: 4px; }
+
+.clue-sum { order: -1; font-size: calc(var(--fs) * 0.5); font-weight: 600; color: var(--text-muted); }
+.clue-num { font-size: calc(var(--fs) * 0.8); font-weight: 800; white-space: nowrap; }
+
+.clue.ok {
+    border-color: var(--success);
+    background: color-mix(in srgb, var(--success) 18%, var(--target-bg));
+    color: var(--success);
+}
+
+.clue.bad {
+    border-color: var(--danger);
+    background: color-mix(in srgb, var(--danger) 14%, var(--target-bg));
+    color: var(--danger);
+}
+
+.clue.ok .clue-sum,
+.clue.bad .clue-sum { color: inherit; }
+
+.board.solved .cell:not(.crossed) { border-color: var(--success); background: color-mix(in srgb, var(--success) 14%, var(--tile)); }
+.board.solved .cell { cursor: default; }

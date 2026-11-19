@@ -1,0 +1,83 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+/* Soft region tints, a pebble-garden palette; neighbouring regions never share one */
+:root {
+    --t0: #fbe3cf;
+    --t1: #d9ecd6;
+    --t2: #d7e5f6;
+    --t3: #f3dcec;
+    --t4: #f4efcf;
+    --wall: #3a3f4c;
+    --ink: #2457b8;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --t0: #3d3127;
+        --t1: #263a2c;
+        --t2: #243349;
+        --t3: #3a2840;
+        --t4: #3a3824;
+        --wall: #c9d1e2;
+        --ink: #8fb4ff;
+    }
+}
+
+.board {
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    border: 3px solid var(--wall);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--surface);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--wall) 18%, transparent);
+    font-size: clamp(1.05rem, 5vw, 1.6rem);
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.12s;
+}
+
+.cell.tint0 { background: var(--t0); }
+.cell.tint1 { background: var(--t1); }
+.cell.tint2 { background: var(--t2); }
+.cell.tint3 { background: var(--t3); }
+.cell.tint4 { background: var(--t4); }
+
+/* Thick walls where the region changes */
+.cell.bt { border-top: 2.5px solid var(--wall); }
+.cell.br { border-right: 2.5px solid var(--wall); }
+.cell.bb { border-bottom: 2.5px solid var(--wall); }
+.cell.bl { border-left: 2.5px solid var(--wall); }
+
+.cell.given { color: var(--text); font-weight: 800; cursor: default; }
+.cell.same-region { filter: brightness(0.95); }
+@media (prefers-color-scheme: dark) { .cell.same-region { filter: brightness(1.25); } }
+.cell.cursor { box-shadow: inset 0 0 0 3px var(--accent); filter: none; }
+.cell.bad { color: var(--danger); background-image: linear-gradient(color-mix(in srgb, var(--danger) 22%, transparent), color-mix(in srgb, var(--danger) 22%, transparent)); }
+
+.board.solved { border-color: var(--success); }
+.board.solved .cell { color: var(--success); }
+
+.pad {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 1.6fr;
+    gap: 6px;
+}
+
+.pad button { padding: 12px 0; font-size: 1.15rem; }
+.pad .erase { font-size: 0.9rem; }
