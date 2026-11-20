@@ -1,0 +1,52 @@
+.level-info,
+.round-info { color: var(--text-muted); }
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+.cell {
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    cursor: default;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.cell:hover { background: var(--surface-2); }
+.board.active .cell { cursor: pointer; }
+.board.active .cell:hover { border-color: var(--accent); }
+
+.cell.lit {
+    background: var(--highlight);
+    border-color: var(--highlight);
+    box-shadow: 0 0 14px var(--highlight);
+}
+
+.cell.found,
+.cell.found:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* After a mistake: the cells that should have been tapped */
+.cell.missed {
+    background: color-mix(in srgb, var(--highlight) 45%, var(--surface-2));
+    border: 2px dashed var(--highlight);
+}
+
+.cell.wrong,
+.cell.wrong:hover {
+    background: var(--danger);
+    border-color: var(--danger);
+}
