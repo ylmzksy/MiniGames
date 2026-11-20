@@ -24,7 +24,7 @@ i18n.register({
         tip_3: "Dragging two cells at once counts as two moves, and Undo takes back one move at a time"
     },
     de: {
-        title: "Schiebegitter",
+        title: "Schiebe\u00ADgitter",
         restart: "Level neu starten",
         undo: "Zurück",
         target: "Ziel",

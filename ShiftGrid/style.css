@@ -134,6 +134,7 @@
     height: var(--cell);
     border: 3px solid var(--accent);
     border-radius: 26%;
+    box-shadow: inset 0 0 0 2px #fff;
     pointer-events: none;
     display: none;
     z-index: 2;

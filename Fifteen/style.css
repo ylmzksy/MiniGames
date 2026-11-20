@@ -1,0 +1,187 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+:root {
+    --frame: #1f4e5a;
+    --frame-edge: #163a43;
+    --tray: #2c6170;
+    --tile: #f7f0e1;
+    --tile-edge: #d8ccb2;
+    --tile-ink: #1f4e5a;
+    --tile-home: #e07a3f;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --frame: #123038;
+        --frame-edge: #0b2026;
+        --tray: #1a4049;
+        --tile: #33505a;
+        --tile-edge: #223a42;
+        --tile-ink: #f3e6c8;
+        --tile-home: #ff9a5c;
+    }
+}
+
+.status.win { color: var(--success); }
+
+/* Target preview + counters above the board */
+.goal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: var(--text-muted);
+}
+
+.goal-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+}
+
+.goal-row .counters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.goal-preview { width: 84px; height: 84px; }
+
+.mini {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 2px;
+    padding: 3px;
+    background: var(--frame);
+    border-radius: 6px;
+}
+
+.mini i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tile);
+    color: var(--tile-ink);
+    border-radius: 2px;
+    font-style: normal;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.mini i.gap { background: var(--tray); }
+
+.mini-pic {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 6px;
+    border: 3px solid var(--frame);
+}
+
+.mini-pic i {
+    position: absolute;
+    background: var(--tray);
+}
+
+/* The frame: a square whose tray holds n x n tile slots */
+.board {
+    --n: 4;
+    position: relative;
+    width: min(100%, 420px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    padding: 8px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(160deg, var(--frame), var(--frame-edge));
+    box-shadow: var(--shadow), inset 0 2px 0 rgba(255, 255, 255, 0.08);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: box-shadow 0.4s;
+}
+
+.tray {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: var(--tray);
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.35);
+    container-type: inline-size;
+}
+
+/* Tiles sit at the top left and are moved by whole tile sizes with translate() */
+.tile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% / var(--n));
+    height: calc(100% / var(--n));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid transparent;
+    border-radius: 12px;
+    background-color: var(--tile);
+    background-clip: padding-box;
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 -4px 0 var(--tile-edge), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+    color: var(--tile-ink);
+    cursor: pointer;
+    transition: transform 0.13s ease-out, opacity 0.5s;
+}
+
+.num {
+    font-size: calc(42cqw / var(--n));
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    padding-bottom: 3px;
+}
+
+/* A small mark shows tiles that already sit where the target wants them */
+.tile.home::after {
+    content: "";
+    position: absolute;
+    bottom: calc(14cqw / var(--n));
+    width: calc(14cqw / var(--n));
+    height: 3px;
+    border-radius: 2px;
+    background: var(--tile-home);
+}
+
+/* Picture tiles: the image is cut by background-position; a small number helps */
+.board.picture .tile {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25), inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.board.picture .tile.home::after { display: none; }
+
+.badge {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    min-width: 1.5em;
+    padding: 1px 4px;
+    border-radius: 6px;
+    background: rgba(10, 20, 30, 0.55);
+    color: #fff;
+    font-size: clamp(0.6rem, calc(14cqw / var(--n)), 0.8rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.tile.missing { opacity: 0; pointer-events: none; }
+
+.board.solved { box-shadow: 0 0 0 4px var(--success), var(--shadow); }
+.board.solved .tile { cursor: default; }
+.board.solved .tile.missing { opacity: 1; }
+.board.solved .badge { opacity: 0; transition: opacity 0.5s; }

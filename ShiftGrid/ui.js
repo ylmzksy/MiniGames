@@ -53,9 +53,9 @@ function loadLevel(idx) {
 /* ---------- Building ---------- */
 
 function cellSize() {
-    const app = document.getElementById('app');
-    const width = Math.min(app.clientWidth - 32, 460);
-    return Math.max(30, Math.min(72, Math.floor((width - 2 * (ARROW + GAP)) / state.n)));
+    // The page width, not #app's: a board left over from a bigger level could stretch #app
+    const width = Math.min(document.documentElement.clientWidth, 560) - 32;
+    return Math.max(30, Math.min(68, Math.floor((width - 2 * (ARROW + GAP)) / state.n)));
 }
 
 // A tile's look: a colour with its glyph, or a number tinted by the row it belongs in
@@ -286,7 +286,7 @@ frame.addEventListener('pointerdown', (e) => {
     const x = Math.min(state.n - 1, Math.max(0, Math.floor((e.clientX - r.left) / cell)));
     const y = Math.min(state.n - 1, Math.max(0, Math.floor((e.clientY - r.top) / cell)));
     drag = { x, y, sx: e.clientX, sy: e.clientY, line: null, off: 0, cells: null, ghosts: null, id: e.pointerId };
-    boardEl.setPointerCapture?.(e.pointerId);
+    try { boardEl.setPointerCapture(e.pointerId); } catch (err) { /* synthetic or finished pointer */ }
     frame.classList.remove('keys');
     cursor = { x, y };
     update();

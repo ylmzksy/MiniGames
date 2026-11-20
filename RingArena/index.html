@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../common/theme.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Ring Arena</title>
+</head>
+<body data-home="../index.html" data-game="ringarena">
+    <div id="app">
+        <div id="status" class="status"></div>
+        <div id="level-info" class="level-info"></div>
+        <div id="goal" class="goal"></div>
+        <div id="counters" class="counters"></div>
+        <svg id="board" class="board"></svg>
+        <p class="hint" data-i18n="hint">Drag along a ring to turn it, or across the rings to slide a row through the center</p>
+        <div class="move-pad">
+            <button onclick="turnSelected(-1)" aria-label="counter-clockwise">↺</button>
+            <button onclick="turnSelected(1)" aria-label="clockwise">↻</button>
+            <button onclick="slideSelected(-1)" data-i18n="slide_in">Slide in</button>
+            <button onclick="slideSelected(1)" data-i18n="slide_out">Slide out</button>
+        </div>
+        <div class="controls">
+            <button id="undoBtn" data-i18n="undo">Undo</button>
+            <button onclick="LevelSelect.open(loadLevel)" data-i18n="levels_button">Levels</button>
+            <button id="restartBtn" class="primary" data-i18n="restart">Restart Level</button>
+        </div>
+    </div>
+
+    <script src="../common/i18n.js"></script>
+    <script src="i18n.js"></script>
+    <script src="../common/shell.js"></script>
+    <script src="../common/levels.js"></script>
+    <script src="../common/progress.js"></script>
+    <script src="engine.js"></script>
+
+    <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
+    <script src="levels/level3.js"></script>
+    <script src="levels/level4.js"></script>
+    <script src="levels/level5.js"></script>
+    <script src="levels/level6.js"></script>
+    <script src="levels/level7.js"></script>
+    <script src="levels/level8.js"></script>
+    <script src="levels/level9.js"></script>
+    <script src="levels/level10.js"></script>
+
+    <script src="ui.js"></script>
+</body>
+</html>

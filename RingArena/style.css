@@ -1,0 +1,92 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+.goal { font-weight: 600; }
+
+/* Figure colours: the same in light and dark themes, each with its own glyph */
+.k-A { --tone: #e2474f; }
+.k-B { --tone: #2e9e58; }
+.k-C { --tone: #3a6fdc; }
+.k-D { --tone: #e0a500; }
+.k-E { --tone: #8d58d2; }
+
+:root {
+    --cell-a: #e9edf5;
+    --cell-b: #dde3ee;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cell-a: #232d42;
+        --cell-b: #1c2538;
+    }
+}
+
+/* The arena */
+.board {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+}
+
+.board.dragging { cursor: grabbing; }
+
+.rim { fill: var(--surface); stroke: var(--border); stroke-width: 2; }
+.hub { fill: var(--surface); stroke: var(--border); stroke-width: 2; }
+
+.cell {
+    fill: var(--cell-a);
+    stroke: var(--surface);
+    stroke-width: 2;
+    transition: fill 0.15s;
+}
+
+.cell.alt { fill: var(--cell-b); }
+.cell.sel-ring,
+.cell.sel-line { fill: color-mix(in srgb, var(--accent) 18%, var(--cell-a)); }
+.cell.sel { fill: color-mix(in srgb, var(--accent) 38%, var(--cell-a)); }
+.board.solved .cell { fill: color-mix(in srgb, var(--success) 22%, var(--cell-a)); }
+
+/* Figures and target marks */
+.fig,
+.fig .body {
+    transition: transform 0.22s ease-out;
+}
+
+.board.instant .fig,
+.board.instant .fig .body,
+.fig.instant,
+.fig.instant .body {
+    transition: none;
+}
+
+.fig .disc { fill: var(--tone); stroke: rgba(0, 0, 0, 0.25); stroke-width: 1.5; }
+.fig .sym { fill: rgba(255, 255, 255, 0.92); }
+.fig { pointer-events: none; }
+.board.solved .fig .disc { stroke: var(--success); stroke-width: 3; }
+
+.mark .disc { fill: none; stroke: var(--tone); stroke-width: 2.5; stroke-dasharray: 4 3; opacity: 0.8; }
+.mark .sym { fill: var(--tone); opacity: 0.5; }
+.mark { pointer-events: none; }
+
+.hint {
+    margin: -6px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.move-pad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 2fr;
+    gap: 8px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.move-pad button { font-size: 1.05rem; }
+.move-pad button[aria-label] { font-size: 1.4rem; line-height: 1; }

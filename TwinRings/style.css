@@ -1,0 +1,104 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+/* Bead colours: the same in light and dark themes, each with its own glyph */
+.c-R { --tone: #e2474f; }
+.c-G { --tone: #2e9e58; }
+.c-B { --tone: #3a6fdc; }
+.c-Y { --tone: #e0a500; }
+.c-P { --tone: #8d58d2; }
+.c-O { --tone: #ee7a1f; }
+
+:root { --groove: #c9d0de; }
+
+@media (prefers-color-scheme: dark) {
+    :root { --groove: #3a4763; }
+}
+
+/* Target preview and counters */
+.goal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.goal-row figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.target {
+    width: 132px;
+    height: 84px;
+    padding: 4px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    outline: 2px dashed color-mix(in srgb, var(--highlight) 70%, transparent);
+    outline-offset: 3px;
+}
+
+.target .track { fill: none; stroke: var(--groove); stroke-width: 8; }
+.target .dot { fill: var(--tone); }
+.target .dot.num { fill: var(--surface); stroke: var(--tone); stroke-width: 5; }
+.target text { fill: var(--text); font-size: 24px; font-weight: 800; }
+.target.big { width: 190px; height: 120px; }
+
+/* The board */
+.board {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface) 70%);
+    border: 1px solid var(--border);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+}
+
+.board.dragging { cursor: grabbing; }
+
+.track {
+    fill: none;
+    stroke: var(--groove);
+    stroke-width: 14;
+    transition: stroke 0.2s;
+}
+
+.track.sel { stroke: color-mix(in srgb, var(--accent) 45%, var(--groove)); }
+.board.solved .track { stroke: color-mix(in srgb, var(--success) 60%, var(--groove)); }
+
+
+.spin { cursor: pointer; }
+.spin circle { fill: var(--surface-2); stroke: var(--border); stroke-width: 1.5; transition: fill 0.15s; }
+.spin:hover circle { fill: var(--accent-soft); stroke: var(--accent); }
+.spin text { fill: var(--text); font-size: 24px; font-weight: 700; pointer-events: none; }
+
+.bead circle { fill: var(--tone); stroke: rgba(0, 0, 0, 0.25); stroke-width: 1.5; }
+.bead .shine { fill: rgba(255, 255, 255, 0.28); stroke: none; }
+.bead text { fill: rgba(255, 255, 255, 0.8); font-weight: 800; pointer-events: none; }
+
+/* Numbered beads: a light face ringed in the colour of the ring they belong on */
+.bead.num circle { fill: var(--surface); stroke: var(--tone); stroke-width: 5; }
+.bead.num .shine { display: none; }
+.bead.num text { fill: var(--text); }
+
+.hint {
+    margin: -6px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Lets the long German title fit next to the language picker on narrow phones */
+@media (max-width: 400px) {
+    .game-header h1 { font-size: 1.25rem; }
+}

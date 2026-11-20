@@ -120,7 +120,8 @@ function buildPreview() {
     const size = Math.max(12, Math.min(26, Math.floor(Math.min(150 / state.cols, 104 / state.rows))));
     preview.style.setProperty('--mini', `${size}px`);
     if (state.face === 'picture') {
-        preview.innerHTML = `<div class="mini-picture" style="width:${state.cols * size}px; height:${state.rows * size}px; background-image:${SwapsPictures.url(state.picture, state.cols, state.rows)}"></div>`;
+        preview.innerHTML = `<div class="mini-picture" style="width:${state.cols * size}px; height:${state.rows * size}px"></div>`;
+        preview.firstElementChild.style.backgroundImage = SwapsPictures.url(state.picture, state.cols, state.rows);
         return;
     }
     const cells = state.goal.map(t => {

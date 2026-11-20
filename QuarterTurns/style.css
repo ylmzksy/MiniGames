@@ -1,0 +1,194 @@
+.level-info,
+.counters { color: var(--text-muted); }
+
+:root {
+    --plate: #343a4a;
+    --plate-edge: #222734;
+    --well: #2a2f3c;
+    --knob: #e9b949;
+    --knob-edge: #a77b1c;
+    --knob-ink: #3a2a06;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --plate: #1d2230;
+        --plate-edge: #121620;
+        --well: #171b26;
+        --knob: #f0c75e;
+        --knob-edge: #9c7420;
+        --knob-ink: #2e2105;
+    }
+}
+
+.status.win { color: var(--success); }
+
+/* Tile colours: each colour also has its own symbol */
+.c-r { --tone: #e5484d; --ink: rgba(255, 255, 255, 0.9); }
+.c-g { --tone: #2f9e66; --ink: rgba(255, 255, 255, 0.9); }
+.c-b { --tone: #3e63dd; --ink: rgba(255, 255, 255, 0.9); }
+.c-y { --tone: #f2b51d; --ink: rgba(70, 45, 0, 0.75); }
+.c-p { --tone: #8e4ec6; --ink: rgba(255, 255, 255, 0.9); }
+.c-w { --tone: #efe9dc; --ink: rgba(60, 60, 70, 0.6); }
+
+/* Numbered tiles are tinted by their target row */
+.n-0 { --tone: #f4a28c; --ink: #4a1d10; }
+.n-1 { --tone: #f6d06f; --ink: #4a3504; }
+.n-2 { --tone: #8fd3b4; --ink: #0f3d2a; }
+.n-3 { --tone: #8dbbe8; --ink: #0f2c4a; }
+.n-4 { --tone: #c6a6e8; --ink: #2f1450; }
+
+/* Target preview + counters above the board */
+.goal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: var(--text-muted);
+}
+
+.goal-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+}
+
+.goal-row .counters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.mini {
+    display: grid;
+    gap: 2px;
+    padding: 3px;
+    background: var(--plate);
+    border-radius: 6px;
+}
+
+.mini i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tone);
+    color: var(--ink);
+    border-radius: 3px;
+    font-style: normal;
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* The board: a plate with w x h cells; handles sit on the inner corners */
+.qboard {
+    --w: 3;
+    --h: 3;
+    width: min(100%, 440px);
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(160deg, var(--plate), var(--plate-edge));
+    box-shadow: var(--shadow);
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden; /* tiles swinging around an edge handle stay on the plate */
+    transition: box-shadow 0.4s;
+}
+
+.qgrid {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--w) / var(--h);
+    border-radius: 10px;
+    background: var(--well);
+    container-type: inline-size;
+}
+
+.qtile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(100% / var(--w));
+    height: calc(100% / var(--h));
+    padding: 4px;
+    transition: none;
+}
+
+.qtile span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(150deg, color-mix(in srgb, var(--tone) 80%, #fff), var(--tone) 60%);
+    color: var(--ink);
+    font-size: calc(30cqw / var(--w));
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.22), 0 2px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.qboard.numeric .qtile span { font-size: calc(36cqw / var(--w)); }
+
+.qtile.turning { z-index: 1; }
+.qtile.lift span { transform: scale(0.94); box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.22), 0 0 0 3px var(--knob); }
+
+/* Tiles no handle can reach never move */
+.qtile.fixed span {
+    background:
+        radial-gradient(circle at 14% 14%, var(--plate) 0 3px, transparent 4px),
+        radial-gradient(circle at 86% 14%, var(--plate) 0 3px, transparent 4px),
+        radial-gradient(circle at 14% 86%, var(--plate) 0 3px, transparent 4px),
+        radial-gradient(circle at 86% 86%, var(--plate) 0 3px, transparent 4px),
+        linear-gradient(150deg, color-mix(in srgb, var(--tone) 80%, #fff), var(--tone) 60%);
+}
+
+/* The handle's hit area is larger than the knob drawn inside it */
+.handle {
+    position: absolute;
+    z-index: 2;
+    width: calc(min(52px, 56cqw / var(--w)));
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.handle::before {
+    content: "↻";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff3c4, var(--knob) 55%);
+    border: 2px solid var(--knob-edge);
+    color: var(--knob-ink);
+    font-size: calc(min(20px, 22cqw / var(--w)));
+    font-weight: 900;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+    transition: transform 0.15s;
+}
+
+.handle.ccw::before { content: "↺"; }
+.handle:hover::before { transform: scale(1.12); }
+.handle:active::before { transform: scale(0.92) rotate(20deg); }
+.handle.ccw:active::before { transform: scale(0.92) rotate(-20deg); }
+.handle.cursor::before { box-shadow: 0 0 0 3px var(--accent), 0 2px 4px rgba(0, 0, 0, 0.45); }
+
+.qboard.solved { box-shadow: 0 0 0 4px var(--success), var(--shadow); }
+.qboard.solved .handle { opacity: 0.35; pointer-events: none; transition: opacity 0.4s; }
+
+.dir-btn { min-width: 150px; }
+.dir-btn.active { border-color: var(--accent); background: var(--accent-soft); }
